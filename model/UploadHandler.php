@@ -1,6 +1,6 @@
 <?php
 
-class UploadHandler extends Sections {
+class UploadHandler extends DbConnection {
 
     private $section;
     private $subSection;
@@ -8,9 +8,9 @@ class UploadHandler extends Sections {
     private $dataStory;
     private $dataLink;
 
-    public function __construct($dbConfig, $loginConfig, $passConfig, $optionsConfig) {
-        parent::__construct($dbConfig, $loginConfig, $passConfig, $optionsConfig);
-    }
+    // public function __construct($dbConfig, $loginConfig, $passConfig, $optionsConfig) {
+    //     parent::__construct($dbConfig, $loginConfig, $passConfig, $optionsConfig);
+    // }
 
     public function setSection ($dataSection) {
         $this->section = $dataSection;

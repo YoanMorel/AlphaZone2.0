@@ -167,7 +167,7 @@ $(function() {
     dropBox.empty();
     objsTab = [];
     fileStorage = [];
-    autoSaveData();
+    autoSaveData('66');
   });
 
   // Fonction qui se déclenche en fonction du clic sur une image dropé dans la dropBox. Elle va déclencher l'apparition de la zone de texte et plus de paramètres (à venir) et afficher le texte qui correspond à l'image si déjà tapé/enregistré
@@ -210,7 +210,7 @@ $(function() {
       if (!$('#fileList img').length) {
         fileStorage = [];
         objsTab = [];
-        autoSaveData();
+        autoSaveData('66');
         dropBox.css('border', '3px dashed #BBB');
         uploadBTN.removeClass('btn-success').addClass('btn-danger').prop('disabled', true);
       }
@@ -272,8 +272,8 @@ $(function() {
   });
 
   // Fonction qui va être appelé par le timer au bout de x secondes. Elle va envoyer les données concernant les images sous forme de données JSON et à l'aide d'AJAX, les enregistrer dans un fichier JSON qui sera lu en cas de perte de session.
-  function autoSaveData() {
-    if (objsTab.length) {
+  function autoSaveData(order = true) {
+    if (order != '66') {
       $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -292,7 +292,7 @@ $(function() {
       $.ajax({
         type: 'POST',
         url: 'controller/autoSave.php',
-        data: 'order=66',
+        data: 'order=' + order,
         success: function(response) {
           console.log(response);
         },

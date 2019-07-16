@@ -5,8 +5,12 @@ function saveData () {
 
   $jsonFile = __DIR__.'/autoSaveBuffer.json';
   if (isset($order) && $order == '66'):
-    unlink($jsonFile);
-    $jsonData = json_encode('Order 66 completed...');
+    if(is_file($jsonFile)):
+      unlink($jsonFile);
+      $jsonData = json_encode('Order 66 completed...');
+    else:
+      $jsonData = json_encode('Order 66 already completed...');
+    endif;
   else:
     $openFile = fopen($jsonFile, 'w') or die(1);
     $jsonData = $_POST['data'];

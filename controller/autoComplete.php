@@ -1,13 +1,12 @@
 <?php
-require '../../config/config.php';
 require '../model/DbConnection.php';
 require '../model/Sections.php';
 
-function sections ($dbConf) {
+function sections () {
 
   extract($_POST);
 
-  $dbRequest = new Sections($dbConf['PARAM_db_name'], $dbConf['PARAM_user'], $dbConf['PARAM_pwd'], $dbConf['PARAM_options']);
+  $dbRequest = new Sections();
 
   if (empty($imgSection)):
     $response = $dbRequest->getSections();
@@ -21,7 +20,7 @@ function sections ($dbConf) {
 }
 
 if(isset($_POST)):
-  echo json_encode(array('data' => sections($dbConfig)));
+  echo json_encode(array('data' => sections()));
 endif;
 
  ?>

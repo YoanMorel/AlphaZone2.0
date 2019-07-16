@@ -14,7 +14,7 @@ class Sections extends DbConnection {
 
     public function getSubSections ($dataSection) {
         $subSectionData = $this->queryCall(
-            'SELECT sub.subSection FROM subSections sub JOIN sections s ON s.id = sub.id_sections WHERE :dataSection = s.section',
+            'SELECT sub.subSection FROM subSections sub INNER JOIN sections s ON s.id = sub.id_sections AND s.section = :dataSection',
             array(
                 array('dataSection', $dataSection, PDO::PARAM_STR))
         );
@@ -23,7 +23,7 @@ class Sections extends DbConnection {
     }
 
     public function getAllAboutSubSection ($dataSection) {
-        $nbrSubSections = $db->queryCall(
+        $nbrSubSections = $this->queryCall(
             'SELECT * FROM subSections sub LEFT JOIN sections s ON s.id = sub.id_sections WHERE :dataSection = s.section',
             array(
                 array('dataSection', $dataSection, PDO::PARAM_STR))

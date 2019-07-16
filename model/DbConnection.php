@@ -4,20 +4,7 @@ require_once 'Setting.php';
 
 abstract class DbConnection {
 
-    // private $db;
-	// private $login;
-    // private $password;
-    // private $options = array();
 	private static $spdo;
-
-	// public function __construct($dbConfig, $loginConfig, $passConfig, $optionsConfig){
-	// 	$this->login 	= $loginConfig;
-	// 	$this->password = $passConfig;
-    //     $this->db 		= $dbConfig;
-    //     $this->options 	= $optionsConfig;
-
-	// 	$this->dbConnect();
-	// }
 
 	protected function queryCall($sql,Array $params = null) {
 		if($params):
@@ -39,11 +26,7 @@ abstract class DbConnection {
 	}
 
 	private static function dbConnect(){
-		try
-		{
-			// $PDOinstance = new PDO("mysql:host=localhost;dbname=$this->db;", $this->login, $this->password, $this->options);
-			// $this->spdo = $PDOinstance;
-
+		try {
 			if(self::$spdo === null):
 				// récupération des paramètres de config
 				$dsn = Setting::param("dsn");
@@ -58,9 +41,7 @@ abstract class DbConnection {
 				);
 			endif;
 			return self::$spdo;
-		}
-		catch (PDOException $error)
-		{
+		} catch (PDOException $error) {
 			$msg = 'ERREUR PDO within ' . $error->getFile() . ' L.' . $error->getLine() . ' : ' . $error->getMessage();
 			die($msg);
 		}

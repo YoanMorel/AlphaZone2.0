@@ -1,20 +1,19 @@
 <?php
 
-  require '../../config/config.php';
   require '../model/DbConnection.php';
   require '../model/Sections.php';
   require '../model/UploadHandler.php';
 
-  function uploadHandler ($dbConf) {
+  function uploadHandler () {
 
     extract($_POST);
 
-    $dbRequest      = new UploadHandler($dbConf['PARAM_db_name'], $dbConf['PARAM_user'], $dbConf['PARAM_pwd'], $dbConf['PARAM_options']);
     $name           = md5(rand().time().'unPeuDePaprikaPourDonnerDuGoutAMonHash').'.jpg';
-    $encodedData    = str_replace(' ', '+', $file);
+    $encodedData    = str_replace(' ', '+', $_POST['file']);
     $decodedData    = base64_decode($encodedData);
     $sectionLink    = '../public/img/'.$section;
     $subSectionLink = '../public/img/'.$section.'/'.$subSection;
+    $dbRequest      = new UploadHandler();
 
     $dbRequest->setSection($section);
     $dbRequest->setSubSection($subSection);
@@ -48,7 +47,7 @@
 }
 
   if (isset($_POST)):
-    $response = uploadHandler($dbConfig);
+    $response = uploadHandler();
     echo $response;
   endif;
 
