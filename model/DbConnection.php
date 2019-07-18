@@ -6,7 +6,7 @@ abstract class DbConnection {
 
 	private static $spdo;
 
-	protected function queryCall($sql,Array $params = null) {
+	protected function queryCall($sql, Array $params = null) {
 		if($params):
 			$returnedData = self::dbConnect()->prepare($sql);
 			// boucle sur les paramètres à binder

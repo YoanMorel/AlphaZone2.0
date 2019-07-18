@@ -1,9 +1,11 @@
 /* Admin Template */
+
 body {
   min-height: 100vh;
 }
 
 /* Style du module d'upload */
+
 div#fileList {
   border: 3px dashed #BBB;
   border-radius: 10px;
@@ -28,8 +30,7 @@ div#onHoldTextarea {
 
 .btnOverImg .btn {
   position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   padding: 5px 5px;
   bottom: 0.5rem;
@@ -75,21 +76,10 @@ textarea {
   font-size: 13px;
 }
 
-.danger {
-  background-color: #f44336;
-}
-
-.warning {
-  background-color: #ff9800;
-}
-
-.success {
-  background-color: #4CAF50;
-}
-
-.info {
-  background-color: #2196F3;
-}
+.danger   {background-color: #f44336;}
+.warning  {background-color: #ff9800;}
+.success  {background-color: #4CAF50;}
+.info     {background-color: #2196F3;}
 
 .closebtn {
   margin-left: 15px;
@@ -99,7 +89,6 @@ textarea {
   font-size: 22px;
   line-height: 20px;
   cursor: pointer;
-  -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
@@ -108,6 +97,7 @@ textarea {
 }
 
 /* Sidebar de la section Admin */
+
 .sidebar {
   height: 100vh;
   width: 100%;
@@ -135,14 +125,16 @@ textarea {
 }
 
 /* Style de la vue UnderConstruction */
+
 .ucView {
   width: 100%;
   height: 100vh;
-  background-image: url("../img/coming-soon-construction-data-211122.jpg");
+  background-image: url('../img/coming-soon-construction-data-211122.jpg');
   background-size: cover;
 }
 
 /* Client Template */
+
 .header {
   position: fixed;
   width: 100%;
@@ -162,10 +154,11 @@ textarea {
   font-size: 24px;
   line-height: 48px;
   height: 48px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   text-align: left;
   padding-left: 20px;
 }
+
 
 .headerTitle {
   font-family: 'Charm', cursive;
@@ -184,6 +177,5 @@ textarea {
 }
 
 img.sample {
-  width: 100vw;
+width: 100vw;
 }
-/*# sourceMappingURL=style.css.map */

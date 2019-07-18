@@ -1,5 +1,16 @@
 $(function() {
 
+  // Evènement pour le Header
+
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 50){  
+        $('div.header').addClass("sticky");
+    }
+    else{
+        $('div.header').removeClass("sticky");
+    }
+  });
+
   // Liste de selecteurs couramment utilisés
   var dropBox = $('#fileList');
   var divIne = $('div#onHoldTextarea');

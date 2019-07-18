@@ -8,10 +8,6 @@ class UploadHandler extends DbConnection {
     private $dataStory;
     private $dataLink;
 
-    // public function __construct($dbConfig, $loginConfig, $passConfig, $optionsConfig) {
-    //     parent::__construct($dbConfig, $loginConfig, $passConfig, $optionsConfig);
-    // }
-
     public function setSection ($dataSection) {
         $this->section = $dataSection;
     }
@@ -63,38 +59,4 @@ class UploadHandler extends DbConnection {
         return $success;
     }
 }
-
-
-// class UploadHandler extends GetSections {
-
-//     private $section;
-//     private $subSection;
-
-//     public function __construct($confHost, $confDbName, $confUser, $confPwd, $confOptions) {
-//         parent::__construct($confHost, $confDbName, $confUser, $confPwd, $confOptions);
-//     }
-
-//     public function setSection ($newSection) {
-//         $this->section = $newSection;
-//     }
-
-//     public function setSubSection ($newSubSection) {
-//         $this->subSection = $newSubSection;
-//     }
-
-//     public function insertSectionInDB () {
-//         $db = $this->dbConnect();
-//         $req = $db->prepare('INSERT INTO sections (section, creationDate) VALUES (:newSection, NOW())');
-//         $req->bindParam(':newSection', $this->section, PDO::PARAM_STR);
-//         $req->execute();
-//     }
-
-//     public function insertSubSectionInDB (){
-//         $db = $this->dbConnect();
-//         $req = $db->prepare('INSERT INTO subSections (subSection, creationDate, id_sections) VALUES (:newSubSection, NOW(), (SELECT id FROM sections WHERE section = :relativeSection))');
-//         $req->bindParam(':newSubSection', $this->subSection, PDO::PARAM_STR);
-//         $req->bindParam(':relativeSection', $this->section, PDO::PARAM_STR);
-//         $req->execute();
-//     }
-// }
 ?>
