@@ -1,4 +1,9 @@
 <?php $this->title = 'Accueil'; ?>
 
-
-<img class="sample" src="https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+<div class="parallax">
+    <a href="index.php?target=main#philosophy"></a>
+</div>
+<div id="philosophy" class="philosophy">
+    <img class="img-fluid" src="public/img/coming-soon-construction-data-211122.jpg" alt="" />
+</div>
+<div class="parallax"></div>

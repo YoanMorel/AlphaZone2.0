@@ -19,6 +19,7 @@
 </head>
 
 <body>
+    <a href="javascript:" id="returnToTop"><i class="fas fa-chevron-up"></i></a>
     <div class="header">
         <span class="headerTitle">L'atelier de Jean-François</span>
         <div class="rightHeader">
@@ -30,6 +31,9 @@
     </div>
     <div class="container-fluid p-0">
         <?= $content; ?>
+    </div>
+    <div class="footer">
+        <p>Footer</p>
     </div>
 
 

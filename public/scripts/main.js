@@ -11,9 +11,31 @@ $(function() {
     }
   });
 
+  // Pour les ancres
+
+  $('a[href="#philosophy"]').on('click', function(event) {
+    event.preventDefault();
+    $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+  });
+
+  // Pour le Scroll to the Highy Top
+  $(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {
+      $('a#returnToTop').fadeIn(200);
+    } else {
+      $('a#returnToTop').fadeOut(200);
+    }
+  });
+  $('a#returnToTop').click(function() {
+    console.log('coucou');
+    $('body, html').animate({
+      scrollTop : 0
+    }, 500);
+  });
+
   // Liste de selecteurs couramment utilisés
   var dropBox = $('#fileList');
-  var divIne = $('div#onHoldTextarea');
+  var dataFields = $('div#onHoldTextarea');
   var imgTitle = $('input#imgTitle');
   var imgSection = $('input#imgSection');
   var imgSubSection = $('input#imgSubSection');
@@ -21,7 +43,7 @@ $(function() {
   var uploadBTN = $('button#upload');
   var alertPopup = $('div.alertPopup');
 
-  // Tableau stockage des images, tableaux stockages des données concernant les images, tableaux pour l'autocompletion
+  // Tableau stockage des images, tableau stockage des données concernant les images, tableaux pour l'autocompletion
   var fileStorage = [];
   var objsTab = [];
   var autoCompleteSections = [];
@@ -90,10 +112,14 @@ $(function() {
     });
   });
 
+  alertPopup.addClass('info').show();
+  $('div.alertPopup span.alertContent').append('<p><b>Information :</b></p>Pour transférer des fichiers images : sélectionnez vos images dans votre explorer et glissez les dans la zone pointillée');
+
   function dragoverDragenterEvent(event) {
     event.preventDefault();
     event.stopPropagation();
     $(this).css('border', '3px dashed red');
+    alertPopup.removeClass('info').fadeout();
   }
 
   function dragleaveEvent(event) {
@@ -116,8 +142,9 @@ $(function() {
         var reader = new FileReader();
         reader.onload = function(event) {
           if (file.type.match('image.*')) {
+            var tempName = file.name.split('.')[0];
             dropBox.append(
-              '<div class="btnOverImg" data-imgid="' + i + '"><img id="' + i + '" class="imgDrop onHold" src="' + event.target.result + '" /><button name="' + i + '" class="btn"><i class="far fa-trash-alt"></i></button></div>');
+              '<div class="btnOverImg" data-imgid="' + tempName + '"><img id="' + tempName + '" class="imgDrop onHold" src="' + event.target.result + '" /><button name="' + tempName + '" class="btn"><i class="far fa-trash-alt"></i></button></div>');
           }
         };
         reader.readAsDataURL(file);
@@ -173,7 +200,7 @@ $(function() {
     $('div.alertPopup span.alertContent').text('Le chargement des fichiers et de leurs données a été exécuté avec succès !');
     uploadBTN.removeClass('btn-success').addClass('btn-danger').prop('disabled', true);
     $('input, textarea').empty();
-    $('#onHoldTextarea').hide();
+    dataFields.hide();
     dropBox.css('border', '3px dashed #BBB');
     dropBox.empty();
     objsTab = [];
@@ -185,13 +212,10 @@ $(function() {
   $(document).on('click', 'img.onHold', function() {
     var imgId = $(this).attr('id');
 
-    if (divIne.css('display') !== 'none' && textArea.attr('name') !== imgId) {
-      divIne.hide();
-      $('textarea, input').val('');
-    }
-
     textArea.attr('name', imgId);
+    imgTitle.val(imgId);
     var objFound = fetchTheObj(objsTab, textArea.attr('name'));
+
     if (objFound) {
       alertPopup.removeClass('warning').hide();
       $('div.alertPopup span.alertContent').empty();
@@ -200,7 +224,7 @@ $(function() {
       imgSubSection.val(objsTab[objsTab.indexOf(objFound)].subSection);
       textArea.val(objsTab[objsTab.indexOf(objFound)].text);
     }
-    divIne.show();
+    dataFields.toggleClass('showDataFields');
   });
 
   // Fonction qui au clic sur le bouton de suppression d'image va d'abord remplacer toutes les informations de l'image par un objet vide afin de garder la structure du tableau intacte. Si il n'y a plus d'images détéctées dans la DropBox, la fonction reset tous les tableaux alors chargés d'objets vides.
@@ -216,7 +240,7 @@ $(function() {
         objsTab[objsTab.indexOf(objFound)] = {};
       }
       $(this).parent().remove();
-      $('#onHoldTextarea').hide();
+      dataFields.hide();
       $('textarea, input').val('');
       if (!$('#fileList img').length) {
         fileStorage = [];
