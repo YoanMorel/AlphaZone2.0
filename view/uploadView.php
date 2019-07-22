@@ -8,8 +8,10 @@
         </div> 
     </div>
   </div>
-  <div class="row no-gutters">
-    <div class="col-10 mx-auto" id="fileList"></div>
+  <div class="row no-gutters pt-3">
+    <div class="col-10 mx-auto" id="fileList">
+      <!-- ZONE DRAG&DROP -->
+    </div>
     <button class="btn btn-danger mx-auto" type="button" id="upload" disabled>Upload</button>
   </div>
   <div id="onHoldTextarea" class="row pt-5 no-gutters showDataFields">

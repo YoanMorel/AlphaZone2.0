@@ -1,9 +1,19 @@
 <?php $this->title = 'Accueil'; ?>
 
-<div class="parallax">
-    <a href="index.php?target=main#philosophy"></a>
+<div class="parallaxTopMainView">
+    <div class="leftSideText">
+        <div class="closeLeftSideText"></div>
+    </div>
+    <a class="downArrow" href="index.php?target=main#middlePhilosophy"></a>
 </div>
-<div id="philosophy" class="philosophy">
-    <img class="img-fluid" src="public/img/coming-soon-construction-data-211122.jpg" alt="" />
+<div id="middlePhilosophy" class="parallaxMiddleMainView">
+    <div class="rightSideText">
+        <div class="closeRightSideText"></div>
+    </div>
+    <a class="downArrow" href="index.php?target=main#bottomPhilosophy"></a>
 </div>
-<div class="parallax"></div>
+<div id="bottomPhilosophy" class="parallaxBottomMainView">
+    <div class="leftSideText">
+        <div class="closeLeftSideText"></div>
+    </div>
+</div>

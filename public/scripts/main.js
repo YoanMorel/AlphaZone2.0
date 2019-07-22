@@ -33,6 +33,17 @@ $(function() {
     }, 500);
   });
 
+  // Evenement pour le sideText
+  $('.closeLeftSideText, .closeRightSideText').click(function() {
+    if ($(this).parent().css("width") === "35px") {
+      $(this).parent().css("width", "50%");
+      $(this).css("background", "rgba(255, 255, 255, 1)");
+    } else {
+      $(this).parent().css("width", "35px");
+      $(this).css("background", "rgba(255, 255, 255, 0.05)");
+    }
+  });
+
   // Liste de selecteurs couramment utilisés
   var dropBox = $('#fileList');
   var dataFields = $('div#onHoldTextarea');
@@ -99,6 +110,9 @@ $(function() {
     autoCompleteSources('');
   }
 
+  alertPopup.addClass('info').show();
+  $('div.alertPopup span.alertContent').append('<p><b>Information :</b></p>Pour transférer des fichiers images : sélectionnez vos images sur votre bureau et glissez les dans la zone pointillée du navigateur (ci-dessous)');
+
   // Lecture du fichier JSON pour remplir le tableaux de données de fichiers si il y a une sauvegarde. Dans le cas où elle existe, on affiche une alerte
   $.getJSON('controller/autoSaveBuffer.json', function(data) {
     $.each(data, function(key, val) {
@@ -106,20 +120,17 @@ $(function() {
         objsTab.push(val);
       }
       if (objsTab.length) {
-        alertPopup.addClass('warning').show();
-        $('div.alertPopup span.alertContent').append('<p><b>Avertissement !</b></p>Une sauvegarde automatique a été detectée. Si votre session a été interrompue momentanément, veuillez glisser une nouvelles fois les fichiers utilisés précédemment.');
+        alertPopup.removeClass('info').addClass('warning').show();
+        $('div.alertPopup span.alertContent').html('<p><b>Avertissement !</b></p>Une sauvegarde automatique a été detectée. Si votre session a été interrompue momentanément, veuillez glisser une nouvelles fois les fichiers utilisés précédemment.');
       }
     });
   });
-
-  alertPopup.addClass('info').show();
-  $('div.alertPopup span.alertContent').append('<p><b>Information :</b></p>Pour transférer des fichiers images : sélectionnez vos images dans votre explorer et glissez les dans la zone pointillée');
 
   function dragoverDragenterEvent(event) {
     event.preventDefault();
     event.stopPropagation();
     $(this).css('border', '3px dashed red');
-    alertPopup.removeClass('info').fadeout();
+    alertPopup.removeClass('info').slideUp();
   }
 
   function dragleaveEvent(event) {
@@ -134,7 +145,7 @@ $(function() {
     if (dataTransfer && dataTransfer.files.length) {
       event.preventDefault();
       event.stopPropagation();
-      alertPopup.removeClass('success').fadeOut();
+      alertPopup.removeClass('success').slideUp();
       $('div.alertPopup span.alertContent').empty();
       $(this).css('border', '3px dashed green');
       $.each(dataTransfer.files, function(i, file) {
@@ -152,7 +163,7 @@ $(function() {
     }
   }
 
-  // Appels de fonction pour gérer les évènement du DROP
+  // Appels des fonctions pour gérer les évènements du DROP
   dropBox.on('dragover dragenter', dragoverDragenterEvent);
   dropBox.on('dragleave', dragleaveEvent);
   dropBox.on('drop', dropEvent);
@@ -208,16 +219,22 @@ $(function() {
     autoSaveData('66');
   });
 
-  // Fonction qui se déclenche en fonction du clic sur une image dropé dans la dropBox. Elle va déclencher l'apparition de la zone de texte et plus de paramètres (à venir) et afficher le texte qui correspond à l'image si déjà tapé/enregistré
+  // Fonction appelée par le clic sur une image dropé dans la dropBox. Elle va déclencher l'apparition de la zone de texte et plus de paramètres (à venir) et afficher le texte qui correspond à l'image si déjà tapé/enregistré
   $(document).on('click', 'img.onHold', function() {
     var imgId = $(this).attr('id');
+    var objFound;
+
+    if (imgId != textArea.attr('name') && dataFields.is(':visible')) {
+      textArea.val('');
+      dataFields.toggleClass('showDataFields');
+    }
 
     textArea.attr('name', imgId);
     imgTitle.val(imgId);
-    var objFound = fetchTheObj(objsTab, textArea.attr('name'));
+    objFound = fetchTheObj(objsTab, textArea.attr('name'));
 
     if (objFound) {
-      alertPopup.removeClass('warning').hide();
+      alertPopup.removeClass('warning').slideUp();
       $('div.alertPopup span.alertContent').empty();
       imgTitle.val(objsTab[objsTab.indexOf(objFound)].title);
       imgSection.val(objsTab[objsTab.indexOf(objFound)].section);
@@ -316,7 +333,7 @@ $(function() {
         data: {
           data: JSON.stringify(objsTab)
         },
-        success: function(response) {
+        complete: function(response) {
           console.log(response);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

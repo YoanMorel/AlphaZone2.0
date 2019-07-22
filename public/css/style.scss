@@ -5,6 +5,11 @@ body {
   scroll-behavior: smooth;
 }
 
+a {
+  outline: 0;
+  transition: 0.3s;
+}
+
 /* Style du module d'upload */
 
 div#fileList {
@@ -58,7 +63,7 @@ textarea {
   -moz-box-sizing: border-box;
   outline: none;
   display: block;
-  width: 75%;
+  width: 85%;
   height: 35px;
   border: none;
   border-bottom: 2px solid #BBB;
@@ -142,6 +147,7 @@ textarea {
 
 .header {
   position: fixed;
+  z-index: 1;
   width: 100%;
   font-size: 50px;
   line-height: 108px;
@@ -187,61 +193,111 @@ img.sample {
 
 /* mainView */
 
-.parallax {
-  /* The image used */
-  background-image: url('../img/art-artist-brush-102127.jpg');
-
-  height: 75vh;
-
-  /* Create the parallax scrolling effect */
+.parallaxTopMainView, 
+.parallaxMiddleMainView, 
+.parallaxBottomMainView {
+  position: relative;
+  display: flex;
+  height: 100vh;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
 
-  & a {
-    position: absolute;
-    top: 65vh;
-    left: 50%;
-    width: 24px;
-    height: 24px;
-    margin-left: -12px;
-    border-left: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    -webkit-animation: sdb04 2s infinite;
-    animation: sdb04 2s infinite;
-    box-sizing: border-box;
-  }
+.leftSideText, .rightSideText {
+  color: #000;
+  margin: 0;
+  position: absolute;
+  width: 50%;
+  height: 60%;
+  background: rgba(255, 255, 255, 0.7);
+  top: 75%;
+  -ms-transform: translateY(-75%);
+  transform: translateY(-75%);
+  transition: 0.5s;
+}
 
-  & a:hover {
-    opacity: .5;
-  }
+.leftSideText {
+  left: 0;
+  border-radius: 0 10px 10px 0;
+}
 
-  @-webkit-keyframes sdb04 {
-    0% {
-      -webkit-transform: rotate(-45deg) translate(0, 0);
-    }
-    20% {
-      -webkit-transform: rotate(-45deg) translate(-10px, 10px);
-    }
-    40% {
-      -webkit-transform: rotate(-45deg) translate(0, 0);
-    }
-  }
+.rightSideText {
+  right: 0;
+  border-radius: 10px 0 0 10px;
+}
 
-  @keyframes sdb04 {
-    0% {
-      transform: rotate(-45deg) translate(0, 0);
-    }
-    20% {
-      transform: rotate(-45deg) translate(-10px, 10px);
-    }
-    40% {
-      transform: rotate(-45deg) translate(0, 0);
-    }
+div.closeRightSideText, div.closeLeftSideText {
+  width: 35px;
+  height: 100%;
+  background: #fff;
+}
+
+.closeLeftSideText {
+  border-radius: 0 10px 10px 0;
+  float: right;
+}
+
+.closeRightSideText {
+  border-radius: 10px 0 0 10px;
+  float: left;
+}
+
+a.downArrow {
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: sdb04 2s infinite;
+  animation: sdb04 2s infinite;
+  box-sizing: border-box;
+}
+
+a.downArrow {
+  opacity: .5;
+}
+
+@-webkit-keyframes sdb04 {
+  0% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
   }
+  20% {
+    -webkit-transform: rotate(-45deg) translate(-10px, 10px);
+  }
+  40% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+  }
+}
+
+@keyframes sdb04 {
+  0% {
+    transform: rotate(-45deg) translate(0, 0);
+  }
+  20% {
+    transform: rotate(-45deg) translate(-10px, 10px);
+  }
+  40% {
+    transform: rotate(-45deg) translate(0, 0);
+  }
+}
+
+.parallaxTopMainView {
+  background-image: url('../img/art-artist-brush-102127.jpg');
+}
+
+.parallaxMiddleMainView {
+  background-image: url('../img/7fbc18e7ee1983a2d5c85e7216597873.jpg');
+}
+
+.parallaxBottomMainView {
+  background-image: url('../img/architecture-art-blue-164455.jpg');
 }
 
 .philosophy {
@@ -276,6 +332,7 @@ img.sample {
 
   a#returnToTop {
     position: fixed;
+    z-index: 1;
     bottom: 75px;
     right: 20px;
     background: rgb(0, 0, 0);

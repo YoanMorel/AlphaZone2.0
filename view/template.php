@@ -25,8 +25,10 @@
         <div class="rightHeader">
             <a href="index.php?target=main">Accueil</a>
             <a href="index.php?target=main">Œuvres</a>
+            <a href="index.php?target=main">Philosophie</a>
             <a href="index.php?target=main">Biographie</a>
             <a href="index.php?target=main">Contact</a>
+            <a href="index.php?target=main"><i class="fas fa-th-large"></i></a>
         </div>
     </div>
     <div class="container-fluid p-0">
