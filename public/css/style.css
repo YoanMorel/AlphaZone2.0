@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Admin Template */
 body {
   min-height: 100vh;
@@ -199,6 +200,38 @@ img.sample {
 }
 
 /* mainView */
+.overlayGallery {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  background-color: black;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.overlayGallery .closeOverlay {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.overlayGallery img {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  padding: 0.5rem;
+}
+
 .parallaxTopMainView,
 .parallaxMiddleMainView,
 .parallaxBottomMainView {
@@ -213,18 +246,31 @@ img.sample {
   background-size: cover;
 }
 
+/* Zone de texte superposée de la vue Main */
 .leftSideText, .rightSideText {
-  color: #000;
+  color: #fff;
   margin: 0;
   position: absolute;
   width: 50%;
   height: 60%;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.4);
   top: 75%;
   -webkit-transform: translateY(-75%);
           transform: translateY(-75%);
   -webkit-transition: 0.5s;
   transition: 0.5s;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.leftSideText .sideTextBox, .rightSideText .sideTextBox {
+  margin: auto;
+  width: 75%;
+  text-align: justify;
+  font-family: 'charm', cursive;
+  font-size: 20px;
 }
 
 .leftSideText {
@@ -240,22 +286,45 @@ img.sample {
 div.closeRightSideText, div.closeLeftSideText {
   width: 35px;
   height: 100%;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
 }
 
 .closeLeftSideText {
   border-radius: 0 10px 10px 0;
-  float: right;
+  right: 0;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
 }
 
 .closeRightSideText {
   border-radius: 10px 0 0 10px;
-  float: left;
+  left: 0;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.fas.fa-chevron-left {
+  margin: auto;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 0.5;
+  color: #fff;
+}
+
+.fas.fa-chevron-right {
+  margin: auto;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 0.5;
+  color: #fff;
 }
 
 a.downArrow {
   position: absolute;
-  top: 95%;
+  top: 92%;
   left: 50%;
   width: 24px;
   height: 24px;

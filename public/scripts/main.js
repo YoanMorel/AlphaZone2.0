@@ -11,6 +11,16 @@ $(function() {
     }
   });
 
+  // Handler pour l'évènement overlayGallery
+  $('a.overlayDrop').click(function() {
+    $('div.overlayGallery').css("height", "100%");
+    $('body').css("overflow", "hidden");
+  });
+  $('div.closeOverlay').click(function() {
+    $('div.overlayGallery').css("height", "0");
+    $('body').css("overflow-y", "scroll");
+  });
+
   // Pour les ancres
 
   $('a[href="#philosophy"]').on('click', function(event) {
@@ -27,7 +37,6 @@ $(function() {
     }
   });
   $('a#returnToTop').click(function() {
-    console.log('coucou');
     $('body, html').animate({
       scrollTop : 0
     }, 500);
@@ -36,11 +45,25 @@ $(function() {
   // Evenement pour le sideText
   $('.closeLeftSideText, .closeRightSideText').click(function() {
     if ($(this).parent().css("width") === "35px") {
+      $(this).siblings('.sideTextBox').fadeIn();
       $(this).parent().css("width", "50%");
-      $(this).css("background", "rgba(255, 255, 255, 1)");
+      $(this).css("background", "rgba(0, 0, 0, 0.7)");
+      if ($(this).children().hasClass('fa-chevron-right')) {
+        $(this).children().removeClass().addClass('fas fa-chevron-left');
+      } else {
+        console.log('right');
+        $(this).children().removeClass().addClass('fas fa-chevron-right');
+      }
     } else {
       $(this).parent().css("width", "35px");
-      $(this).css("background", "rgba(255, 255, 255, 0.05)");
+      $(this).css("background", "rgba(0, 0, 0, 0.05)");
+      $(this).siblings('.sideTextBox').fadeOut();
+      if ($(this).children().hasClass('fa-chevron-right')) {
+        $(this).children().removeClass().addClass('fas fa-chevron-left');
+      } else {
+        console.log('right');
+        $(this).children().removeClass().addClass('fas fa-chevron-right');
+      }
     }
   });
 

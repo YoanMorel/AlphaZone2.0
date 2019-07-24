@@ -1,18 +1,30 @@
 <?php
 
+require_once 'model/OverlayPictures.php';
+
 class View {
 
     private $file;
     private $title;
+    private $overlayPics;
 
     public function __construct($requestedView) {
         $this->file = 'view/'.$requestedView.'View.php';
+        $this->overlayPics = new OverlayPictures();
     }
 
-    public function generate($data, $admin = false) {
+    public function generate(Array $data, $admin = false) {
+        $request = $this->overlayPics->getPicturesLink();
+        $pics = $request->fetchAll(PDO::FETCH_NUM);
+        $links = [];
+        foreach($pics as list($img, $subSection, $section)):
+            $links[] = 'public/img/'.$section.'/'.$subSection.'/'.$img;
+        endforeach;
+
         $content = $this->viewGenerator($this->file, $data);
+
         if (!$admin):
-            $view = $this->viewGenerator('view/template.php', array('title' => $this->title, 'content' => $content));
+            $view = $this->viewGenerator('view/template.php', array('title' => $this->title, 'content' => $content, 'overlay' => $links));
         else:
             $view = $this->viewGenerator('view/adminTemplate.php', array('title' => $this->title, 'content' => $content));
         endif;

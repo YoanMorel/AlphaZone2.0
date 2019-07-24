@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Charm|Italianno|Marck+Script|Tangerine&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Charm|Italianno|Marck+Script|Bilbo+Swash+Caps|Tangerine&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="public/css/style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     <title><?= $title; ?></title>
 </head>
 
@@ -24,11 +23,27 @@
         <span class="headerTitle">L'atelier de Jean-François</span>
         <div class="rightHeader">
             <a href="index.php?target=main">Accueil</a>
-            <a href="index.php?target=main">Œuvres</a>
-            <a href="index.php?target=main">Philosophie</a>
-            <a href="index.php?target=main">Biographie</a>
-            <a href="index.php?target=main">Contact</a>
-            <a href="index.php?target=main"><i class="fas fa-th-large"></i></a>
+            <a href="index.php?target=pieces">Œuvres</a>
+            <a href="index.php?target=philosophy">Philosophie</a>
+            <a href="index.php?target=biography">Biographie</a>
+            <a href="index.php?target=contact">Contact</a>
+            <a class="overlayDrop" href="javascript:void(0)"><i class="fas fa-th-large"></i></a>
+        </div>
+    </div>
+    <div class="overlayGallery">
+        <div class="closeOverlay">Fermer</div>
+        <div class="container mx-auto my-auto w-50">
+            <div class="row">
+            <?php
+                foreach($overlay as $link): 
+            ?>
+                <div class="col-6">
+                    <img src="<?= $link ?>" />
+                </div>
+            <?php
+                endforeach;
+            ?>
+            </div>
         </div>
     </div>
     <div class="container-fluid p-0">
