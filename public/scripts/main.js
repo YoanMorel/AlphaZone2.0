@@ -1,7 +1,15 @@
 $(function() {
 
-  // Evènement pour le Header
+  // Snackbar Handler
+  function snackBar(text) {
+    $('#snackBar').addClass('show').text(text);
+    setTimeout(() => {
+      $('#snackBar').removeClass('show').empty();
+    }, 3000);
+  }
 
+
+  // Evènement pour le Header
   $(window).scroll(function() {
     if ($(this).scrollTop() > 50){  
         $('div.header').addClass("sticky");
@@ -357,7 +365,7 @@ $(function() {
           data: JSON.stringify(objsTab)
         },
         complete: function(response) {
-          console.log(response);
+          snackBar(response.responseJSON.msg);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           console.log('Status :' + textStatus + ' Error:' + errorThrown);
@@ -368,8 +376,8 @@ $(function() {
         type: 'POST',
         url: 'controller/autoSave.php',
         data: 'order=' + order,
-        success: function(response) {
-          console.log(response);
+        complete: function(response) {
+          snackBar(response.responseText);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           console.log('Status :' + textStatus + ' Error:' + errorThrown);

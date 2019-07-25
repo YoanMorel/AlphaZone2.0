@@ -14,16 +14,16 @@ class View {
     }
 
     public function generate(Array $data, $admin = false) {
-        $request = $this->overlayPics->getPicturesLink();
-        $pics = $request->fetchAll(PDO::FETCH_NUM);
-        $links = [];
-        foreach($pics as list($img, $subSection, $section)):
-            $links[] = 'public/img/'.$section.'/'.$subSection.'/'.$img;
-        endforeach;
 
         $content = $this->viewGenerator($this->file, $data);
 
         if (!$admin):
+            $request = $this->overlayPics->getPicturesLink('4');
+            $pics = $request->fetchAll(PDO::FETCH_NUM);
+            $links = [];
+            foreach($pics as list($img, $subSection, $section)):
+                $links[] = 'public/img/'.$section.'/'.$subSection.'/'.$img;
+            endforeach;
             $view = $this->viewGenerator('view/template.php', array('title' => $this->title, 'content' => $content, 'overlay' => $links));
         else:
             $view = $this->viewGenerator('view/adminTemplate.php', array('title' => $this->title, 'content' => $content));

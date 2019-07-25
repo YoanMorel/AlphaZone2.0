@@ -2,24 +2,25 @@
 
 function saveData () {
   extract($_POST);
+  $data;
 
   $jsonFile = __DIR__.'/autoSaveBuffer.json';
   if (isset($order) && $order == '66'):
     if(is_file($jsonFile)):
       unlink($jsonFile);
-      $jsonData = json_encode('Order 66 completed...');
+      $data = 'Sauvegarde supprimée...';
     else:
-      $jsonData = json_encode('Order 66 already completed...');
+      $data = 'Pas de Sauvegarde...';
     endif;
   else:
     $openFile = fopen($jsonFile, 'w') or die(1);
-    $jsonData = $_POST['data'];
-    fwrite($openFile, $jsonData);
+    $dataReceived = $_POST['data'];
+    fwrite($openFile, $dataReceived);
     fclose($openFile);
 
-    $jsonData = json_encode('Autosave '.date('H:i:s', time()).'...');
+    $data = json_encode(array('msg' => 'Sauvegarde '.date('H:i:s', time()).'...'));
   endif;
-  return $jsonData;
+  return $data;
 }
 
 if (isset($_POST)):

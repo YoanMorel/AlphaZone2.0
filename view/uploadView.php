@@ -16,12 +16,13 @@
     <button class="btn btn-danger mx-auto" type="button" id="upload" disabled>Upload</button>
   </div>
   <div id="onHoldTextarea" class="row pt-5 no-gutters showDataFields">
-    <div class="col-4 text-center">
-      <input id="imgTitle" type="text" name="" value="" placeholder="Titre de l'image" />
-      <input id="imgSection" type="text" name="" value="" placeholder="Section de l'image" />
-      <input id="imgSubSection" type="text" name="" value="" placeholder="Sous-section de l'image" />
+    <div class="col-md-4 col-12 text-center">
+      <input id="imgTitle" type="text" name="" placeholder="Titre de l'image" />
+      <input id="imgSection" type="text" name="" placeholder="Section de l'image" />
+      <input id="imgSubSection" type="text" name="" placeholder="Sous-section de l'image" />
+      <input id="imgCreationDate" type="text" name="" placeholder="Date de création de l'oeuvre" />
     </div>
-    <div class="col-8">
+    <div class="col-md-8 col-12">
       <textarea class="onHoldTextImg" name="" placeholder="Entrer du texte"></textarea>
     </div>
   </div>

@@ -18,6 +18,7 @@
 </head>
 
 <body>
+<div id="snackBar"></div>
 
   <div class="container-fluid p-0">
       <div class="row no-gutters">
