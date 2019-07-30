@@ -17,12 +17,12 @@
   </div>
   <div id="onHoldTextarea" class="row pt-5 no-gutters showDataFields">
     <div class="col-md-4 col-12 text-center">
-      <input id="imgTitle" type="text" name="" placeholder="Titre de l'image" />
-      <input id="imgSection" type="text" name="" placeholder="Section de l'image" />
-      <input id="imgSubSection" type="text" name="" placeholder="Sous-section de l'image" />
-      <input id="imgCreationDate" type="text" name="" placeholder="Date de création de l'oeuvre" />
+      <input class="uploadForm" id="imgTitle" type="text" name="" placeholder="Titre de l'image" />
+      <input class="uploadForm" id="imgSection" type="text" name="" placeholder="Section de l'image" />
+      <input class="uploadForm" id="imgSubSection" type="text" name="" placeholder="Sous-section de l'image" />
+      <input class="uploadForm" id="imgCreationDate" type="text" name="" placeholder="Date de création de l'oeuvre" />
     </div>
     <div class="col-md-8 col-12">
-      <textarea class="onHoldTextImg" name="" placeholder="Entrer du texte"></textarea>
+      <textarea class="onHoldTextImg uploadForm" name="" placeholder="Entrer du texte"></textarea>
     </div>
   </div>

@@ -1,8 +1,10 @@
-/* Admin Template */
+/* [ADMIN TEMPLATE]
+**************************/
 
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
+  display: flex;
 }
 
 a {
@@ -10,54 +12,52 @@ a {
   transition: 0.3s;
 }
 
-/* Snackbar */
+/* [SNACKBAR]
+************************/
 
 #snackBar {
-  visibility: hidden; /* Hidden by default. Visible on click */
-  min-width: 250px; /* Set a default minimum width */
-  margin-left: -125px; /* Divide value of min-width by 2 */
-  background-color: #2196F3; /* Black background color */
-  color: #fff; /* White text color */
-  text-align: center; /* Centered text */
-  border-radius: 2px; /* Rounded borders */
-  padding: 12px; /* Padding */
-  position: fixed; /* Sit on top of the screen */
-  z-index: 1; /* Add a z-index if needed */
-  left: 50%; /* Center the snackbar */
-  top: 20px; /* 30px from the bottom */
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #2196F3;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 12px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 20px;
+
+  &.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 20px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 20px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {top: 20px; opacity: 1;}
+    to {top: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {top: 20px; opacity: 1;}
+    to {top: 0; opacity: 0;}
+  }
 }
 
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
-#snackBar.show {
-  visibility: visible; /* Show the snackbar */
-  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-  However, delay the fade out process for 2.5 seconds */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-/* Animations to fade the snackbar in and out */
-@-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 20px; opacity: 1;}
-}
-
-@keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 20px; opacity: 1;}
-}
-
-@-webkit-keyframes fadeout {
-  from {top: 20px; opacity: 1;}
-  to {top: 0; opacity: 0;}
-}
-
-@keyframes fadeout {
-  from {top: 20px; opacity: 1;}
-  to {top: 0; opacity: 0;}
-}
-
-/* Style du module d'upload */
+/* [UPLOAD VIEW]
+*************************/
 
 div#fileList {
   border: 3px dashed #BBB;
@@ -102,9 +102,8 @@ div.showDataFields {
   border-radius: 5px;
 }
 
-input[type="text"],
-input[type="password"],
-textarea {
+input.uploadForm,
+textarea.uploadForm {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -149,7 +148,8 @@ textarea {
   color: black;
 }
 
-/* Sidebar de la section Admin */
+/* [Sidebar de la section Admin]
+***********************************/
 
 .sidebar {
   height: 100vh;
@@ -177,7 +177,8 @@ textarea {
   color: #f1f1f1;
 }
 
-/* Style de la vue UnderConstruction */
+/* [Style de la UnderConstruction View]
+******************************************/
 
 .ucView {
   width: 100%;
@@ -186,11 +187,11 @@ textarea {
   background-size: cover;
 }
 
+/* [ADMIN SECTION END]
+***************************/
  
-  /* 
-  * Client Template
-  *
-  */
+/* [Client Template]
+***************************/
 
 .header {
   position: fixed;
@@ -230,7 +231,7 @@ textarea {
 .rightHeader a {
   float: left;
   padding-right: 2rem;
-  font-size: 1rem;
+  font-size: 0.90rem;
   color: #fff;
 }
 
@@ -238,7 +239,8 @@ img.sample {
   width: 100vw;
 }
 
-/* mainView */
+/* [MAIN VIEW]
+************************/
 
 .overlayGallery {
   height: 0;
@@ -274,13 +276,13 @@ img.sample {
   position: relative;
   display: flex;
   height: 100vh;
-  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-/* Zone de texte superposée de la vue Main */
+/* [Zone de texte superposée de la MainView]
+*********************************************/
 
 .leftSideText, .rightSideText {
   color: #fff;
@@ -306,13 +308,13 @@ img.sample {
 }
 
 .leftSideText {
-  left: 0;
-  border-radius: 0 10px 10px 0;
+  left: 2rem;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .rightSideText {
-  right: 0;
-  border-radius: 10px 0 0 10px;
+  right: 2rem;
+  border-radius: 10px 10px 10px 10px;
 }
 
 div.closeRightSideText, div.closeLeftSideText {
@@ -320,6 +322,7 @@ div.closeRightSideText, div.closeLeftSideText {
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   position: absolute;
+  cursor: pointer;
 }
 
 .closeLeftSideText {
@@ -347,6 +350,84 @@ div.closeRightSideText, div.closeLeftSideText {
   opacity: 0.5;
   color: #fff;
 }
+
+/* [END MAIN VIEW]
+*******************************/
+
+/* [CONTACT VIEW]
+*******************************/
+
+.contactHeader {
+  background: url('../img/delivery-envelopes-mail-1919343.jpg');
+  height: 50vh;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.contactTitle {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  font-weight: bold;
+  font-size: 2rem;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.boxTitle {
+  margin: auto;
+}
+
+label {
+  display: block;
+}
+
+input.contactField, textarea.contactField {
+  width: 90%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 1);
+  padding: 14px;
+}
+
+input.contactField.fieldError {
+  border: 1px solid rgba(255, 0, 0, 1);
+  color: #f93943;
+  background: #fce4e4;
+  background-image: url('../img/xicon.svg');
+  background-size: 20px;
+  background-position: right 2% center;
+  background-repeat: no-repeat;
+
+  &[placeholder] {
+    font-weight: bold;
+  }
+}
+
+textarea.contactField {
+  height: 100px;
+  resize: none;
+}
+
+button.btnContact {
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  font-size: 12px;
+  padding: 14px 28px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+button.btnContact:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* [END CONTACT VIEW]
+*******************************/
 
 a.downArrow {
   position: absolute;
@@ -415,24 +496,25 @@ a.downArrow {
 }
 
 
-/*  
-  * Footer
-  */
+/* [FOOTER]
+*************************/
 
   .footer {
-    position: relative;
-    left: 0;
-    bottom: 0;
+    margin-top: auto;
     width: 100%;
-    height: 10vh;
+    height: 150px;
     background-color: rgba(0, 0, 0, 1);
     color: white;
     text-align: center;
+    display: flex;
   }
 
-/*
-  * Scroll to top
-  */
+  .textBoxFooter {
+    margin: auto;
+  }
+
+/* [BTN SCROLL TOP]
+**************************/
 
   a#returnToTop {
     position: fixed;
@@ -440,7 +522,7 @@ a.downArrow {
     bottom: 75px;
     right: 20px;
     background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
     width: 50px;
     height: 50px;
     display: block;
@@ -454,21 +536,23 @@ a.downArrow {
     -ms-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    border: 1px solid #F1F1F1;
 
     & i {
-    color: #fff;
-    margin: 0;
-    position: relative;
-    left: 16px;
-    top: 13px;
-    font-size: 19px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+      color: #fff;
+      margin: 0;
+      position: relative;
+      left: 16px;
+      top: 13px;
+      font-size: 19px;
+      -webkit-transition: all 0.3s ease;
+      -moz-transition: all 0.3s ease;
+      -ms-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      transition: all 0.3s ease;
     }
   }
+
   a#returnToTop:hover {
     background: rgba(0, 0, 0, 0.9);
   }

@@ -1,8 +1,12 @@
 @charset "UTF-8";
-/* Admin Template */
+/* [ADMIN TEMPLATE]
+**************************/
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 a {
@@ -11,45 +15,29 @@ a {
   transition: 0.3s;
 }
 
-/* Snackbar */
+/* [SNACKBAR]
+************************/
 #snackBar {
   visibility: hidden;
-  /* Hidden by default. Visible on click */
   min-width: 250px;
-  /* Set a default minimum width */
   margin-left: -125px;
-  /* Divide value of min-width by 2 */
   background-color: #2196F3;
-  /* Black background color */
   color: #fff;
-  /* White text color */
   text-align: center;
-  /* Centered text */
   border-radius: 2px;
-  /* Rounded borders */
   padding: 12px;
-  /* Padding */
   position: fixed;
-  /* Sit on top of the screen */
   z-index: 1;
-  /* Add a z-index if needed */
   left: 50%;
-  /* Center the snackbar */
   top: 20px;
-  /* 30px from the bottom */
 }
 
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
 #snackBar.show {
   visibility: visible;
-  /* Show the snackbar */
-  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-  However, delay the fade out process for 2.5 seconds */
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-/* Animations to fade the snackbar in and out */
 @-webkit-keyframes fadein {
   from {
     top: 0;
@@ -94,7 +82,8 @@ a {
   }
 }
 
-/* Style du module d'upload */
+/* [UPLOAD VIEW]
+*************************/
 div#fileList {
   border: 3px dashed #BBB;
   border-radius: 10px;
@@ -139,9 +128,8 @@ div.showDataFields {
   border-radius: 5px;
 }
 
-input[type="text"],
-input[type="password"],
-textarea {
+input.uploadForm,
+textarea.uploadForm {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -198,7 +186,8 @@ textarea {
   color: black;
 }
 
-/* Sidebar de la section Admin */
+/* [Sidebar de la section Admin]
+***********************************/
 .sidebar {
   height: 100vh;
   width: 100%;
@@ -225,7 +214,8 @@ textarea {
   color: #f1f1f1;
 }
 
-/* Style de la vue UnderConstruction */
+/* [Style de la UnderConstruction View]
+******************************************/
 .ucView {
   width: 100%;
   height: 100vh;
@@ -233,10 +223,10 @@ textarea {
   background-size: cover;
 }
 
-/* 
-  * Client Template
-  *
-  */
+/* [ADMIN SECTION END]
+***************************/
+/* [Client Template]
+***************************/
 .header {
   position: fixed;
   z-index: 1;
@@ -274,7 +264,7 @@ textarea {
 .rightHeader a {
   float: left;
   padding-right: 2rem;
-  font-size: 1rem;
+  font-size: 0.90rem;
   color: #fff;
 }
 
@@ -282,7 +272,8 @@ img.sample {
   width: 100vw;
 }
 
-/* mainView */
+/* [MAIN VIEW]
+************************/
 .overlayGallery {
   height: 0;
   width: 100%;
@@ -323,13 +314,13 @@ img.sample {
   display: -ms-flexbox;
   display: flex;
   height: 100vh;
-  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-/* Zone de texte superposée de la vue Main */
+/* [Zone de texte superposée de la MainView]
+*********************************************/
 .leftSideText, .rightSideText {
   color: #fff;
   margin: 0;
@@ -357,13 +348,13 @@ img.sample {
 }
 
 .leftSideText {
-  left: 0;
-  border-radius: 0 10px 10px 0;
+  left: 2rem;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .rightSideText {
-  right: 0;
-  border-radius: 10px 0 0 10px;
+  right: 2rem;
+  border-radius: 10px 10px 10px 10px;
 }
 
 div.closeRightSideText, div.closeLeftSideText {
@@ -371,6 +362,7 @@ div.closeRightSideText, div.closeLeftSideText {
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   position: absolute;
+  cursor: pointer;
 }
 
 .closeLeftSideText {
@@ -405,6 +397,84 @@ div.closeRightSideText, div.closeLeftSideText {
   color: #fff;
 }
 
+/* [END MAIN VIEW]
+*******************************/
+/* [CONTACT VIEW]
+*******************************/
+.contactHeader {
+  background: url("../img/delivery-envelopes-mail-1919343.jpg");
+  height: 50vh;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.contactTitle {
+  width: 100%;
+  height: 15%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: bold;
+  font-size: 2rem;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.boxTitle {
+  margin: auto;
+}
+
+label {
+  display: block;
+}
+
+input.contactField, textarea.contactField {
+  width: 90%;
+  background: #fff;
+  border: 1px solid black;
+  padding: 14px;
+}
+
+input.contactField.fieldError {
+  border: 1px solid red;
+  color: #f93943;
+  background: #fce4e4;
+  background-image: url("../img/xicon.svg");
+  background-size: 20px;
+  background-position: right 2% center;
+  background-repeat: no-repeat;
+}
+
+input.contactField.fieldError[placeholder] {
+  font-weight: bold;
+}
+
+textarea.contactField {
+  height: 100px;
+  resize: none;
+}
+
+button.btnContact {
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  font-size: 12px;
+  padding: 14px 28px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+button.btnContact:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* [END CONTACT VIEW]
+*******************************/
 a.downArrow {
   position: absolute;
   top: 92%;
@@ -475,30 +545,33 @@ a.downArrow {
   background-size: cover;
 }
 
-/*  
-  * Footer
-  */
+/* [FOOTER]
+*************************/
 .footer {
-  position: relative;
-  left: 0;
-  bottom: 0;
+  margin-top: auto;
   width: 100%;
-  height: 10vh;
+  height: 150px;
   background-color: black;
   color: white;
   text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-/*
-  * Scroll to top
-  */
+.textBoxFooter {
+  margin: auto;
+}
+
+/* [BTN SCROLL TOP]
+**************************/
 a#returnToTop {
   position: fixed;
   z-index: 1;
   bottom: 75px;
   right: 20px;
   background: black;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   width: 50px;
   height: 50px;
   display: block;
@@ -508,6 +581,7 @@ a#returnToTop {
   -webkit-transition: all 0.3s linear;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  border: 1px solid #F1F1F1;
 }
 
 a#returnToTop i {

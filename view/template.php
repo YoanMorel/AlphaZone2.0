@@ -48,9 +48,9 @@
     </div>
     <div class="container-fluid p-0">
         <?= $content; ?>
-    </div>
-    <div class="footer">
-        <p>Footer</p>
+        <div class="footer">
+            <div class="textBoxFooter">Footer</div>
+        </div>
     </div>
 
 

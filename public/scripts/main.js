@@ -8,14 +8,13 @@ $(function() {
     }, 3000);
   }
 
-
   // Evènement pour le Header
   $(window).scroll(function() {
     if ($(this).scrollTop() > 50){  
-        $('div.header').addClass("sticky");
+      $('div.header').addClass("sticky");
     }
     else{
-        $('div.header').removeClass("sticky");
+      $('div.header').removeClass("sticky");
     }
   });
 
@@ -31,9 +30,11 @@ $(function() {
 
   // Pour les ancres
 
-  $('a[href="#philosophy"]').on('click', function(event) {
+  $('[href*="#"]').on('click', function(event) {
     event.preventDefault();
-    $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+    var anchor = $(this).attr('href');
+    $('html, body').animate({
+      scrollTop: $(anchor).offset().top}, 500, 'linear');
   });
 
   // Pour le Scroll to the Highy Top
@@ -52,24 +53,31 @@ $(function() {
 
   // Evenement pour le sideText
   $('.closeLeftSideText, .closeRightSideText').click(function() {
+    
     if ($(this).parent().css("width") === "35px") {
-      $(this).siblings('.sideTextBox').fadeIn();
-      $(this).parent().css("width", "50%");
+      $(this).siblings('.sideTextBox').show();
+      if($(this).parent().hasClass('rightSideText')) {
+        $(this).parent().css({"width": "50%", "right": "2rem"});
+      } else {
+        $(this).parent().css({"width": "50%", "left": "2rem"});
+      }
       $(this).css("background", "rgba(0, 0, 0, 0.7)");
       if ($(this).children().hasClass('fa-chevron-right')) {
         $(this).children().removeClass().addClass('fas fa-chevron-left');
       } else {
-        console.log('right');
         $(this).children().removeClass().addClass('fas fa-chevron-right');
       }
     } else {
-      $(this).parent().css("width", "35px");
+      if($(this).parent().hasClass('rightSideText')) {
+        $(this).parent().css({"width": "35px", "right": "0"});
+      } else {
+        $(this).parent().css({"width": "35px", "left": "0"});
+      }
       $(this).css("background", "rgba(0, 0, 0, 0.05)");
-      $(this).siblings('.sideTextBox').fadeOut();
+      $(this).siblings('.sideTextBox').hide();
       if ($(this).children().hasClass('fa-chevron-right')) {
         $(this).children().removeClass().addClass('fas fa-chevron-left');
       } else {
-        console.log('right');
         $(this).children().removeClass().addClass('fas fa-chevron-right');
       }
     }
@@ -218,7 +226,7 @@ $(function() {
 
       $.ajax({
         type: 'POST',
-        url: 'controller/uploadHandler.php',
+        url: 'controller/uploadHandlerCtrl.php',
         data: postUrl,
         success: function(response) {
           console.log(response);

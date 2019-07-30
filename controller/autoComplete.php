@@ -2,25 +2,35 @@
 require '../model/DbConnection.php';
 require '../model/Sections.php';
 
-function sections () {
+class AutoComplete {
 
-  extract($_POST);
+  private $dbRequest;
+  private $section;
 
-  $dbRequest = new Sections();
+  public function __construct($imgSection) {
+    $this->dbRequest = new Sections();
+    $this->section = $imgSection;
+  }
 
-  if (empty($imgSection)):
-    $response = $dbRequest->getSections();
-    $data = $response->fetchAll(PDO::FETCH_NUM);
-  else:
-    $response = $dbRequest->getSubSections($imgSection);
-    $data = $response->fetchAll(PDO::FETCH_NUM);
-  endif;
+  public function sections() {
+    $data;
 
-  return $data;
+    if(empty($this->section)):
+      $response = $this->dbRequest->getSections();
+      $data = $response->fetchAll(PDO::FETCH_NUM);
+    else:
+      $response = $this->dbRequest->getSubSections($this->section);
+      $data = $response->fetchAll(PDO::FETCH_NUM);
+    endif;
+
+    return $data;
+  }
 }
 
 if(isset($_POST)):
-  echo json_encode(array('data' => sections()));
+  extract($_POST);
+  $sections = new AutoComplete($imgSection);
+  echo json_encode(array('data' => $sections->sections()));
 endif;
 
  ?>
