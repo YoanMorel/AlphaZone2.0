@@ -20,9 +20,18 @@ abstract class DbConnection {
 		endif;
 
 		return $returnedData;
-        // ferme le curseur PDO
-		$returnedData->closeCursor();
-		$returnedData = NULL;
+	}
+
+	protected function startTransaction() {
+		return self::dbConnect()->beginTransaction();
+	}
+
+	protected function commitTransaction() {
+		return self::dbConnect()->commit();
+	}
+
+	protected function preventTransaction() {
+		return self::dbConnect()->rollBack();
 	}
 
 	private static function dbConnect(){

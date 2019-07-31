@@ -39,7 +39,7 @@ $(function() {
 
   // Pour le Scroll to the Highy Top
   $(window).scroll(function() {
-    if ($(this).scrollTop() >= 50) {
+    if ($(this).scrollTop() >= 250) {
       $('a#returnToTop').fadeIn(200);
     } else {
       $('a#returnToTop').fadeOut(200);
@@ -57,9 +57,17 @@ $(function() {
     if ($(this).parent().css("width") === "35px") {
       $(this).siblings('.sideTextBox').show();
       if($(this).parent().hasClass('rightSideText')) {
-        $(this).parent().css({"width": "50%", "right": "2rem"});
+        $(this).parent().css({
+          "width": "50%",
+          "right": "2rem",
+          "border-radius": "10px 10px 10px 10px"
+        });
       } else {
-        $(this).parent().css({"width": "50%", "left": "2rem"});
+        $(this).parent().css({
+          "width": "50%",
+          "left": "2rem",
+          "border-radius": "10px 10px 10px 10px"
+        });
       }
       $(this).css("background", "rgba(0, 0, 0, 0.7)");
       if ($(this).children().hasClass('fa-chevron-right')) {
@@ -69,9 +77,17 @@ $(function() {
       }
     } else {
       if($(this).parent().hasClass('rightSideText')) {
-        $(this).parent().css({"width": "35px", "right": "0"});
+        $(this).parent().css({
+          "width": "35px",
+          "right": "0",
+          "border-radius": "10px 0 0 10px"
+        });
       } else {
-        $(this).parent().css({"width": "35px", "left": "0"});
+        $(this).parent().css({
+          "width": "35px",
+          "left": "0",
+          "border-radius": "0 10px 10px 0"
+        });
       }
       $(this).css("background", "rgba(0, 0, 0, 0.05)");
       $(this).siblings('.sideTextBox').hide();
@@ -265,7 +281,7 @@ $(function() {
 
     if (imgId != textArea.attr('name') && dataFields.is(':visible')) {
       textArea.val('');
-      dataFields.toggleClass('showDataFields');
+      dataFields.css("display", "none");
     }
 
     textArea.attr('name', imgId);
@@ -280,7 +296,12 @@ $(function() {
       imgSubSection.val(objsTab[objsTab.indexOf(objFound)].subSection);
       textArea.val(objsTab[objsTab.indexOf(objFound)].text);
     }
-    dataFields.toggleClass('showDataFields');
+
+    if (dataFields.is(':visible')) {
+      dataFields.css("display", "none");
+    } else {
+      dataFields.css("display", "flex");
+    }
   });
 
   // Fonction qui au clic sur le bouton de suppression d'image va d'abord remplacer toutes les informations de l'image par un objet vide afin de garder la structure du tableau intacte. Si il n'y a plus d'images détéctées dans la DropBox, la fonction reset tous les tableaux alors chargés d'objets vides.

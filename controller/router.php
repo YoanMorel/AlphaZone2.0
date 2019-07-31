@@ -31,18 +31,28 @@ class Router {
 
     public function getRoute() {
         try {
-            if (isset($_GET['target'])):
-                if ($_GET['target'] == 'main'):
-                    $this->mainCtrl->mainView();
-                elseif ($_GET['target'] == 'pieces'):
+            if (isset($_GET['action'])):
+                if ($_GET['action'] == 'pieces'):
                     $this->piecesCtrl->piecesView();
-                elseif ($_GET['target'] == 'philosophy'):
+                elseif ($_GET['action'] == 'philosophy'):
                     $this->philosophyCtrl->philosophyView();
-                elseif ($_GET['target'] == 'biography'):
+                elseif ($_GET['action'] == 'biography'):
                     $this->biographyCtrl->biographyView();
-                elseif ($_GET['target'] == 'contact'):
-                    $this->contactCtrl->contactView();
-                elseif ($_GET['target'] == 'admin'):
+                elseif ($_GET['action'] == 'contact'):
+                    if(empty($_POST)):
+                        $this->contactCtrl->contactView();
+                    else:
+                        array_map('htmlspecialchars', $_POST);
+
+                        $lname = $this->getParams($_POST, 'lname');
+                        $fname = $this->getParams($_POST, 'fname');
+                        $mail = $this->getParams($_POST, 'mail');
+                        $subject = $this->getParams($_POST, 'subject');
+                        $inquire = $this->getParams($_POST, 'inquire');
+
+                        $this->contactCtrl->inquires($lname, $fname, $mail, $subject, $inquire);
+                    endif;
+                elseif ($_GET['action'] == 'admin'):
                     // if (!isset($_SESSION['sUser'])):
                     //     $login = $this->getParams($_POST, 'login');
                     //     $pwd = $this->getParams($_POST, 'pwd');
@@ -66,7 +76,7 @@ class Router {
                     endif;
                 endif;
             else:
-                throw new Exception('Cible GET non valide');
+                $this->mainCtrl->mainView();
             endif;
         } catch (Exception $error) {
             $this->errorAlert($error->getMessage());

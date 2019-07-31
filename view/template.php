@@ -22,11 +22,11 @@
     <div class="header">
         <span class="headerTitle">L'atelier de Jean-François</span>
         <div class="rightHeader">
-            <a href="index.php?target=main">Accueil</a>
-            <a href="index.php?target=pieces">Œuvres</a>
-            <a href="index.php?target=philosophy">Philosophie</a>
-            <a href="index.php?target=biography">Biographie</a>
-            <a href="index.php?target=contact">Contact</a>
+            <a href="index.php">Accueil</a>
+            <a href="index.php?action=pieces">Œuvres</a>
+            <a href="index.php?action=philosophy">Philosophie</a>
+            <a href="index.php?action=biography">Biographie</a>
+            <a href="index.php?action=contact">Contact</a>
             <a class="overlayDrop" href="javascript:void(0)"><i class="fas fa-th-large"></i></a>
         </div>
     </div>
@@ -56,7 +56,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.0.js" integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

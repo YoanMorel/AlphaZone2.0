@@ -1,6 +1,5 @@
 <?php $this->title = 'uploader'; ?>
 
-
   <div class="row no-gutters">
     <div class="col-12">
         <div class="alertPopup">

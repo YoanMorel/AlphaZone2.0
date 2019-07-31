@@ -1,6 +1,7 @@
 <?php
-require '../model/DbConnection.php';
-require '../model/Sections.php';
+
+require_once '../model/DbConnection.php';
+require_once '../model/Sections.php';
 
 class AutoComplete {
 

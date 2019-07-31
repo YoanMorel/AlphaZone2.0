@@ -24,11 +24,11 @@
       <div class="row no-gutters">
           <div class="col-2">
             <div class="sidebar">
-                <a href="index.php?target=admin&module=main"><i class="fas fa-home"></i><span class="ml-1">Home</span></a>
-                <a href="index.php?target=admin&module=upload"><i class="fas fa-upload"></i><span class="ml-1">Upload</span></a>
-                <a href="index.php?target=admin&module=update"><i class="fas fa-image"></i><span class="ml-1">Edition</span></a>
-                <a href="index.php?target=admin&module=contact"><i class="fas fa-envelope"></i><span class="ml-1">Contact</span></a>
-                <a href="index.php?target=admin&module=disconnect"><i class="fas fa-power-off"></i> Déconnexion</a>
+                <a href="index.php?action=admin&module=main"><i class="fas fa-home"></i><span class="ml-1">Home</span></a>
+                <a href="index.php?action=admin&module=upload"><i class="fas fa-upload"></i><span class="ml-1">Upload</span></a>
+                <a href="index.php?action=admin&module=update"><i class="fas fa-image"></i><span class="ml-1">Edition</span></a>
+                <a href="index.php?action=admin&module=contact"><i class="fas fa-envelope"></i><span class="ml-1">Contact</span></a>
+                <a href="index.php?action=admin&module=disconnect"><i class="fas fa-power-off"></i> Déconnexion</a>
             </div>
           </div>
           <div class="col-10">
