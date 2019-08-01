@@ -1,7 +1,6 @@
 <?php
 
   require '../model/DbConnection.php';
-  require '../model/Sections.php';
   require '../model/UploadHandler.php';
 
   function uploadHandler () {
@@ -11,8 +10,8 @@
     $name           = md5(rand().time().'unPeuDePaprikaPourDonnerDuGoutAMonHash').'.jpg';
     $encodedData    = str_replace(' ', '+', $_POST['file']);
     $decodedData    = base64_decode($encodedData);
-    $sectionLink    = '../public/img/'.$section;
-    $subSectionLink = '../public/img/'.$section.'/'.$subSection;
+    $sectionLink    = '../gallery/'.$section;
+    $subSectionLink = '../gallery/'.$section.'/'.$subSection;
     $dbRequest      = new UploadHandler();
 
     $dbRequest->setSection($section);
@@ -39,7 +38,7 @@
     endif;
 
     if ($stmt):
-      return $name.' loaded in public/img/'.$section.'/'.$subSection.'/ at '.date('H:i:s', time()).' ...';
+      return $name.' loaded in gallery/'.$section.'/'.$subSection.'/ at '.date('H:i:s', time()).' ...';
     else:
       return 'upload failed...';
     endif;

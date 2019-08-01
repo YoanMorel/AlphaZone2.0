@@ -239,7 +239,7 @@ $(function() {
         img.text = objInTab.text;
       }
       var postUrl = $.param(img); // Transforme les objets en parametres transmissibles par méthode POST. Dans ce cas, img.file=IMGBASE64
-
+      console.log(img.file);
       $.ajax({
         type: 'POST',
         url: 'controller/uploadHandlerCtrl.php',

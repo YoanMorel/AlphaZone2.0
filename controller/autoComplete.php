@@ -1,7 +1,7 @@
 <?php
 
 require_once '../model/DbConnection.php';
-require_once '../model/Sections.php';
+require_once '../model/Gallery.php';
 
 class AutoComplete {
 
@@ -9,7 +9,7 @@ class AutoComplete {
   private $section;
 
   public function __construct($imgSection) {
-    $this->dbRequest = new Sections();
+    $this->dbRequest = new Gallery();
     $this->section = $imgSection;
   }
 

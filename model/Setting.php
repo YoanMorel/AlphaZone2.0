@@ -14,7 +14,7 @@ class Setting {
     }
 
     private static function getParams() {
-        if (self::$params == null):
+        if (self::$params === null):
             $path = $_SERVER['DOCUMENT_ROOT'].'/testZone/config/config.ini';
             if (!file_exists($path)):
                 throw new Exception("Aucun fichier de configuration trouvé");

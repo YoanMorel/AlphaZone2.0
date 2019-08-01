@@ -7,7 +7,7 @@ class Inquires extends DbConnection {
             $this->startTransaction();
 
             $success = $this->queryCall(
-                'INSERT INTO contacts (lname, fname, mail) VALUES (:lname, :fname, :mail)',
+                'INSERT INTO T_CONTACTS (CON_LAST_NAME, CON_FIRST_NAME, CON_MAIL) VALUES (:lname, :fname, :mail)',
                 array(
                     array('lname', $authorLastName, PDO::PARAM_STR),
                     array('fname', $authorFirstName, PDO::PARAM_STR),
@@ -15,7 +15,7 @@ class Inquires extends DbConnection {
                 ));
 
             $success = $this->queryCall(
-                'INSERT INTO inquires (inquireSubject, inquire, inquireDate, id_contacts) VALUES (:inquireSubject, :inquire, NOW(), LAST_INSERT_ID())',
+                'INSERT INTO T_INQUIRES (INQ_SUBJECT, INQ_INQUIRE, INQ_POST_DATE, INQ_OPENED, CON_ID) VALUES (:inquireSubject, :inquire, NOW(), false, LAST_INSERT_ID())',
                 array(
                     array('inquireSubject', $inquireSubject, PDO::PARAM_STR),
                     array('inquire', $inquire, PDO::PARAM_STR)
@@ -31,12 +31,12 @@ class Inquires extends DbConnection {
     }
 
     public function getContacts() {
-        $success = $this->queryCall('SELECT * FROM contacts');
+        $success = $this->queryCall('SELECT * FROM T_CONTACTS');
 
         return $success;
     }
 
-    public function getInquires($contactMail = NULL) {
-        $success = $this->queryCall('');
-    }
+    // public function getInquires($contactMail = NULL) {
+    //     $success = $this->queryCall('');
+    // }
 }
