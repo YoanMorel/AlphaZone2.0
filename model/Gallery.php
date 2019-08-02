@@ -29,6 +29,8 @@ class Gallery extends DbConnection {
                 array('subSectionData', $subSectionData, PDO::PARAM_STR)
             )
         );
+
+        return $piecesData;
     }
 
 }

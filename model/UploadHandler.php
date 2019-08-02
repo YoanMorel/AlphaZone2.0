@@ -34,7 +34,7 @@ class UploadHandler extends DbConnection {
 
     public function insertSubSectionInDB () {
         $success = $this->queryCall(
-            'INSERT INTO T_SUBSECTIONS (SUB_SUBSECTION, SUB_CREATION_DATE, SEC_ID) VALUES (:newSubSection, NOW(), (SELECT SEC_ID FROM T_SECTION WHERE SEC_SECTION = :relativeSection))',
+            'INSERT INTO T_SUBSECTIONS (SUB_SUBSECTION, SUB_CREATION_DATE, SEC_ID) VALUES (:newSubSection, NOW(), (SELECT SEC_ID FROM T_SECTIONS WHERE SEC_SECTION = :relativeSection))',
             array(
                 array('newSubSection', $this->subSection, PDO::PARAM_STR),
                 array('relativeSection', $this->section, PDO::PARAM_STR)
