@@ -27,7 +27,7 @@ class ScanDir {
             if(count($this->dataScan, COUNT_RECURSIVE) < count($this->dirScan, COUNT_RECURSIVE)):
                 $this->loadPendingData();
             elseif (count($this->dataScan, COUNT_RECURSIVE) > count($this->dirScan, COUNT_RECURSIVE)):
-                'Some shit doing some pretty shit';
+                // 'Some shit doing some pretty shit'
             else:
                 echo 'Pas d\'irrégularités détéctées';
             endif;
@@ -38,15 +38,15 @@ class ScanDir {
         foreach($this->dirScan as $section => $subSections):
             $this->uploadHandler->setSection($section);
             if($this->uploadHandler->insertSectionInDB())
-                $this->log[$section] = '>loaded<';
+                $this->log[$section] = 'Section >loaded<';
             foreach($subSections as $subSection => $files):
                 $this->uploadHandler->setSubSection($subSection);
                 if($this->uploadHandler->insertSubSectionInDB())
-                    $this->log[$subSection] = '>loaded<';
+                    $this->log[$subSection] = 'SubSection >loaded<';
                 foreach($files as $file):
                     $this->uploadHandler->setData(null, null, $file);
                     if($this->uploadHandler->insertDataInDB())
-                        $this->log[$file] = '>loaded<';
+                        $this->log[$file] = 'Data >loaded<';
                 endforeach;
             endforeach;
         endforeach;

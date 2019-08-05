@@ -22,7 +22,7 @@ class View {
             $pics = $request->fetchAll(PDO::FETCH_NUM);
             $links = [];
             foreach($pics as list($img, $subSection, $section)):
-                $links[] = 'gallery'.$section.'/'.$subSection.'/'.$img;
+                $links[] = 'gallery/'.$section.'/'.$subSection.'/'.$img;
             endforeach;
             $view = $this->viewGenerator('view/template.php', array('title' => $this->title, 'content' => $content, 'overlay' => $links));
         else:

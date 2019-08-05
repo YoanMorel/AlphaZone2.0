@@ -29,12 +29,17 @@ $(function() {
   });
 
   // Pour les ancres
-
   $('[href*="#"]').on('click', function(event) {
     event.preventDefault();
     var anchor = $(this).attr('href');
     $('html, body').animate({
       scrollTop: $(anchor).offset().top}, 500, 'linear');
+  });
+
+  $('a.mainToGallery').hover(function() {
+    $('div.parallaxExtraMainView > img').css("filter", "blur(8px)");
+  }, function() {
+    $('div.parallaxExtraMainView > img').css("filter", "none");
   });
 
   // Pour le Scroll to the Highy Top
