@@ -37,7 +37,7 @@ $(function() {
   });
 
   $('a.mainToGallery').hover(function() {
-    $('div.parallaxExtraMainView > img').css("filter", "blur(8px)");
+    $('div.parallaxExtraMainView > img').css("filter", "blur(4px)");
   }, function() {
     $('div.parallaxExtraMainView > img').css("filter", "none");
   });
