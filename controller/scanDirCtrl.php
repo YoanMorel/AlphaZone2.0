@@ -33,35 +33,50 @@ class ScanDir {
     }
 
     private function loadPendingData($array1, $array2) {
-        $arrayDiff = array_diff($array2, $array1);
+        $arrayDiff  = array_diff($array2, $array1);
 
         foreach($arrayDiff as $path):
             $pathTab = explode('/', $path);
+            $name    = md5(rand().time().'unPeuDePaprikaPourDonnerDuGoutAMonHash').'.jpg';
+            $ifSectionExists = false;
+
+            if(rename('../gallery/'.$path, '../gallery/'.$pathTab[0].'/'.$pathTab[1].'/'.$name)):
+                $pathTab[2] = $name;
+            endif;
+
             $sections = $this->gallery->getSections()->fetchAll();
             foreach($sections as $section):
-                var_dump($pathTab[0]);
-                var_dump($section['SEC_SECTION']);
-                // rentre dans le else à chaque itération sauf une fois
+                $ifSubSectionExists = false;
                 if($pathTab[0] == $section['SEC_SECTION']):
-                //     $this->uploadHandler->setSection($section['SEC_SECTION']);
-                //     $subSections = $this->gallery->getSubSections($section['SEC_SECTION'])->fetchAll();
-                //     foreach($subSections as $subSection):
-                //         if($pathTab[1] == $subSection['SUB_SUBSECTION']):
-                //             $this->uploadHandler->setSubSection($subSection['SUB_SUBSECTION']);
-                //             $this->uploadHandler->setData(null, null, $pathTab[2]);
-                //             if($this->uploadHandler->insertDataInDB())
-                //                 echo 'Done';
-                //         endif;
-                //     endforeach;
-                // else:
-                //     $this->uploadHandler->setSection($pathTab[0]);
-                //     $this->uploadHandler->setSubSection($pathTab[1]);
-                //     $this->uploadHandler->setData(null, null, $pathTab[2]);
-                //     $this->uploadHandler->insertSectionInDB();
-                //     $this->uploadHandler->insertSubSectionInDB();
-                //     $this->uploadHandler->insetDataInDB();
+                    $ifSectionExists = true;
+                    $this->uploadHandler->setSection($section['SEC_SECTION']);
+                    $subSections = $this->gallery->getSubSections($section['SEC_SECTION'])->fetchAll();
+                    foreach($subSections as $subSection):
+                        if($pathTab[1] == $subSection['SUB_SUBSECTION']):
+                            $ifSubSectionExists = true;
+                            $this->uploadHandler->setSubSection($subSection['SUB_SUBSECTION']);
+                            $this->uploadHandler->setData(null, null, $pathTab[2]);
+                            if($this->uploadHandler->insertDataInDB())
+                                echo '>Release< Done Level 0';
+                        endif;
+                    endforeach;
+                    if(!$ifSubSectionExists):
+                        $this->uploadHandler->setSubSection($pathTab[1]);
+                        $this->uploadHandler->setData(null, null, $pathTab[2]);
+                        $this->uploadHandler->insertSubSectionInDB();                    
+                        if($this->uploadHandler->insertDataInDB())
+                            echo '>Release< Done Level 1';
+                    endif;
                 endif;
             endforeach;
+            if(!$ifSectionExists):
+                $this->uploadHandler->setSection($pathTab[0]);
+                $this->uploadHandler->setSubSection($pathTab[1]);
+                $this->uploadHandler->setData(null, null, $pathTab[2]);
+                $this->uploadHandler->insertSectionInDB();
+                $this->uploadHandler->insertSubSectionInDB();                                       if($this->uploadHandler->insertDataInDB())
+                    echo '>Release< Done Level 2';
+            endif;
         endforeach;
     }
 
@@ -74,9 +89,6 @@ class ScanDir {
         endforeach;
 
         foreach($this->imagesPathList as $path):
-            // $pathTab = explode('/', $path);
-            // $this->dirScan[$pathTab[0]][$pathTab[1]][] = $pathTab[2];
-
             $this->dirScan[] = $path;
         endforeach;
     }
@@ -88,9 +100,7 @@ class ScanDir {
             $i = 0;
             foreach($subSectionsList as $subSection):
                 $pieces = $this->gallery->getPieces($section['SEC_SECTION'], $subSection['SUB_SUBSECTION'])->fetchAll();
-                // $this->dataScan[$section['SEC_SECTION']][$subSection['SUB_SUBSECTION']] = [];
                 foreach($pieces as $piece):
-                    // $this->dataScan[$section['SEC_SECTION']][$subSection['SUB_SUBSECTION']][] = $piece['PIE_IMG_LINK'];
                     $this->dataScan[] = $section['SEC_SECTION'].'/'.$subSection['SUB_SUBSECTION'].'/'.$piece['PIE_IMG_LINK'];
                 endforeach;
             endforeach;
