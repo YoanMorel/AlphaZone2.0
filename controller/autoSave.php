@@ -18,7 +18,7 @@ function saveData () {
     fwrite($openFile, $dataReceived);
     fclose($openFile);
 
-    $data = json_encode(array('msg' => 'Sauvegarde '.date('H:i:s', time()).'...'));
+    $data = json_encode(['msg' => 'Sauvegarde '.date('H:i:s', time()).'...']);
   endif;
   return $data;
 }

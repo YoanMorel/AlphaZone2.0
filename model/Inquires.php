@@ -8,18 +8,20 @@ class Inquires extends DbConnection {
 
             $success = $this->queryCall(
                 'INSERT INTO T_CONTACTS (CON_LAST_NAME, CON_FIRST_NAME, CON_MAIL) VALUES (:lname, :fname, :mail)',
-                array(
-                    array('lname', $authorLastName, PDO::PARAM_STR),
-                    array('fname', $authorFirstName, PDO::PARAM_STR),
-                    array('mail', $authorMail, PDO::PARAM_STR)
-                ));
+                [
+                    ['lname', $authorLastName, PDO::PARAM_STR],
+                    ['fname', $authorFirstName, PDO::PARAM_STR],
+                    ['mail', $authorMail, PDO::PARAM_STR]
+                ]
+            );
 
             $success = $this->queryCall(
                 'INSERT INTO T_INQUIRES (INQ_SUBJECT, INQ_INQUIRE, INQ_POST_DATE, INQ_OPENED, CON_ID) VALUES (:inquireSubject, :inquire, NOW(), false, LAST_INSERT_ID())',
-                array(
-                    array('inquireSubject', $inquireSubject, PDO::PARAM_STR),
-                    array('inquire', $inquire, PDO::PARAM_STR)
-                ));
+                [
+                    ['inquireSubject', $inquireSubject, PDO::PARAM_STR],
+                    ['inquire', $inquire, PDO::PARAM_STR]
+                ]
+            );
             
             if($this->commitTransaction())
                 return $success;

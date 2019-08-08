@@ -6,7 +6,7 @@ class UploadAdminCtrl {
 
     public function uploadView() {
         $view = new View('upload');
-        $view->generate(array(false), true);
+        $view->generate([false], true);
     }
 
 }

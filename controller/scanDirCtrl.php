@@ -9,10 +9,10 @@ class ScanDir {
     private $dirToScan;
     private $gallery;
     private $uploadHandler;
-    private $imagesPathList = array();
-    private $dataScan       = array();
-    private $dirScan        = array();
-    private $log            = array();
+    private $imagesPathList = [];
+    private $dataScan       = [];
+    private $dirScan        = [];
+    private $log            = [];
 
     public function __construct($pathToScan) {
         $this->gallery          = new Gallery();

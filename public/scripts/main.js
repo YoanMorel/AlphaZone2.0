@@ -337,7 +337,7 @@ $(function() {
   // Event qui enregistre en temps réel le text tapé dans chaque "textarea". Il peut aussi sauvegarder automatiquement le texte dans un buffer JSON toutes les 5 secondes si aucune touche n'a été pressée dans l'intervale de temps.
   var autoSaveTimer;
 
-  $('textarea, input').on('keyup', function() {
+  $('div#onHoldTextarea textarea, div#onHoldTextarea input').on('keyup', function() {
     var idTextarea = textArea.attr('name');
     var textInArea = textArea.val();
     var imgTitleContent = imgTitle.val();
@@ -433,6 +433,21 @@ $(function() {
     if (imgSectionContent) {
       autoCompleteSources(imgSectionContent);
     }
+  });
+
+  $('form#contactInquiries input').on('blur', function() {
+    $name = $(this).attr('name');
+    $.ajax({
+      type: 'POST',
+      url: 'controller/contactCtrl.php',
+      data: $name + '=' + $(this).val(),
+      complete: function(response) {
+        console.log(response.responseText);
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log('Status :' + textStatus + ' Error:' + errorThrown);
+      }
+    });
   });
 
 });

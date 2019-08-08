@@ -11,6 +11,6 @@ class MainCtrl {
 
     public function mainView() {
         $view = new View('main');
-        $view->generate(array(false), false);
+        $view->generate([false], false);
     }
 }

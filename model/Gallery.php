@@ -11,8 +11,9 @@ class Gallery extends DbConnection {
     public function getSubSections($sectionData) {
         $subSectionData = $this->queryCall(
             'SELECT sub.SUB_SUBSECTION FROM T_SUBSECTIONS sub INNER JOIN T_SECTIONS s ON s.SEC_ID = sub.SEC_ID AND s.SEC_SECTION = :sectionData',
-            array(
-                array('sectionData', $sectionData, PDO::PARAM_STR))
+            [
+                ['sectionData', $sectionData, PDO::PARAM_STR]
+            ]
         );
 
         return $subSectionData;
@@ -24,10 +25,10 @@ class Gallery extends DbConnection {
             LEFT JOIN T_SUBSECTIONS sub ON sub.SUB_ID = p.SUB_ID 
             LEFT JOIN T_SECTIONS s ON s.SEC_ID = sub.SEC_ID
             WHERE :sectionData = s.SEC_SECTION AND :subSectionData = sub.SUB_SUBSECTION',
-            array(
-                array('sectionData', $sectionData, PDO::PARAM_STR),
-                array('subSectionData', $subSectionData, PDO::PARAM_STR)
-            )
+            [
+                ['sectionData', $sectionData, PDO::PARAM_STR],
+                ['subSectionData', $subSectionData, PDO::PARAM_STR]
+            ]
         );
 
         return $piecesData;

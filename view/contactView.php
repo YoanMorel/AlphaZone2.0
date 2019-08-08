@@ -9,7 +9,7 @@
         <form id="contactInquiries" action="index.php?action=contact" method="POST">
             <p>
                 <label for="lname">Nom</label>
-                <input type="text" class="contactField fieldError" placeholder="Votre nom ici" id="lname" name="lname" />
+                <input type="text" class="contactField fieldGood" placeholder="Votre nom ici" id="lname" name="lname" />
             </p>
             <p>
                 <label for="fname">Prénom</label>

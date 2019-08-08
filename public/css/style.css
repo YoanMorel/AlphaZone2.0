@@ -509,6 +509,20 @@ input.contactField.fieldError[placeholder] {
   font-weight: bold;
 }
 
+input.contactField.fieldGood {
+  border: 1px solid lime;
+  color: #7ff939;
+  background: #e4fcec;
+  background-image: url("../img/vicon.svg");
+  background-size: 20px;
+  background-position: right 2% center;
+  background-repeat: no-repeat;
+}
+
+input.contactField.fieldGood[placeholder] {
+  font-weight: bold;
+}
+
 textarea.contactField {
   height: 100px;
   resize: none;

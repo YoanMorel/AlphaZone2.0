@@ -17,11 +17,9 @@ class AutoComplete {
     $data;
 
     if(empty($this->section)):
-      $response = $this->dbRequest->getSections();
-      $data = $response->fetchAll(PDO::FETCH_NUM);
+      $data = $this->dbRequest->getSections()->fetchAll(PDO::FETCH_NUM);
     else:
-      $response = $this->dbRequest->getSubSections($this->section);
-      $data = $response->fetchAll(PDO::FETCH_NUM);
+      $data = $this->dbRequest->getSubSections($this->section)->fetchAll(PDO::FETCH_NUM);
     endif;
 
     return $data;
@@ -31,7 +29,7 @@ class AutoComplete {
 if(isset($_POST)):
   extract($_POST);
   $sections = new AutoComplete($imgSection);
-  echo json_encode(array('data' => $sections->sections()));
+  echo json_encode(['data' => $sections->sections()]);
 endif;
 
  ?>

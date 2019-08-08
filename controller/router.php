@@ -85,7 +85,7 @@ class Router {
 
     private function errorAlert($msgError) {
         $view = new View('error');
-        $view->generate(array('msgError' => $msgError));
+        $view->generate(['msgError' => $msgError]);
     }
 
     private function getParams($tab, $name) {
