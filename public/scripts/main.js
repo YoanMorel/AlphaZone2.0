@@ -439,8 +439,8 @@ $(function() {
     $name = $(this).attr('name');
     $.ajax({
       type: 'POST',
-      url: 'controller/contactCtrl.php',
-      data: $name + '=' + $(this).val(),
+      url: 'controller/AjaxRouter.php',
+      data: 'validation=ajax&' + $name + '=' + $(this).val(),
       complete: function(response) {
         console.log(response.responseText);
       },

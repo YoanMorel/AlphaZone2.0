@@ -45,12 +45,12 @@ class Router {
                         array_map('htmlspecialchars', $_POST);
 
                         $lname = $this->getParams($_POST, 'lname');
-                        $fname = $this->getParams($_POST, 'fname');
+                        $fname = $this->getParams($_POST, 'organisme');
                         $mail = $this->getParams($_POST, 'mail');
                         $subject = $this->getParams($_POST, 'subject');
                         $inquire = $this->getParams($_POST, 'inquire');
 
-                        $this->contactCtrl->inquires($lname, $fname, $mail, $subject, $inquire);
+                        $this->contactCtrl->inquires($lname, $organisme, $mail, $subject, $inquire);
                     endif;
                 elseif ($_GET['action'] == 'admin'):
                     // if (!isset($_SESSION['sUser'])):

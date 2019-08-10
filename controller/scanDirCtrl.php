@@ -25,9 +25,10 @@ class ScanDir {
         $this->getDataScan();
         if($this->dataScan && $this->dirScan):
             if(count($this->dataScan) < count($this->dirScan)):
+                $this->log['scan'] = 'Irrégularités détéctées lors du Scan. Des informations sont manquantes dans la base de données. Lancement du régularisateur';
                 $this->loadPendingData($this->dataScan, $this->dirScan);
             else:
-                echo 'Pas d\'irrégularités détéctées';
+                $this->log['scan'] = 'Aucune irrégularité détéctée';
             endif;
         endif;
     }
@@ -42,6 +43,8 @@ class ScanDir {
 
             if(rename('../gallery/'.$path, '../gallery/'.$pathTab[0].'/'.$pathTab[1].'/'.$name)):
                 $pathTab[2] = $name;
+            else:
+                $this->log['rename'] = 'Le fichier n\'a pas pu être renommé';
             endif;
 
             $sections = $this->gallery->getSections()->fetchAll();
@@ -56,16 +59,22 @@ class ScanDir {
                             $ifSubSectionExists = true;
                             $this->uploadHandler->setSubSection($subSection['SUB_SUBSECTION']);
                             $this->uploadHandler->setData(null, null, $pathTab[2]);
-                            if($this->uploadHandler->insertDataInDB())
-                                echo '>Release< Done Level 0';
+                            if($this->uploadHandler->insertDataInDB()):
+                                $this->log['LVL0'] = '>Release< Done Level 0. Files loaded';
+                            else:
+                                $this->log['LVL0'] = '>Release< Something\'s wrong appened on Level 0';
+                            endif;
                         endif;
                     endforeach;
                     if(!$ifSubSectionExists):
                         $this->uploadHandler->setSubSection($pathTab[1]);
                         $this->uploadHandler->setData(null, null, $pathTab[2]);
                         $this->uploadHandler->insertSubSectionInDB();                    
-                        if($this->uploadHandler->insertDataInDB())
-                            echo '>Release< Done Level 1';
+                        if($this->uploadHandler->insertDataInDB()):
+                            $this->log['LVL1'] = '>Release< Done Level 1. Subsection made and Files loaded';
+                        else:
+                            $this->log['LVL1'] = '>Release< Something\'s wrong appened on Level 1';
+                        endif;
                     endif;
                 endif;
             endforeach;
@@ -74,8 +83,11 @@ class ScanDir {
                 $this->uploadHandler->setSubSection($pathTab[1]);
                 $this->uploadHandler->setData(null, null, $pathTab[2]);
                 $this->uploadHandler->insertSectionInDB();
-                $this->uploadHandler->insertSubSectionInDB();                                       if($this->uploadHandler->insertDataInDB())
-                    echo '>Release< Done Level 2';
+                $this->uploadHandler->insertSubSectionInDB();                                       if($this->uploadHandler->insertDataInDB()):
+                    $this->log['LVL2'] = '>Release< Done Level 2. Section, Subection made and Files loaded';
+                else:
+                    $this->log['LVL2'] = '>Release< Something\'s wrong appened on Level 2';
+                endif;
             endif;
         endforeach;
     }
@@ -106,11 +118,16 @@ class ScanDir {
             endforeach;
         endforeach;
     }
+
+    public function getLog() {
+        return $this->log;
+    }
 }
 
 $scan = new ScanDir('../gallery/');
 
 $scan->regularize();
+echo json_encode(['log' => $scan->getLog()]);
 
 
 

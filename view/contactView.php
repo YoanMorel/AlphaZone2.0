@@ -12,8 +12,8 @@
                 <input type="text" class="contactField fieldGood" placeholder="Votre nom ici" id="lname" name="lname" />
             </p>
             <p>
-                <label for="fname">Prénom</label>
-                <input type="text" class="contactField fieldError" placeholder="Votre prénom ici" id="fname" name="fname" />
+                <label for="organisme">Organisme</label>
+                <input type="text" class="contactField fieldError" placeholder="Votre prénom ici" id="organisme" name="organisme" />
             </p>
             <p>
                 <label for="mail">Adresse mail</label>
