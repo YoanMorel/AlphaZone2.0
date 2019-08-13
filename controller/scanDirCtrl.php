@@ -14,6 +14,13 @@ class ScanDir {
     private $dirScan        = [];
     private $log            = [];
 
+    public function __get($value) {
+        if($value != 'log'):
+            throw new BadMethodCallException(__CLASS__ . '::'.$value.' : inaccessible ou inexistant.');
+        endif;
+        return $this->log;
+    }
+
     public function __construct($pathToScan) {
         $this->gallery          = new Gallery();
         $this->uploadHandler    = new UploadHandler();
@@ -27,8 +34,10 @@ class ScanDir {
             if(count($this->dataScan) < count($this->dirScan)):
                 $this->log['scan'] = 'Irrégularités détéctées lors du Scan. Des informations sont manquantes dans la base de données. Lancement du régularisateur';
                 $this->loadPendingData($this->dataScan, $this->dirScan);
+                $this->log['scan'] .= "\n\rOpération terminé à ".date('G:i', mktime());
             else:
                 $this->log['scan'] = 'Aucune irrégularité détéctée';
+                $this->log['scan'] .= "\n\rOpération terminée à ".date('G:i', mktime());
             endif;
         endif;
     }
@@ -43,8 +52,9 @@ class ScanDir {
 
             if(rename('../gallery/'.$path, '../gallery/'.$pathTab[0].'/'.$pathTab[1].'/'.$name)):
                 $pathTab[2] = $name;
+                $this->log[$pathTab[2]]['rename'] = 'Fichier renommé';
             else:
-                $this->log['rename'] = 'Le fichier n\'a pas pu être renommé';
+                $this->log[$pathTab[2]]['rename'] = 'Le fichier n\'a pas pu être renommé';
             endif;
 
             $sections = $this->gallery->getSections()->fetchAll();
@@ -60,9 +70,9 @@ class ScanDir {
                             $this->uploadHandler->setSubSection($subSection['SUB_SUBSECTION']);
                             $this->uploadHandler->setData(null, null, $pathTab[2]);
                             if($this->uploadHandler->insertDataInDB()):
-                                $this->log['LVL0'] = '>Release< Done Level 0. Files loaded';
+                                $this->loglog[$pathTab[2]]['LVL0'] = '>Release< Done Level 0. Files loaded';
                             else:
-                                $this->log['LVL0'] = '>Release< Something\'s wrong appened on Level 0';
+                                $this->loglog[$pathTab[2]]['LVL0'] = '>Release< Something\'s wrong appened on Level 0';
                             endif;
                         endif;
                     endforeach;
@@ -71,9 +81,9 @@ class ScanDir {
                         $this->uploadHandler->setData(null, null, $pathTab[2]);
                         $this->uploadHandler->insertSubSectionInDB();                    
                         if($this->uploadHandler->insertDataInDB()):
-                            $this->log['LVL1'] = '>Release< Done Level 1. Subsection made and Files loaded';
+                            $this->log[$pathTab[2]]['LVL1'] = '>Release< Done Level 1. Subsection made and Files loaded';
                         else:
-                            $this->log['LVL1'] = '>Release< Something\'s wrong appened on Level 1';
+                            $this->log[$pathTab[2]]['LVL1'] = '>Release< Something\'s wrong appened on Level 1';
                         endif;
                     endif;
                 endif;
@@ -84,9 +94,9 @@ class ScanDir {
                 $this->uploadHandler->setData(null, null, $pathTab[2]);
                 $this->uploadHandler->insertSectionInDB();
                 $this->uploadHandler->insertSubSectionInDB();                                       if($this->uploadHandler->insertDataInDB()):
-                    $this->log['LVL2'] = '>Release< Done Level 2. Section, Subection made and Files loaded';
+                    $this->log[$pathTab[2]]['LVL2'] = '>Release< Done Level 2. Section, Subection made and Files loaded';
                 else:
-                    $this->log['LVL2'] = '>Release< Something\'s wrong appened on Level 2';
+                    $this->log[$pathTab[2]]['LVL2'] = '>Release< Something\'s wrong appened on Level 2';
                 endif;
             endif;
         endforeach;
@@ -120,16 +130,13 @@ class ScanDir {
     }
 
     public function getLog() {
-        return $this->log;
+        return !empty($this->log);
     }
 }
 
 $scan = new ScanDir('../gallery/');
 
 $scan->regularize();
-echo json_encode(['log' => $scan->getLog()]);
-
-
-
+echo json_encode(['log' => $scan->log]);
 
 ?>

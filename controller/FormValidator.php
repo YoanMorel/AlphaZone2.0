@@ -4,16 +4,20 @@ class FormValidator {
 
     private static $ERROR_EMPTY_ELEMENT = [
         'lname' => 'Vous devez renseigner un nom',
-        'mail' => 'Vous devez renseigner une adresse mail'
+        'mail'  => 'Vous devez renseigner une adresse mail',
+        'subject' => 'Vous devez renseigner un objet',
+        'inquire' => 'Vous devez saisir un commentaire'
     ];
 
     private static $ERROR_INVALID_ELEMENT = [
         'lname' => 'Ce n\'est pas un nom valide',
-        'mail' => 'Cette adresse mail est invalide'
+        'mail'  => 'Cette adresse mail est invalide',
+        'subject' => 'Ce n\'est pas un nom d\'objet valide',
+        'inquire' => 'Ce commentaire n\'est pas valide'
     ];
 
-    private $errors = [];
-    private $filterRules = [];
+    private $errors         = [];
+    private $filterRules    = [];
 
     public function __get($value) {
         if($value != 'errors'):
@@ -31,6 +35,13 @@ class FormValidator {
             'mail' => [
                 'filter' => FILTER_CALLBACK,
                 'options' => [$this, 'filterMailAdress']
+            ],
+            'subject' => [
+                'filter' => FILTER_CALLBACK,
+                'options' => [$this, 'filterSubject']
+            ],
+            'inquire' => [
+                'filter' => FILTER_SANITIZE_STRING
             ]
         ];
     }
@@ -76,33 +87,23 @@ class FormValidator {
 
         return $filter;
     }
+
+    private function filterSubject($input) {
+        $filter = NULL;
+        if(!empty($input)):
+            $subject = filter_var($input, FILTER_SANITIZE_STRING);
+            if($subject === false):
+                $this->errors['subject'] = self::$ERROR_INVALID_ELEMENT['subject'];
+            else:
+                $filter = $subject;
+            endif;
+        endif;
+
+        return $filter;
+    }
 }
 
 // vvv HTML DE TEST POUR LA CLASS DE VALIDATION vvv
 // INPUT_POST n'est pas initialisée si la REQUEST_METHOD n'est pas égale à POST
 // Donc aucun test ne peut se faire en initialisant la variable POST directement dans le code
-?>
-<!-- <form id="contactInquiries" action="FormValidator.php" method="POST">
-            <p>
-                <label for="lname">Nom</label>
-                <input type="text" class="contactField fieldGood" placeholder="Votre nom ici" id="lname" name="lname" />
-            </p>
-            <p>
-                <label for="mail">Adresse mail</label>
-                <input type="mail" class="contactField" placeholder="Votre adresse mail ici" id="mail" name="mail" />
-            </p>
-            <p>
-                <button class="btnContact" type="submit" form="contactInquiries">Envoyer</button>
-            </p>
-</form> -->
-<?php
-// if(!empty($_POST)):
-// $validator = new FormValidator();
-// $validator->validationFilter();
-// if($validator->getErrors()):
-//     var_dump($validator->errors);
-// else:
-//     echo 'Clear';
-// endif;
-// endif;
 ?>

@@ -9,11 +9,11 @@
         <form id="contactInquiries" action="index.php?action=contact" method="POST">
             <p>
                 <label for="lname">Nom</label>
-                <input type="text" class="contactField fieldGood" placeholder="Votre nom ici" id="lname" name="lname" />
+                <input type="text" class="contactField" placeholder="Votre nom ici" id="lname" name="lname" />
             </p>
             <p>
                 <label for="organisme">Organisme</label>
-                <input type="text" class="contactField fieldError" placeholder="Votre prénom ici" id="organisme" name="organisme" />
+                <input type="text" class="contactField" placeholder="Votre organisme ici" id="organisme" name="organisme" />
             </p>
             <p>
                 <label for="mail">Adresse mail</label>
@@ -21,7 +21,7 @@
             </p>
             <p>
                 <label for="subject">Objet</label>
-                <input type="text" class="contactField" placeholder="L'objet de votre message ici" id="object" name="subject" />
+                <input type="text" class="contactField" placeholder="L'objet de votre message ici" id="subject" name="subject" />
             </p>
             <p>
                 <label for="inquire">Votre Message : </label>

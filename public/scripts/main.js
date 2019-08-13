@@ -435,19 +435,33 @@ $(function() {
     }
   });
 
-  $('form#contactInquiries input').on('blur', function() {
-    $name = $(this).attr('name');
-    $.ajax({
-      type: 'POST',
-      url: 'controller/AjaxRouter.php',
-      data: 'validation=ajax&' + $name + '=' + $(this).val(),
-      complete: function(response) {
-        console.log(response.responseText);
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        console.log('Status :' + textStatus + ' Error:' + errorThrown);
-      }
-    });
+  // Script de controle dynamique de la validité du formulaire de contact
+  $('form#contactInquiries input').on({
+    blur: function() {
+      var name = $(this).attr('name');
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: 'controller/AjaxRouter.php',
+        data: 'ajax=validation&' + name + '=' + $(this).val(),
+        complete: function(response) {
+          fieldFound = Object.keys(response.responseJSON);
+          $.each(fieldFound, function(key, value) {
+            if(value == name) {
+              $('input#' + name).addClass('fieldError');
+            } else if ($('input#' + name).val() && !$('input#' + name).hasClass('fieldError')) {
+              $('input#' + name).addClass('fieldGood');
+            }
+          });
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log('Status :' + textStatus + ' Error:' + errorThrown);
+        }
+      });
+    },
+    focus: function() {
+        $(this).removeClass('fieldError fieldGood');
+    }
   });
 
 });

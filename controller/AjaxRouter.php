@@ -2,7 +2,8 @@
 
 if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'):
 
-    if(isset($_POST['validation']) && !empty($_POST)):
+    // Controller de la validation formulaire de contact
+    if(isset($_POST['ajax']) && !empty($_POST) && $_POST['ajax'] == 'validation'):
         require_once 'FormValidator.php';
 
         $validator = new FormValidator();
