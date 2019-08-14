@@ -21,9 +21,11 @@ class View {
             $request = $this->overlayPics->getPicturesLink('4');
             $pics = $request->fetchAll(PDO::FETCH_NUM);
             $links = [];
+            
             foreach($pics as list($img, $subSection, $section)):
                 $links[] = 'gallery/'.$section.'/'.$subSection.'/'.$img;
             endforeach;
+
             $view = $this->viewGenerator('view/template.php', array('title' => $this->title, 'content' => $content, 'overlay' => $links));
         else:
             $view = $this->viewGenerator('view/adminTemplate.php', array('title' => $this->title, 'content' => $content));
@@ -40,7 +42,6 @@ class View {
 
             ob_start();
             require $file;
-
             return ob_get_clean();
         else:
             throw new Exception('Fichier '.$file.' non récupéré');

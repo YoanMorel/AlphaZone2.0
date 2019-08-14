@@ -522,6 +522,11 @@ textarea.contactField {
   resize: none;
 }
 
+form#contactInquiries div.errorMsg {
+  font-size: 12px;
+  color: red;
+}
+
 button.btnContact {
   border: 2px solid #000;
   background: #fff;

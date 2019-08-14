@@ -8,7 +8,7 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
 
         $validator = new FormValidator();
         $validator->validationFilter();
-        if($validator->getErrors()):
+        if($validator->hasErrors()):
             $response = $validator->errors;
         else:
             $response = NULL;

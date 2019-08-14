@@ -128,10 +128,6 @@ class ScanDir {
             endforeach;
         endforeach;
     }
-
-    public function getLog() {
-        return !empty($this->log);
-    }
 }
 
 $scan = new ScanDir('../gallery/');

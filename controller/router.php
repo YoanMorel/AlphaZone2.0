@@ -45,7 +45,7 @@ class Router {
                         array_map('htmlspecialchars', $_POST);
 
                         $lname = $this->getParams($_POST, 'lname');
-                        $fname = $this->getParams($_POST, 'organisme');
+                        $organisme = $this->getParams($_POST, 'organisme');
                         $mail = $this->getParams($_POST, 'mail');
                         $subject = $this->getParams($_POST, 'subject');
                         $inquire = $this->getParams($_POST, 'inquire');

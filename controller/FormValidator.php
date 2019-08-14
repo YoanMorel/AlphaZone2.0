@@ -3,17 +3,25 @@
 class FormValidator {
 
     private static $ERROR_EMPTY_ELEMENT = [
-        'lname' => 'Vous devez renseigner un nom',
-        'mail'  => 'Vous devez renseigner une adresse mail',
-        'subject' => 'Vous devez renseigner un objet',
-        'inquire' => 'Vous devez saisir un commentaire'
+        'lname'     => 'Vous devez renseigner un nom',
+        'mail'      => 'Vous devez renseigner une adresse mail',
+        'subject'   => 'Vous devez renseigner un objet',
+        'inquire'   => 'Vous devez saisir un commentaire',
+        'login'     => 'Vous devez renseigner un identifiant',
+        'password'  => 'Vous devez saisir un mot de passe'
     ];
 
     private static $ERROR_INVALID_ELEMENT = [
-        'lname' => 'Ce n\'est pas un nom valide',
-        'mail'  => 'Cette adresse mail est invalide',
-        'subject' => 'Ce n\'est pas un nom d\'objet valide',
-        'inquire' => 'Ce commentaire n\'est pas valide'
+        'lname'     => 'Ce n\'est pas un nom valide',
+        'mail'      => 'Cette adresse mail est invalide',
+        'subject'   => 'Ce n\'est pas un nom d\'objet valide',
+        'inquire'   => 'Ce commentaire n\'est pas valide',
+        'login'     => 'Cet identifiant n\'est pas valide ou n\'éxiste pas'
+    ];
+
+    private static $ERROR_ALREADY_EXISTS_ELEMENT = [
+        'lname' => true,
+        'login' => 'Vous utilisez déjà cet identifiant'
     ];
 
     private $errors         = [];
@@ -30,15 +38,15 @@ class FormValidator {
         $this->filterRules = [
             'lname' => [
                 'filter' => FILTER_CALLBACK,
-                'options' => [$this, 'filterLname']
+                'options' => [$this, 'lnameFilter']
             ],
             'mail' => [
                 'filter' => FILTER_CALLBACK,
-                'options' => [$this, 'filterMailAdress']
+                'options' => [$this, 'mailAdressFilter']
             ],
             'subject' => [
                 'filter' => FILTER_CALLBACK,
-                'options' => [$this, 'filterSubject']
+                'options' => [$this, 'subjectFilter']
             ],
             'inquire' => [
                 'filter' => FILTER_SANITIZE_STRING
@@ -55,11 +63,11 @@ class FormValidator {
         endforeach;
     }
 
-    public function getErrors() {
+    public function hasErrors() {
         return !empty($this->errors);
     }
 
-    private function filterMailAdress($input) {
+    private function mailAdressFilter($input) {
         $filter = NULL; // simule FILTER_NULL_ON_FAILURE
         if(!empty($input)):
             $mail = filter_var($input, FILTER_SANITIZE_EMAIL);
@@ -74,7 +82,7 @@ class FormValidator {
         return $filter;
     }
 
-    private function filterLname($input) {
+    private function lnameFilter($input) {
         $filter = NULL;
         if(!empty($input)):
             $lname = filter_var($input, FILTER_SANITIZE_STRING);
@@ -88,7 +96,7 @@ class FormValidator {
         return $filter;
     }
 
-    private function filterSubject($input) {
+    private function subjectFilter($input) {
         $filter = NULL;
         if(!empty($input)):
             $subject = filter_var($input, FILTER_SANITIZE_STRING);

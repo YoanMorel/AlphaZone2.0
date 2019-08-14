@@ -2,23 +2,24 @@
 
 class Inquires extends DbConnection {
 
-    public function addInquire($authorLastName, $authorFirstName, $authorMail, $inquireSubject, $inquire) {
+    public function addInquire($vars) {
         try {
+            extract($vars);
             $this->startTransaction();
 
             $success = $this->queryCall(
-                'INSERT INTO T_CONTACTS (CON_LAST_NAME, CON_FIRST_NAME, CON_MAIL) VALUES (:lname, :fname, :mail)',
+                'INSERT INTO T_CONTACTS (CON_LAST_NAME, CON_ORGANISME, CON_MAIL) VALUES (:lname, :organisme, :mail)',
                 [
-                    ['lname', $authorLastName, PDO::PARAM_STR],
-                    ['fname', $authorFirstName, PDO::PARAM_STR],
-                    ['mail', $authorMail, PDO::PARAM_STR]
+                    ['lname', $lname, PDO::PARAM_STR],
+                    ['organisme', $organisme, PDO::PARAM_STR],
+                    ['mail', $mail, PDO::PARAM_STR]
                 ]
             );
 
             $success = $this->queryCall(
-                'INSERT INTO T_INQUIRES (INQ_SUBJECT, INQ_INQUIRE, INQ_POST_DATE, INQ_OPENED, CON_ID) VALUES (:inquireSubject, :inquire, NOW(), false, LAST_INSERT_ID())',
+                'INSERT INTO T_INQUIRES (INQ_SUBJECT, INQ_INQUIRE, INQ_POST_DATE, INQ_OPENED, CON_ID) VALUES (:subject, :inquire, NOW(), false, LAST_INSERT_ID())',
                 [
-                    ['inquireSubject', $inquireSubject, PDO::PARAM_STR],
+                    ['subject', $subject, PDO::PARAM_STR],
                     ['inquire', $inquire, PDO::PARAM_STR]
                 ]
             );

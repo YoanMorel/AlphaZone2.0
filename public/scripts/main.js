@@ -448,9 +448,9 @@ $(function() {
           fieldFound = Object.keys(response.responseJSON);
           $.each(fieldFound, function(key, value) {
             if(value == name) {
-              $('input#' + name).addClass('fieldError');
+              $('input#' + name).addClass('fieldError').after('<div class="errorMsg">'+ response.responseJSON[value] +'</div>');
             } else if ($('input#' + name).val() && !$('input#' + name).hasClass('fieldError')) {
-              $('input#' + name).addClass('fieldGood');
+              $('input#' + name).addClass('fieldGood').siblings('form#contactInquiries div.errorMsg').empty();
             }
           });
         },
