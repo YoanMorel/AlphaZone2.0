@@ -20,12 +20,14 @@ class ContactCtrl {
 
     public function contactAdminView() {
         $view = new View('contactAdmin');
-        $view->generate([null], true);
+        $contacts = $this->inquiries->getContacts()->fetchAll();
+        $inquiries = $this->inquiries->getInquiries()->fetchAll();
+        $view->generate(['contacts' => $contacts, 'inquiries' => $inquiries], true);
     }
 
     public function inquiries($lname, $organisme, $mail, $subject, $inquire) {
         $vars = [
-            'errors'    => [],
+            'errors'        => [],
             'varsValue'     => [
                 'lname'     => $lname,
                 'organisme' => $organisme,

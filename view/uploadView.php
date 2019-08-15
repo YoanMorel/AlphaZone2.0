@@ -12,7 +12,7 @@
     <div class="col-10 mx-auto" id="fileList">
       <!-- ZONE DRAG&DROP -->
     </div>
-    <button class="btn btn-danger mx-auto" type="button" id="upload" disabled>Upload</button>
+    <button class="btn btn-danger mx-auto" type="button" id="upload" disabled>Envoyer</button>
   </div>
   <div id="onHoldTextarea" class="row pt-5 no-gutters showDataFields">
     <div class="col-md-4 col-12 text-center">

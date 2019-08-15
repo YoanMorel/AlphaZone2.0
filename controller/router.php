@@ -70,7 +70,7 @@ class Router {
                             $this->mainAdminCtrl->ucView();
                         endif;
                         if ($_GET['module'] == 'contact'):
-                            $this->mainAdminCtrl->contactAdminView();
+                            $this->contactCtrl->contactAdminView();
                         endif;
                     else:
                         throw new Exception('Cible GET admin non valide');

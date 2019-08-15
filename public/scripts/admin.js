@@ -59,6 +59,7 @@ $(function() {
           for (var y in data['data'][x]) {
             if (section) {
               autoCompleteSubSections.push(data['data'][x][y]);
+              // console.log('coucou');
             } else {
               autoCompleteSections.push(data['data'][x][y]);
             }
@@ -343,5 +344,9 @@ $(function() {
       autoCompleteSources(imgSectionContent);
     }
   });
+
+/*****************************************
+ > FIN SCRIPT DU MODULE D'UPLOAD D'IMAGES
+*****************************************/
 
 });

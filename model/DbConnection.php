@@ -10,8 +10,8 @@ abstract class DbConnection {
 		if($params):
 			$returnedData = self::dbConnect()->prepare($sql);
 			// boucle sur les paramètres à binder
-			foreach ($params as $var):
-				$returnedData->bindParam($var[0],$var[1],$var[2]);
+			foreach ($params as $param):
+				$returnedData->bindParam($param[0], $param[1], $param[2]);
 			endforeach;
 			// execute la requete préparée
 			$returnedData->execute();
@@ -36,6 +36,10 @@ abstract class DbConnection {
 
 	protected function getLastInsertId() {
 		return self::dbConnect()->lastInsertId();
+	}
+
+	protected function getRowCount() {
+		return self::dbConnect()->rowCount();
 	}
 
 	private static function dbConnect(){

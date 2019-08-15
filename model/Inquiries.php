@@ -32,11 +32,11 @@ class Inquiries extends DbConnection {
             endif;
 
             $success = $this->queryCall(
-                'INSERT INTO T_INQUIRIES (INQ_SUBJECT, INQ_INQUIRE, INQ_POST_DATE, INQ_OPENED, CON_ID) VALUES (:subject, :inquire, NOW(), false, :contactID)',
+                'INSERT INTO T_INQUIRIES (INQ_SUBJECT, INQ_INQUIRE, INQ_POST_DATE, INQ_OPENED, INQ_REPLIED, CON_ID) VALUES (:subject, :inquire, NOW(), false, false, :contactID)',
                 [
                     ['subject', $subject, PDO::PARAM_STR],
                     ['inquire', $inquire, PDO::PARAM_STR],
-                    ['contactID', $contactID, PDO::PARAM_STR]
+                    ['contactID', $contactID, PDO::PARAM_INT]
                 ]
             );
             
