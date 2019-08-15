@@ -34,6 +34,10 @@ abstract class DbConnection {
 		return self::dbConnect()->rollBack();
 	}
 
+	protected function getLastInsertId() {
+		return self::dbConnect()->lastInsertId();
+	}
+
 	private static function dbConnect(){
 		try {
 			if(self::$spdo === null):

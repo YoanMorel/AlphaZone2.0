@@ -15,6 +15,34 @@ a {
   transition: 0.3s;
 }
 
+/* [Sidebar de la section Admin]
+***********************************/
+.sidebar {
+  height: 100vh;
+  width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  /* position: fixed;
+  z-index: 1; */
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #FFD700;
+}
+
 /* [SNACKBAR]
 ************************/
 #snackBar {
@@ -184,34 +212,6 @@ textarea.uploadForm {
 
 .closebtn:hover {
   color: black;
-}
-
-/* [Sidebar de la section Admin]
-***********************************/
-.sidebar {
-  height: 100vh;
-  width: 100%;
-  position: -webkit-sticky;
-  position: sticky;
-  /* position: fixed;
-  z-index: 1; */
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 16px;
-}
-
-.sidebar a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
-  display: block;
-}
-
-.sidebar a:hover {
-  color: #f1f1f1;
 }
 
 /* [Style de la UnderConstruction View]
@@ -543,6 +543,77 @@ button.btnContact {
 button.btnContact:hover {
   background: #000;
   color: #fff;
+}
+
+.modalWindow {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modalWindow.showModal {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modalWindow > div {
+  width: 50vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 2em;
+  background: #fff;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.75);
+}
+
+.modalWindow header {
+  font-weight: bold;
+}
+
+.modalWindow h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+
+.modalWindow small {
+  color: #aaa;
+}
+
+div.modalClose {
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  width: 70px;
+}
+
+div.modalClose a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+div.modalClose a:hover {
+  color: black;
+}
+
+.modalWindow div:not(:last-of-type) {
+  margin-bottom: 15px;
 }
 
 /* [END CONTACT VIEW]

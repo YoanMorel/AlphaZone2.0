@@ -4,9 +4,9 @@
 <div class="contactTitle">
     <div class="boxTitle">Contact</div>
 </div>
-<div class="row no-gutters text-center">
-    <div class="col-6 pt-4 pb-4 mx-auto">
-        <form id="contactInquiries" action="index.php?action=contact" method="POST">
+<div id="contactForm" class="row no-gutters text-center">
+    <div class="col-10 col-md-6 pt-4 pb-4 mx-auto">
+        <form id="contactInquiries" action="index.php?action=contact#contactForm" method="POST">
             <div class="pb-3">
                 <label for="lname">Nom</label>
                 <input type="text" class="contactField <?= isset($errors['lname']) ? 'fieldError' : ''; ?>" placeholder="Votre nom ici" id="lname" name="lname" value="<?= isset($varsValue['lname']) ? $varsValue['lname'] : ''; ?>" />
@@ -35,5 +35,14 @@
                 <button class="btnContact" type="submit" form="contactInquiries">Envoyer</button>
             </div>
         </form>
+    </div>
+</div>
+<div id="openModal" class="modalWindow <?= !isset($errors) && !isset($varsValue) ? 'showModal' : ''; ?>">
+    <div>
+        <div class=modalClose><a href="javascript:void(0);" id="closeModal">Fermer</a></div>
+        <h1>Message reçu !</h1>
+        <div>
+            Comme nous apprécions particulièrement les échanges avec nos visiteurs, nous vous recontacterons très prochainement à l'aide des informations que vous avez renseignez dans votre fiche de contact.<br />A très bientôt !
+        </div>
     </div>
 </div>

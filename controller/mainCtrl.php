@@ -6,6 +6,6 @@ class MainCtrl {
 
     public function mainView() {
         $view = new View('main');
-        $view->generate([false]);
+        $view->generate([null]);
     }
 }

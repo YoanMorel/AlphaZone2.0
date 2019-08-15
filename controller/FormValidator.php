@@ -20,7 +20,6 @@ class FormValidator {
     ];
 
     private static $ERROR_ALREADY_EXISTS_ELEMENT = [
-        'lname' => true,
         'login' => 'Vous utilisez déjà cet identifiant'
     ];
 
@@ -70,6 +69,7 @@ class FormValidator {
     private function mailAdressFilter($input) {
         $filter = NULL; // simule FILTER_NULL_ON_FAILURE
         if(!empty($input)):
+            
             $mail = filter_var($input, FILTER_SANITIZE_EMAIL);
             $mail = filter_var($input, FILTER_VALIDATE_EMAIL);
             if($mail === false):

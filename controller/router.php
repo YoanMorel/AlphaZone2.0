@@ -20,6 +20,7 @@ class Router {
     private $uploadAdminCtrl;
 
     public function __construct() {
+        
         $this->mainCtrl         = new MainCtrl();
         $this->piecesCtrl       = new PiecesCtrl();
         $this->philosophyCtrl   = new PhilosophyCtrl();
@@ -50,7 +51,7 @@ class Router {
                         $subject = $this->getParams($_POST, 'subject');
                         $inquire = $this->getParams($_POST, 'inquire');
 
-                        $this->contactCtrl->inquires($lname, $organisme, $mail, $subject, $inquire);
+                        $this->contactCtrl->inquiries($lname, $organisme, $mail, $subject, $inquire);
                     endif;
                 elseif ($_GET['action'] == 'admin'):
                     // if (!isset($_SESSION['sUser'])):
@@ -69,7 +70,7 @@ class Router {
                             $this->mainAdminCtrl->ucView();
                         endif;
                         if ($_GET['module'] == 'contact'):
-                            $this->mainAdminCtrl->ucView();
+                            $this->mainAdminCtrl->contactAdminView();
                         endif;
                     else:
                         throw new Exception('Cible GET admin non valide');
