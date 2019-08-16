@@ -8,7 +8,8 @@ class FormValidator {
         'subject'   => 'Vous devez renseigner un objet',
         'inquire'   => 'Vous devez saisir un commentaire',
         'login'     => 'Vous devez renseigner un identifiant',
-        'password'  => 'Vous devez saisir un mot de passe'
+        'password'  => 'Vous devez saisir un mot de passe',
+        'repeatPwd' => 'Vous devez saisir une deuxième fois votre mot de passe'
     ];
 
     private static $ERROR_INVALID_ELEMENT = [
@@ -16,11 +17,14 @@ class FormValidator {
         'mail'      => 'Cette adresse mail est invalide',
         'subject'   => 'Ce n\'est pas un nom d\'objet valide',
         'inquire'   => 'Ce commentaire n\'est pas valide',
-        'login'     => 'Cet identifiant n\'est pas valide ou n\'éxiste pas'
+        'login'     => 'Cet identifiant/mot de passe n\'est pas valide ou n\'éxiste pas',
+        'password'  => 'Cet identifiant/mot de passe n\'est pas valide ou n\'existe pas',
+        'repeatPwd' => 'Les mots de passe saisis ne coïncide pas'
     ];
 
     private static $ERROR_ALREADY_EXISTS_ELEMENT = [
-        'login' => 'Vous utilisez déjà cet identifiant'
+        'login'     => 'Vous utilisez déjà cet identifiant',
+        'password'  => 'Vous devez saisir un nouveau mot de passe'
     ];
 
     private $errors         = [];

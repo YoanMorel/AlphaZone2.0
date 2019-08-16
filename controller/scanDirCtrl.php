@@ -121,7 +121,7 @@ class ScanDir {
             $subSectionsList = $this->gallery->getSubSections($section['SEC_SECTION'])->fetchAll();
             $i = 0;
             foreach($subSectionsList as $subSection):
-                $pieces = $this->gallery->getPieces($section['SEC_SECTION'], $subSection['SUB_SUBSECTION'])->fetchAll();
+                $pieces = $this->gallery->getPiecesFrom($section['SEC_SECTION'], $subSection['SUB_SUBSECTION'])->fetchAll();
                 foreach($pieces as $piece):
                     $this->dataScan[] = $section['SEC_SECTION'].'/'.$subSection['SUB_SUBSECTION'].'/'.$piece['PIE_IMG_LINK'];
                 endforeach;

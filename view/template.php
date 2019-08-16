@@ -49,7 +49,7 @@
     <div class="container-fluid p-0">
         <?= $content; ?>
         <div class="footer">
-            <div class="textBoxFooter">Footer</div>
+            <div class="textBoxFooter"><a href="index.php?action=admin&module=main">Admin</a></div>
         </div>
     </div>
 

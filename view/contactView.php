@@ -37,12 +37,12 @@
         </form>
     </div>
 </div>
-<div id="openModal" class="modalWindow <?= !isset($errors) && !isset($varsValue) ? 'showModal' : ''; ?>">
+<div id="openModal" class="modalWindow <?= empty($errors) && isset($lname) ? 'showModal' : ''; ?>">
     <div>
         <div class=modalClose><a href="javascript:void(0);" id="closeModal">Fermer</a></div>
         <h1>Message reçu !</h1>
         <div>
-            Comme nous apprécions particulièrement les échanges avec nos visiteurs, nous vous recontacterons très prochainement à l'aide des informations que vous avez renseignez dans votre fiche de contact.<br />A très bientôt !
+            Comme nous apprécions particulièrement les échanges avec nos visiteurs, nous vous recontacterons très prochainement à l'aide des informations que vous avez renseignées dans votre fiche de contact.<br />A très bientôt !
         </div>
     </div>
 </div>

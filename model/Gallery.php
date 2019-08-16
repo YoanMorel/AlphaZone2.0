@@ -19,7 +19,7 @@ class Gallery extends DbConnection {
         return $subSectionData;
     }
 
-    public function getPieces($sectionData, $subSectionData) {
+    public function getPiecesFrom($sectionData, $subSectionData) {
         $piecesData = $this->queryCall(
             'SELECT p.* FROM T_PIECES p 
             LEFT JOIN T_SUBSECTIONS sub ON sub.SUB_ID = p.SUB_ID 
@@ -30,6 +30,12 @@ class Gallery extends DbConnection {
                 ['subSectionData', $subSectionData, PDO::PARAM_STR]
             ]
         );
+
+        return $piecesData;
+    }
+
+    public function getAllPieces() {
+        $piecesData = $this->queryCall('SELECT * FROM T_PIECES');
 
         return $piecesData;
     }

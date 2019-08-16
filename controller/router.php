@@ -61,7 +61,7 @@ class Router {
                     // endif;
                     if (isset($_GET['module'])):
                         if ($_GET['module'] == 'main'):
-                            $this->mainAdminCtrl->ucView();
+                            $this->mainAdminCtrl->mainAdminView();
                         endif;
                         if ($_GET['module'] == 'upload'):
                             $this->uploadAdminCtrl->uploadView();

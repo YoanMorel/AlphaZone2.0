@@ -1,4 +1,4 @@
-<?php $this->title = 'Contacts'; ?>
+<?php $this->title = 'Messagerie'; ?>
 
 <?php
     setlocale(LC_ALL, 'fr_FR.UTF8');

@@ -1,16 +1,21 @@
 $(function() {
 
-    // Snackbar Handler
-    function snackBar(text) {
-      $('#snackBar').addClass('show').text(text);
-      setTimeout(() => {
-        $('#snackBar').removeClass('show').empty();
-      }, 3000);
-    }
+  // [SNACKBAR HANDLER]
+  function snackBar(text) {
+    $('#snackBar').addClass('show').text(text);
+    setTimeout(() => {
+      $('#snackBar').removeClass('show').empty();
+    }, 3000);
+  }
 
-/***************************************
- >  SCRIPT DU MODULE D'UPLOAD D'IMAGES
-***************************************/
+  // [SLIDE EFFECT]
+  $(".slideanim").each(function(){
+    $(this).addClass("slide");
+  });
+
+/*****************************************
+ >  [SCRIPT DU MODULE D'UPLOAD D'IMAGES]
+*****************************************/
 
   // Liste de selecteurs couramment utilisés
   var dropBox = $('#fileList');
