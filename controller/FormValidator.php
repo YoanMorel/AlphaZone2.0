@@ -19,7 +19,7 @@ class FormValidator {
         'inquire'   => 'Ce commentaire n\'est pas valide',
         'login'     => 'Cet identifiant/mot de passe n\'est pas valide ou n\'éxiste pas',
         'password'  => 'Cet identifiant/mot de passe n\'est pas valide ou n\'existe pas',
-        'repeatPwd' => 'Les mots de passe saisis ne coïncide pas'
+        'repeatPwd' => 'Les mots de passe saisis ne coïncident pas'
     ];
 
     private static $ERROR_ALREADY_EXISTS_ELEMENT = [

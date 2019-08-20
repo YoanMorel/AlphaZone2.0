@@ -49,8 +49,6 @@ a {
   .sidebar {
     height: auto;
     width: 100%;
-    position: -webkit-sticky;
-    position: sticky;
     /* position: fixed;
     z-index: 1; */
     top: 0;
@@ -203,7 +201,7 @@ a {
   visibility: visible;
 }
 
-@keyframes slideCard {
+@-webkit-keyframes slideCard {
   0% {
     opacity: 0;
     -webkit-transform: translateY(70%);
@@ -216,14 +214,16 @@ a {
   }
 }
 
-@-webkit-keyframes slideCard {
+@keyframes slideCard {
   0% {
     opacity: 0;
     -webkit-transform: translateY(70%);
+            transform: translateY(70%);
   }
   100% {
     opacity: 1;
     -webkit-transform: translateY(0%);
+            transform: translateY(0%);
   }
 }
 
@@ -418,20 +418,64 @@ textarea.uploadForm {
   transition: .3s;
   background-color: rgba(0, 0, 0, 0.9);
   color: #FFF;
-  overflow: hidden;
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  visibility: hidden;
+  overflow: hidden;
 }
 
-.messengerContainer {
-  margin-left: auto;
-  margin-right: auto;
-  top: 0;
+.messengerOverlay .messengerContainer {
+  padding: 1rem;
   width: 75%;
   height: 100vh;
-  border: 1px solid #FFF;
+  background-color: black;
+  position: relative;
+  margin: 0 auto 0 auto;
+}
+
+.messengerOverlay .messengerContainer .contactName {
+  padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.messengerOverlay .messengerContainer .inquirePostDate {
+  padding: 10px;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.messengerOverlay .messengerContainer .inquireSubject {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.messengerOverlay .messengerContainer .inquire {
+  padding: 10px;
+  background-color: #EEE;
+  border: 1px solid #AAA;
+  color: #000;
+}
+
+.messengerOverlay .closeMessengerOverlay {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 1;
+  padding: 5px;
+}
+
+.messengerOverlay .closeMessengerOverlay:hover {
+  font-weight: bold;
+  background-color: #DDD;
+  color: #000;
 }
 
 @media (max-width: 500px) {
@@ -448,13 +492,24 @@ textarea.uploadForm {
     float: none;
     display: block;
   }
-  .messengerContainer {
-    margin-left: auto;
-    margin-right: auto;
+  .messengerOverlay {
+    right: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    -webkit-transition: .3s;
+    transition: .3s;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #FFF;
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .messengerOverlay .messengerContainer {
     top: 0;
     width: 100vw;
     height: 100vh;
-    border: 1px solid #FFF;
   }
 }
 
@@ -472,7 +527,6 @@ textarea.uploadForm {
   color: #fafdf6;
   padding-left: 10pt;
   font-family: 'PT Sans', sans-serif;
-  /* set animation */
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   overflow: hidden;

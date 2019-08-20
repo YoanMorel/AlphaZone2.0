@@ -378,28 +378,53 @@ $(function() {
 *****************************************/
 
   $('div.inquireContainer').click(function() {
+    $(window).scrollTop(0);
     var inqId = $(this).attr('id');
-    $('div.messengerOverlay').css('width', '100%');
+    $('div.messengerOverlay').css({'width': '100%', 'visibility': 'visible'});
+    
     $.ajax({
       type: 'POST',
       dataType: 'json',
       url: 'controller/AjaxRouter.php',
       data: 'ajax=messenger&inqId=' + inqId,
       complete: function(response) {
-        console.log(response.responseJSON);
+        var mail      = response.responseJSON[0]['CON_MAIL'];
+        var lastName  = response.responseJSON[0]['CON_LAST_NAME'];
+        var organisme = response.responseJSON[0]['CON_ORGANISME'];
+        var subject   = response.responseJSON[0]['INQ_SUBJECT'];
+        var inquire   = response.responseJSON[0]['INQ_INQUIRE'].replace(/\n/g, '<br />');
+
         if(!$('#' + inqId).hasClass('opened')) {
           $('#' + inqId).addClass('opened').children('img').attr('src', 'public/img/opened.svg');
         }
-        $('div.contactMail').text(response.responseJSON[0]['CON_MAIL']);
-        $('div.contactName').text(response.responseJSON[0]['CON_LAST_NAME']);
-        $('div.contactOrganisme').text(response.responseJSON[0]['CON_ORGANISME']);
-        $('div.inquireSubject').text(response.responseJSON[0]['INQ_SUBJECT']);
-        $('div.inquire').html(response.responseJSON[0]['INQ_INQUIRE'].replace(/\n/g, '<br />'));
+        var postDate = response.responseJSON[0]['INQ_POST_DATE'].split(' ');
+        var frenchDate = new Date(postDate[0] + 'T' + postDate[1]);
+        var options = {
+          weekday:  'long',
+          year:     'numeric',
+          month:    'long',
+          day:      'numeric',
+          hour:     'numeric',
+          minute:   'numeric',
+          seconde:  '2-digit'
+        };
+
+        $('span.closeMessengerOverlay').html('&times;');
+        $('div.contactMail').html('<i class="fas fa-fw fa-at"></i>' + mail);
+        $('div.contactName').html('<i class="fas fa-fw fa-user"></i> De la part de ' + lastName + ' (' + organisme + ')');
+        $('div.inquirePostDate').html('<i class="far fa-fw fa-clock"></i> le' + frenchDate.toLocaleDateString('fr-FR', options))
+        $('div.inquireSubject').html('Objet : ' + subject);
+        $('div.inquire').html(inquire);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         console.log('Status :' + textStatus + ' Error:' + errorThrown);
       }
     });
+  });
+
+  $('span.closeMessengerOverlay').click(function() {
+    $(this).parent().css({'width': '0', 'visibility': 'hidden'});
+    $('div.messengerContainer').children('div').text('');
   });
 
 });

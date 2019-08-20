@@ -24,11 +24,12 @@
 
 ?>
 <div class="messengerOverlay">
+    <span class="closeMessengerOverlay">&times;</span>
     <div class="messengerContainer">
       <div class="contactMail"></div>
-      <div class="contactName"></div>
-      <div class="contactOrganisme"></div>
       <div class="inquireSubject"></div>
+      <div class="contactName"></div>
+      <div class="inquirePostDate"></div>
       <div class="inquire"></div>
     </div>
 </div>

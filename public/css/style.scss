@@ -48,7 +48,6 @@ a {
   .sidebar {
     height: auto;
     width: 100%;
-    position: sticky;
     /* position: fixed;
     z-index: 1; */
     top: 0;
@@ -190,17 +189,6 @@ a {
   100% {
     opacity: 1;
     transform: translateY(0%);
-  }
-}
-
-@-webkit-keyframes slideCard {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateY(70%);
-  } 
-  100% {
-    opacity: 1;
-    -webkit-transform: translateY(0%);
   }
 }
 
@@ -369,18 +357,62 @@ textarea.uploadForm {
   transition: .3s;
   background-color: rgba(0, 0, 0, 0.9);
   color: #FFF;
-  overflow: hidden;
   position: absolute;
   display: flex;
-}
+  visibility: hidden;
+  overflow: hidden;
 
-.messengerContainer {
-  margin-left: auto;
-  margin-right: auto;
-  top: 0;
-  width: 75%;
-  height: 100vh;
-  border: 1px solid #FFF;
+  .messengerContainer {
+    padding: 1rem;
+    width: 75%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 1);
+    position: relative;
+    margin: 0 auto 0 auto;
+
+    .contactName {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .inquirePostDate {
+      padding: 10px;
+      font-size: 16px;
+      text-align: left;
+      width: 100%;      
+    }
+  
+    .inquireSubject {
+      padding: 10px;
+      font-size: 20px;
+    }
+  
+    .inquire {
+      padding: 10px;
+      background-color: #EEE;
+      border: 1px solid #AAA;
+      color: #000;
+    }
+  }
+
+  .closeMessengerOverlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1;
+    padding: 5px;
+
+    &:hover {
+      font-weight: bold;
+      background-color: #DDD;
+      color: #000;
+    }
+  }
 }
 
 @media (max-width: 500px) {
@@ -399,17 +431,24 @@ textarea.uploadForm {
     }
   }
 
-  .messengerContainer {
-    margin-left: auto;
-    margin-right: auto;
+  .messengerOverlay {
+    right: 0;
     top: 0;
-    width: 100vw;
-    height: 100vh;
-    border: 1px solid #FFF;  
+    width: 0;
+    height: 100%;
+    transition: .3s;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #FFF;
+    position: absolute;
+    display: flex;
+
+    .messengerContainer {
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+    }
   }
 }
-
-
 
 /* [ADMIN TEMPLATE END]
 ***************************/
@@ -427,8 +466,6 @@ textarea.uploadForm {
   color: #fafdf6;
   padding-left: 10pt;
   font-family: 'PT Sans', sans-serif;
-  /* set animation */
-  -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   overflow: hidden;
 }
