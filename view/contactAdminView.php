@@ -10,11 +10,11 @@
 
 ?>
 
-<div class="inquireContainer <?= $inquire['INQ_OPENED'] ? 'opened' : ''; ?>">
+<div id="<?= $inquire['INQ_ID'] ?>" class="inquireContainer <?= $inquire['INQ_OPENED'] ? 'opened' : ''; ?>">
   <img src="<?= $inquire['INQ_OPENED'] ? 'public/img/opened.svg' : 'public/img/received.svg'; ?>" alt="icon" />
   <p><span><b><?= $inquire['CON_LAST_NAME']; ?></b></span>de <?= $inquire['CON_ORGANISME']; ?></p>
   <p>Sujet : <b><?= $inquire['INQ_SUBJECT']; ?></b></p>
-  <p><?= substr($inquire['INQ_INQUIRE'], 0, 60); ?>...</p>
+  <p class="inquireMsg"><?= substr($inquire['INQ_INQUIRE'], 0, 60); ?>...</p>
   <span class="time"><?= $inquireTime ?></span>
 </div>
 
@@ -23,3 +23,12 @@
     endforeach;
 
 ?>
+<div class="messengerOverlay">
+    <div class="messengerContainer">
+      <div class="contactMail"></div>
+      <div class="contactName"></div>
+      <div class="contactOrganisme"></div>
+      <div class="inquireSubject"></div>
+      <div class="inquire"></div>
+    </div>
+</div>

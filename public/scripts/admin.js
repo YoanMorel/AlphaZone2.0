@@ -9,9 +9,28 @@ $(function() {
   }
 
   // [SLIDE EFFECT]
-  $(".slideanim").each(function(){
-    $(this).addClass("slide");
+  $(".slideCardAnim").each(function(){
+    $(this).addClass("slideCard");
   });
+
+  // [CLOCK]
+  startTime();
+
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    $('div.clockTime').text(h + ":" + m + ":" + s);
+    var t = setTimeout(startTime, 500);
+  }
+
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
 
 /*****************************************
  >  [SCRIPT DU MODULE D'UPLOAD D'IMAGES]
@@ -353,5 +372,34 @@ $(function() {
 /*****************************************
  > FIN SCRIPT DU MODULE D'UPLOAD D'IMAGES
 *****************************************/
+
+/*****************************************
+ > DEBUT SCRIPT MESSENGER
+*****************************************/
+
+  $('div.inquireContainer').click(function() {
+    var inqId = $(this).attr('id');
+    $('div.messengerOverlay').css('width', '100%');
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: 'controller/AjaxRouter.php',
+      data: 'ajax=messenger&inqId=' + inqId,
+      complete: function(response) {
+        console.log(response.responseJSON);
+        if(!$('#' + inqId).hasClass('opened')) {
+          $('#' + inqId).addClass('opened').children('img').attr('src', 'public/img/opened.svg');
+        }
+        $('div.contactMail').text(response.responseJSON[0]['CON_MAIL']);
+        $('div.contactName').text(response.responseJSON[0]['CON_LAST_NAME']);
+        $('div.contactOrganisme').text(response.responseJSON[0]['CON_ORGANISME']);
+        $('div.inquireSubject').text(response.responseJSON[0]['INQ_SUBJECT']);
+        $('div.inquire').html(response.responseJSON[0]['INQ_INQUIRE'].replace(/\n/g, '<br />'));
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log('Status :' + textStatus + ' Error:' + errorThrown);
+      }
+    });
+  });
 
 });

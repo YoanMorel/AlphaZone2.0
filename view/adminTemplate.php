@@ -17,12 +17,12 @@
     <title><?= $title; ?></title>
 </head>
 
-<body>
+<body onload="startTime()">
 <div id="snackBar"></div>
 
   <div class="container-fluid p-0">
       <div class="row no-gutters">
-          <div class="col-2">
+          <div class="col-12 col-md-2">
             <div class="sidebar">
                 <a href="index.php?action=admin&module=main">
                   <i class="fas fa-fw fa-home"></i> Accueil
@@ -41,7 +41,7 @@
                 </a>
             </div>
           </div>
-          <div class="col-10">
+          <div class="col-12 col-md-10">
             <?= $content; ?>
           </div>
       </div>

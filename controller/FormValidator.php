@@ -40,19 +40,20 @@ class FormValidator {
     public function __construct() {
         $this->filterRules = [
             'lname' => [
-                'filter' => FILTER_CALLBACK,
-                'options' => [$this, 'lnameFilter']
+                'filter'    => FILTER_CALLBACK,
+                'options'   => [$this, 'lnameFilter']
             ],
-            'mail' => [
-                'filter' => FILTER_CALLBACK,
-                'options' => [$this, 'mailAdressFilter']
+            'mail'  => [
+                'filter'    => FILTER_CALLBACK,
+                'options'   => [$this, 'mailAdressFilter']
             ],
             'subject' => [
-                'filter' => FILTER_CALLBACK,
-                'options' => [$this, 'subjectFilter']
+                'filter'    => FILTER_CALLBACK,
+                'options'   => [$this, 'subjectFilter']
             ],
             'inquire' => [
-                'filter' => FILTER_SANITIZE_STRING
+                'filter'    => FILTER_CALLBACK,
+                'options'   => [$this, 'inquireFilter']
             ]
         ];
     }
@@ -108,6 +109,20 @@ class FormValidator {
                 $this->errors['subject'] = self::$ERROR_INVALID_ELEMENT['subject'];
             else:
                 $filter = $subject;
+            endif;
+        endif;
+
+        return $filter;
+    }
+
+    private function inquireFilter($input) {
+        $filter = NULL;
+        if(!empty($input)):
+            $inquire = filter_var($input, FILTER_SANITIZE_STRING);
+            if($inquire === false):
+                $this->errors['inquire'] = self::$ERROR_INVALID_ELEMENT['inquire'];
+            else:
+                $filter = $inquire;
             endif;
         endif;
 

@@ -62,7 +62,7 @@ class Inquiries extends DbConnection {
             );
         else:
             $success = $this->queryCall(
-                'SELECT inq.*, con.* FROM T_INQUIRIES inq LEFT JOIN T_CONTACTS con ON :contactID = inq.CON_ID ORDER BY inq.INQ_POST_DATE DESC',
+                'SELECT inq.*, con.* FROM T_INQUIRIES inq INNER JOIN T_CONTACTS con ON :contactID = inq.CON_ID ORDER BY inq.INQ_POST_DATE DESC',
                 [
                     ['contactID', $contactID, PDO::PARAM_STR]
                 ]
@@ -72,8 +72,30 @@ class Inquiries extends DbConnection {
         return $success;
     }
 
+    public function getInquire($inquireID) {
+        $success = $this->queryCall(
+            'SELECT inq.*, con.* FROM T_INQUIRIES inq INNER JOIN T_CONTACTS con ON con.CON_ID = inq.CON_ID AND inq.INQ_ID = :inquireID',
+            [
+                ['inquireID', $inquireID, PDO::PARAM_INT]
+            ]
+        );
+
+        return $success;
+    }
+
     public function getSealedInquiries() {
         $success = $this->queryCall('SELECT INQ_OPENED FROM T_INQUIRIES WHERE INQ_OPENED = 0');
+
+        return $success;
+    }
+
+    public function setOpenedInquire($inquireID) {
+        $success = $this->queryCall(
+            'UPDATE T_INQUIRIES SET INQ_OPENED = 1 WHERE INQ_ID = :inquireID',
+            [
+                ['inquireID', $inquireID, PDO::PARAM_INT]
+            ]
+        );
 
         return $success;
     }
