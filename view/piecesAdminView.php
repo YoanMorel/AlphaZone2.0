@@ -19,6 +19,13 @@
                     <a href="#">Supprimer</a>
                 </div>
             </div>
+            <!-- <div class="overlay">
+                <div class="list">
+                    <a href="#">Afficher</a>
+                    <a href="#">Editer</a>
+                    <a href="#">Supprimer</a>
+                </div>
+            </div> -->
             <img data-name="" class="" src="gallery/<?= $imgLink ?>" alt="image" />
         </div>
     </div>

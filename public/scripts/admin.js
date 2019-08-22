@@ -18,12 +18,14 @@ $(function() {
 
   function startTime() {
     var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
+    var h     = today.getHours();
+    var m     = today.getMinutes();
+    var s     = today.getSeconds();
+
     m = checkTime(m);
     s = checkTime(s);
     $('div.clockTime').text(h + ":" + m + ":" + s);
+
     var t = setTimeout(startTime, 500);
   }
 
@@ -242,9 +244,9 @@ $(function() {
 
   // Fonction qui au clic sur le bouton de suppression d'image va d'abord remplacer toutes les informations de l'image par un objet vide afin de garder la structure du tableau intacte. Si il n'y a plus d'images détéctées dans la DropBox, la fonction reset tous les tableaux alors chargés d'objets vides.
   $(document).on('click', '.btnOverImg button.btn', function() {
-    var btnId = $(this).attr('name');
+    var btnId       = $(this).attr('name');
     var divParentId = $(this).parent().data('imgid');
-    var objFound = fetchTheObj(objsTab, btnId);
+    var objFound    = fetchTheObj(objsTab, btnId);
 
     if (btnId == divParentId) {
       var idToReplace = parseInt(btnId);
@@ -272,13 +274,13 @@ $(function() {
   var autoSaveTimer;
 
   $('div#onHoldTextarea textarea, div#onHoldTextarea input').on('keyup', function() {
-    var idTextarea = textArea.attr('name');
-    var textInArea = textArea.val();
-    var imgTitleContent = imgTitle.val();
-    var imgSectionContent = imgSection.val();
-    var imgSubSectionContent = imgSubSection.val();
-    var objFound = fetchTheObj(objsTab, idTextarea);
-    var counter = 0;
+    var idTextarea            = textArea.attr('name');
+    var textInArea            = textArea.val();
+    var imgTitleContent       = imgTitle.val();
+    var imgSectionContent     = imgSection.val();
+    var imgSubSectionContent  = imgSubSection.val();
+    var objFound              = fetchTheObj(objsTab, idTextarea);
+    var counter               = 0;
 
     if (!objsTab.length || !objFound) {
       objsTab.push(new ObjToUp(idTextarea, imgTitleContent, imgSectionContent, imgSubSectionContent, textInArea));

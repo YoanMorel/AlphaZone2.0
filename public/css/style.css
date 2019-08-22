@@ -379,6 +379,10 @@ textarea.uploadForm {
   cursor: pointer;
 }
 
+.inquireContainer:hover {
+  border: 2px solid #2196F3;
+}
+
 .inquireContainer::after {
   content: "";
   clear: both;
@@ -431,7 +435,7 @@ textarea.uploadForm {
   padding: 1rem;
   width: 75%;
   height: 100vh;
-  background-color: #666666;
+  background-color: #444857;
   font-family: 'Titillium Web';
   position: relative;
   margin: 0 auto 0 auto;
@@ -567,14 +571,7 @@ textarea.uploadForm {
   height: auto;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  -webkit-transform: scale(1);
-          transform: scale(1);
   display: block;
-}
-
-.galleryCol:hover img {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
 }
 
 .galleryCol .dropDownImg {
@@ -1132,4 +1129,7 @@ a#returnToTop:hover i {
   color: #fff;
   top: 5px;
 }
+
+/* [BOITE A IDEES]
+***********************/
 /*# sourceMappingURL=style.css.map */
