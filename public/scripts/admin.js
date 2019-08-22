@@ -198,8 +198,8 @@ $(function() {
     });
 
     // A sécuriser en cas d'echec de transfert !!!!
-    alertPopup.addClass('success').show();
-    $('div.alertPopup span.alertContent').text('Le chargement des fichiers et de leurs données a été exécuté avec succès !');
+    alertPopup.removeClass('info, warning').addClass('success').show();
+    $('div.alertPopup span.alertContent').html('<p><b>Succès : </b></p>Le chargement des fichiers et de leurs données a été exécuté avec succès ! Pour modifier ou supprimer le ou les fichiers, <a href="index.php?action=admin&module=update">Cliquez ici</a>.');
     uploadBTN.removeClass('btn-success').addClass('btn-danger').prop('disabled', true);
     $('input, textarea').empty();
     dataFields.hide();
@@ -328,11 +328,13 @@ $(function() {
       $.ajax({
         type: 'POST',
         dataType: 'json',
-        url: 'controller/autoSave.php',
+        url: 'controller/AjaxRouter.php',
         data: {
+          ajax: 'autoSave',
           data: JSON.stringify(objsTab)
         },
         complete: function(response) {
+          console.log(response);
           snackBar(response.responseJSON.msg);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -342,9 +344,10 @@ $(function() {
     } else {
       $.ajax({
         type: 'POST',
-        url: 'controller/autoSave.php',
-        data: 'order=' + order,
+        url: 'controller/AjaxRouter.php',
+        data: 'ajax=autoSave&order=' + order + '&data=' + null,
         complete: function(response) {
+          console.log(response);
           snackBar(response.responseText);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -371,35 +374,32 @@ $(function() {
 
 /*****************************************
  > FIN SCRIPT DU MODULE D'UPLOAD D'IMAGES
-*****************************************/
+ * **************************************/
 
 /*****************************************
- > DEBUT SCRIPT MESSENGER
-*****************************************/
+ > DEBUT SCRIPT DE MESSAGERIE
+ * **************************************/
 
   $('div.inquireContainer').click(function() {
+    $('div.messengerContainer').children('div').text('');
     $(window).scrollTop(0);
     var inqId = $(this).attr('id');
-    $('div.messengerOverlay').css({'width': '100%', 'visibility': 'visible'});
+    $('div.messengerOverlay').addClass('slideMessenger');
     
     $.ajax({
-      type: 'POST',
+      type:     'POST',
       dataType: 'json',
-      url: 'controller/AjaxRouter.php',
-      data: 'ajax=messenger&inqId=' + inqId,
+      url:      'controller/AjaxRouter.php',
+      data:     'ajax=messenger&inqId=' + inqId,
       complete: function(response) {
-        var mail      = response.responseJSON[0]['CON_MAIL'];
-        var lastName  = response.responseJSON[0]['CON_LAST_NAME'];
-        var organisme = response.responseJSON[0]['CON_ORGANISME'];
-        var subject   = response.responseJSON[0]['INQ_SUBJECT'];
-        var inquire   = response.responseJSON[0]['INQ_INQUIRE'].replace(/\n/g, '<br />');
-
-        if(!$('#' + inqId).hasClass('opened')) {
-          $('#' + inqId).addClass('opened').children('img').attr('src', 'public/img/opened.svg');
-        }
-        var postDate = response.responseJSON[0]['INQ_POST_DATE'].split(' ');
-        var frenchDate = new Date(postDate[0] + 'T' + postDate[1]);
-        var options = {
+        var mail        = response.responseJSON[0]['CON_MAIL'];
+        var lastName    = response.responseJSON[0]['CON_LAST_NAME'];
+        var organisme   = response.responseJSON[0]['CON_ORGANISME'];
+        var subject     = response.responseJSON[0]['INQ_SUBJECT'];
+        var inquire     = response.responseJSON[0]['INQ_INQUIRE'].replace(/\n/g, '<br />');
+        var postDate    = response.responseJSON[0]['INQ_POST_DATE'].split(' ');
+        var frenchDate  = new Date(postDate[0] + 'T' + postDate[1]);
+        var options     = {
           weekday:  'long',
           year:     'numeric',
           month:    'long',
@@ -409,11 +409,16 @@ $(function() {
           seconde:  '2-digit'
         };
 
+        if(!$('#' + inqId).hasClass('opened')) {
+          $('#' + inqId).addClass('opened').children('img').attr('src', 'public/img/opened.svg');
+        }
+
         $('span.closeMessengerOverlay').html('&times;');
         $('div.contactMail').html('<i class="fas fa-fw fa-at"></i>' + mail);
         $('div.contactName').html('<i class="fas fa-fw fa-user"></i> De la part de ' + lastName + ' (' + organisme + ')');
-        $('div.inquirePostDate').html('<i class="far fa-fw fa-clock"></i> le' + frenchDate.toLocaleDateString('fr-FR', options))
-        $('div.inquireSubject').html('Objet : ' + subject);
+        $('div.inquirePostDate').html('<i class="far fa-fw fa-clock"></i> le ' + frenchDate.toLocaleDateString('fr-FR', options))
+        $('div.inquireSubject').html('Objet : <span class="subject">' + subject + '</span>');
+        $('div.inquireCtrl').html('<button name="' + inqId + '" id="reply" class="inquireBTN"><i class="fas fa-fw fa-reply"></i>Répondre</button><button name="' + inqId + '" id="unread" class="inquireBTN"><i class="fas fa-fw fa-envelope"></i>Marquer comme non lu</button>');
         $('div.inquire').html(inquire);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -423,8 +428,51 @@ $(function() {
   });
 
   $('span.closeMessengerOverlay').click(function() {
-    $(this).parent().css({'width': '0', 'visibility': 'hidden'});
-    $('div.messengerContainer').children('div').text('');
+    $(this).parent().removeClass('slideMessenger');
   });
+
+  $(document).on('click', '#reply', function() {
+    var inqId = $(this).attr('name');
+
+    $.ajax({
+      type:   'POST',
+      url:    'controller/AjaxRouter.php',
+      data:   'ajax=messenger&inqId=' + inqId + '&action=reply',
+      complete: function(response) {
+        var mailto_link = 'mailto:' + $('.contactMail').text() + '?subject=' + $('.subject').text();
+    
+        win = window.open(mailto_link, 'emailWindow');
+        if (win && win.open && !win.closed) win.close();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log('Status :' + textStatus + ' Error:' + errorThrown);
+      }
+    });
+
+  });
+
+  $(document).on('click', '#unread', function() {
+    var inqId = $(this).attr('name');
+
+    $.ajax({
+      type:     'POST',
+      dataType: 'json',
+      url:      'controller/AjaxRouter.php',
+      data:     'ajax=messenger&inqId=' + inqId + '&action=unread',
+      complete: function(response) {
+        if($('#' + inqId).hasClass('opened')) {
+          $('#' + inqId).removeClass('opened').children('img').attr('src', 'public/img/received.svg');
+        }       
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log('Status :' + textStatus + ' Error:' + errorThrown);
+      }
+    });
+
+  });
+
+/****************************
+ > FIN SCRIPT DE MESSAGERIE
+ * *************************/
 
 });

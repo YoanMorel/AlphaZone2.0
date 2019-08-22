@@ -18,7 +18,6 @@
 </head>
 
 <body onload="startTime()">
-<div id="snackBar"></div>
 
   <div class="container-fluid p-0">
       <div class="row no-gutters">
@@ -31,17 +30,23 @@
                   <i class="fas fa-fw fa-upload"></i> Envoyer
                 </a>
                 <a href="index.php?action=admin&module=update">
-                  <i class="fas fa-fw fa-image"></i> Galeries
+                  <i class="fas fa-fw fa-image"></i> Galerie
                 </a>
                 <a href="index.php?action=admin&module=contact">
-                  <i class="fas fa-fw fa-envelope"></i> Messageries
+                  <i class="fas fa-fw fa-envelope"></i> Messagerie
                 </a>
-                <a href="index.php">
+                <a href="index.php?action=admin&module=events">
+                  <i class="far fa-fw fa-calendar-alt"></i> Évènements
+                </a>
+                <a href="index.php?action=admin&module=settings">
+                  <i class="fas fa-fw fa-cogs"></i> Paramètres
+                <a href="index.php" class="red">
                   <i class="fas fa-fw fa-power-off"></i> Déconnexion
                 </a>
             </div>
           </div>
           <div class="col-12 col-md-10">
+            <div id="snackBar"></div>
             <?= $content; ?>
           </div>
       </div>

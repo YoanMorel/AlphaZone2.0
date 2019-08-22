@@ -1,7 +1,7 @@
 <?php $this->title = 'Administration'; ?>
 
 <div class="topBar slideTopBar">
-    Bienvenue sur votre console d'administration Jean-François
+    <span style="padding-left: 1rem;">Bienvenue sur votre console d'administration Jean-François
     <div class="clockTime"></div>
 </div>
 <div style="display: flex; width: 100%; height: 60vh;">

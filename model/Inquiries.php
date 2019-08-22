@@ -89,9 +89,51 @@ class Inquiries extends DbConnection {
         return $success;
     }
 
+    public function getSealedInquire($inquireID) {
+        $success = $this->queryCall(
+            'SELECT INQ_OPENED FROM T_INQUIRIES WHERE INQ_OPENED = 0 AND INQ_ID = :inquireID',
+            [
+                ['inquireID', $inquireID, PDO::PARAM_INT]
+            ]
+        );
+
+        return $success;
+    }
+
+    public function getRepliedInquiries() {
+        $success = $this->queryCall('SELECT INQ_REPLIED FROM T_INQUIRIES');
+
+        return $success;
+    }
+
+    // TOGGLED BOOL
     public function setOpenedInquire($inquireID) {
         $success = $this->queryCall(
-            'UPDATE T_INQUIRIES SET INQ_OPENED = 1 WHERE INQ_ID = :inquireID',
+            'UPDATE T_INQUIRIES SET INQ_OPENED = NOT INQ_OPENED WHERE INQ_ID = :inquireID',
+            [
+                ['inquireID', $inquireID, PDO::PARAM_INT]
+            ]
+        );
+
+        return $success;
+    }
+
+    public function setOpenedAllInquieries() {
+        $success = $this->queryCall('UPDATE T_INQUIRIES SET INQ_OPENED = 1');
+
+        return $success;
+    }
+
+    public function setSealedAllInquieries() {
+        $success = $this->queryCall('UPDATE T_INQUIRIES SET INQ_OPENED = 0');
+
+        return $success;
+    }
+
+    // TOGGLED BOOL
+    public function setRepliedInquire($inquireID) {
+        $success = $this->queryCall(
+            'UPDATE T_INQUIRIES SET INQ_REPLIED = NOT INQ_OPENED WHERE INQ_ID = :inquireID',
             [
                 ['inquireID', $inquireID, PDO::PARAM_INT]
             ]

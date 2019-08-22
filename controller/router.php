@@ -67,13 +67,19 @@ class Router {
                             $this->uploadAdminCtrl->uploadView();
                         endif;
                         if ($_GET['module'] == 'update'):
-                            $this->mainAdminCtrl->ucView();
+                            $this->piecesCtrl->piecesAdminView();
                         endif;
                         if ($_GET['module'] == 'contact'):
                             $this->contactCtrl->contactAdminView();
                         endif;
+                        if ($_GET['module'] == 'events'):
+                            $this->mainAdminCtrl->ucView();
+                        endif;
+                        if ($_GET['module'] == 'settings'):
+                            $this->mainAdminCtrl->ucView();
+                        endif;
                     else:
-                        throw new Exception('Cible GET admin non valide');
+                        $this->errorAlert('Index GET invalide !');
                     endif;
                 endif;
             else:

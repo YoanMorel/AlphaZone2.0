@@ -1,6 +1,6 @@
 @charset "UTF-8";
-/* [ADMIN TEMPLATE]
-**************************/
+/* [COMMON RULES]
+*******************/
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
@@ -15,6 +15,8 @@ a {
   transition: 0.3s;
 }
 
+/* [ADMIN TEMPLATE]
+**************************/
 /* [SIDEBAR ADMIN SECTION]
 ***********************************/
 .sidebar {
@@ -43,6 +45,10 @@ a {
 
 .sidebar a:hover {
   color: #FFD700;
+}
+
+.sidebar a:hover.red {
+  color: #f93943;
 }
 
 @media (max-width: 500px) {
@@ -78,7 +84,7 @@ a {
   min-width: 250px;
   margin-left: -125px;
   background-color: #2196F3;
-  color: #fff;
+  color: #FFF;
   text-align: center;
   border-radius: 2px;
   padding: 12px;
@@ -178,10 +184,6 @@ a {
 }
 
 .slideCardAnim {
-  visibility: hidden;
-}
-
-.slideTopBarAmin {
   visibility: hidden;
 }
 
@@ -412,7 +414,7 @@ textarea.uploadForm {
 .messengerOverlay {
   right: 0;
   top: 0;
-  width: 0;
+  width: 100%;
   height: 100%;
   -webkit-transition: .3s;
   transition: .3s;
@@ -422,7 +424,6 @@ textarea.uploadForm {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  visibility: hidden;
   overflow: hidden;
 }
 
@@ -430,7 +431,8 @@ textarea.uploadForm {
   padding: 1rem;
   width: 75%;
   height: 100vh;
-  background-color: black;
+  background-color: #666666;
+  font-family: 'Titillium Web';
   position: relative;
   margin: 0 auto 0 auto;
 }
@@ -478,6 +480,44 @@ textarea.uploadForm {
   color: #000;
 }
 
+.slideMessengerAnim {
+  visibility: hidden;
+}
+
+.slideMessenger {
+  animation-name: slideMessenger;
+  -webkit-animation-name: slideMessenger;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  visibility: visible;
+}
+
+@-webkit-keyframes slideMessenger {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(70%);
+            transform: translateY(70%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@keyframes slideMessenger {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(70%);
+            transform: translateY(70%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
 @media (max-width: 500px) {
   .inquireContainer {
     text-align: center;
@@ -495,7 +535,7 @@ textarea.uploadForm {
   .messengerOverlay {
     right: 0;
     top: 0;
-    width: 0;
+    width: 100%;
     height: 100%;
     -webkit-transition: .3s;
     transition: .3s;
@@ -511,6 +551,75 @@ textarea.uploadForm {
     width: 100vw;
     height: 100vh;
   }
+}
+
+/* [GALLERY ADMIN VIEW]
+***************************/
+.galleryCol {
+  overflow: hidden;
+  width: 100%;
+  height: 200px;
+}
+
+.galleryCol img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  display: block;
+}
+
+.galleryCol:hover img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.galleryCol .dropDownImg {
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  color: #818181;
+  font-size: 12px;
+}
+
+.galleryCol .dropDownImg .btnDropDownImg {
+  cursor: pointer;
+  background-color: #191716;
+  padding: 12px;
+  -webkit-box-shadow: 0 0 1em #DDD;
+          box-shadow: 0 0 1em #DDD;
+}
+
+.galleryCol .dropDownImg .dropDownList {
+  display: none;
+  position: absolute;
+  background-color: #191716;
+  min-width: 100px;
+  -webkit-box-shadow: 0 0 1em #DDD;
+          box-shadow: 0 0 1em #DDD;
+  right: 0;
+  padding: 1rem;
+  text-align: right;
+}
+
+.galleryCol .dropDownImg .dropDownList a {
+  display: block;
+  text-decoration: none;
+  color: #818181;
+}
+
+.galleryCol .dropDownImg .dropDownList a:hover {
+  color: #FFD700;
+  font-weight: bold;
+}
+
+.galleryCol .dropDownImg:hover .dropDownList {
+  display: block;
 }
 
 /* [ADMIN TEMPLATE END]

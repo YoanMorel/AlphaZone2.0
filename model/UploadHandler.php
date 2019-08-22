@@ -35,7 +35,8 @@ class UploadHandler extends DbConnection {
 
     public function insertSubSectionInDB () {
         $success = $this->queryCall(
-            'INSERT INTO T_SUBSECTIONS (SUB_SUBSECTION, SUB_CREATION_DATE, SEC_ID) VALUES (:newSubSection, NOW(), (SELECT SEC_ID FROM T_SECTIONS WHERE SEC_SECTION = :relativeSection))',
+            'INSERT INTO T_SUBSECTIONS (SUB_SUBSECTION, SUB_CREATION_DATE, SEC_ID) VALUES (:newSubSection, NOW(), (
+                SELECT SEC_ID FROM T_SECTIONS WHERE SEC_SECTION = :relativeSection))',
             [
                 ['newSubSection', $this->subSection, PDO::PARAM_STR],
                 ['relativeSection', $this->section, PDO::PARAM_STR]
@@ -47,7 +48,10 @@ class UploadHandler extends DbConnection {
 
     public function insertDataInDB () {
         $success = $this->queryCall(
-            'INSERT INTO T_PIECES (PIE_TITLE, PIE_IMG_LINK, PIE_STORY, PIE_UPLOAD_DATE, SUB_ID) VALUES (:dataTitle, :dataLink, :dataStory, NOW(), (SELECT sub.SUB_ID FROM T_SUBSECTIONS sub LEFT JOIN T_SECTIONS s ON s.SEC_ID = sub.SEC_ID AND sub.SUB_SUBSECTION = :subSectionName WHERE s.SEC_SECTION = :sectionName))',
+            'INSERT INTO T_PIECES (PIE_TITLE, PIE_IMG_LINK, PIE_STORY, PIE_UPLOAD_DATE, SUB_ID) 
+            VALUES (:dataTitle, :dataLink, :dataStory, NOW(), (
+                SELECT sub.SUB_ID FROM T_SUBSECTIONS sub 
+                LEFT JOIN T_SECTIONS s ON s.SEC_ID = sub.SEC_ID AND sub.SUB_SUBSECTION = :subSectionName WHERE s.SEC_SECTION = :sectionName))',
             [
                 ['dataTitle', $this->dataTitle, PDO::PARAM_STR],
                 ['dataLink', $this->dataLink, PDO::PARAM_STR],

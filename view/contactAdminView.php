@@ -23,13 +23,14 @@
     endforeach;
 
 ?>
-<div class="messengerOverlay">
+<div class="messengerOverlay slideMessengerAnim">
     <span class="closeMessengerOverlay">&times;</span>
     <div class="messengerContainer">
       <div class="contactMail"></div>
       <div class="inquireSubject"></div>
       <div class="contactName"></div>
       <div class="inquirePostDate"></div>
+      <div class="inquireCtrl"></div>
       <div class="inquire"></div>
     </div>
 </div>

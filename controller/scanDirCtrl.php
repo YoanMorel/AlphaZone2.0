@@ -1,8 +1,4 @@
 <?php
-
-require_once '../model/DbConnection.php';
-require_once '../model/UploadHandler.php';
-require_once '../model/Gallery.php';
      
 class ScanDir {
 
@@ -115,7 +111,7 @@ class ScanDir {
         endforeach;
     }
 
-    private function getDataScan() {
+    public function getDataScan() {
         $sectionsList = $this->gallery->getSections()->fetchAll();
         foreach($sectionsList as $section):
             $subSectionsList = $this->gallery->getSubSections($section['SEC_SECTION'])->fetchAll();
@@ -127,12 +123,9 @@ class ScanDir {
                 endforeach;
             endforeach;
         endforeach;
+
+        return $this->dataScan;
     }
 }
-
-$scan = new ScanDir('../gallery/');
-
-$scan->regularize();
-echo json_encode(['log' => $scan->log]);
 
 ?>
