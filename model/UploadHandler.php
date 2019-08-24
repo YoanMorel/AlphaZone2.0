@@ -17,9 +17,9 @@ class UploadHandler extends DbConnection {
     }
 
     public function setData ($title, $story, $link) {
-        $this->dataTitle = $title;
-        $this->dataStory = $story;
-        $this->dataLink = $link;
+        $this->dataTitle    = $title;
+        $this->dataStory    = $story;
+        $this->dataLink     = $link;
     }
 
     public function insertSectionInDB () {

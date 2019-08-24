@@ -16,11 +16,19 @@ class MainAdminCtrl {
     }
 
     public function mainAdminView() {
-        $view = new View('mainAdmin');
-        $pieces = $this->gallery->getAllPieces()->rowCount();
-        $inquiries = $this->inquiries->getSealedInquiries()->rowCount();
-        $contacts = $this->inquiries->getContacts()->rowCount();
-        $view->generate(['pieces' => $pieces, 'inquiries' => $inquiries, 'contacts' => $contacts], true);
+        $view           = new View('mainAdmin');
+        $pieces         = $this->gallery->getAllPieces()->rowCount();
+        $inquiries      = $this->inquiries->getSealedInquiries()->rowCount();
+        $contacts       = $this->inquiries->getContacts()->rowCount();
+        $nullStories    = $this->gallery->getNullStories()->rowCount();
+
+        $view->generate([
+            'pieces'        => $pieces,
+            'inquiries'     => $inquiries,
+            'contacts'      => $contacts,
+            'nullStories'   => $nullStories]
+            , true
+        );
     }
 
     public function ucView() {

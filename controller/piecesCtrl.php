@@ -13,12 +13,14 @@ class PiecesCtrl {
     }
 
     public function piecesAdminView() {
-        $view = new View('piecesAdmin');
-        $gallery = new Gallery();
-        $scanDir = new ScanDir('gallery');
-        $pieces = $gallery->getAllPieces()->fetchAll();
-        $imgLinks = $scanDir->getDataScan();
-        $view->generate(['pieces' => $pieces, 'imgLinks' => $imgLinks], true);
+        $view       = new View('piecesAdmin');
+        $gallery    = new Gallery();
+        $scanDir    = new ScanDir('gallery');
+        $pieces     = $gallery->getAllPieces()->fetchAll();
+        $sections   = $gallery->getSections()->fetchAll();
+        $imgLinks   = $scanDir->getDataScan();
+
+        $view->generate(['pieces' => $pieces, 'sections' => $sections, 'imgLinks' => $imgLinks], true);
     }
 }
 

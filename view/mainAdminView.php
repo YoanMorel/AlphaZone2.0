@@ -4,7 +4,7 @@
     <span style="padding-left: 1rem;">Bienvenue sur votre console d'administration Jean-François
     <div class="clockTime"></div>
 </div>
-<div style="display: flex; width: 100%; height: 60vh;">
+<div style="display: flex; width: 100%; height: 80vh; overflow: hidden;">
 <div class="container mx-auto my-auto w-75">
     <div class="row slideCardAnim">
         <div class="col-12 col-md-4">
@@ -28,6 +28,14 @@
                 <p><i class="fas fa-users"></i></p>
                 <h3><?= $contacts ?></h3>
                 <p>Contacts vous ont écrit</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <p><i class="fas fa-pencil-alt"></i></p>
+                <h3><?= $nullStories ?></h3>
+                <p>Editions en attente</p>
             </div>
         </div>
     </div>

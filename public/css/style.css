@@ -48,7 +48,7 @@ a {
 }
 
 .sidebar a:hover.red {
-  color: #f93943;
+  color: #F93943;
 }
 
 @media (max-width: 500px) {
@@ -485,7 +485,7 @@ textarea.uploadForm {
 }
 
 .slideMessengerAnim {
-  visibility: hidden;
+  display: none;
 }
 
 .slideMessenger {
@@ -493,32 +493,30 @@ textarea.uploadForm {
   -webkit-animation-name: slideMessenger;
   animation-duration: 1s;
   -webkit-animation-duration: 1s;
-  visibility: visible;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 @-webkit-keyframes slideMessenger {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(70%);
-            transform: translateY(70%);
+    left: 70%;
   }
   100% {
     opacity: 1;
-    -webkit-transform: translateY(0%);
-            transform: translateY(0%);
+    left: 0;
   }
 }
 
 @keyframes slideMessenger {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(70%);
-            transform: translateY(70%);
+    left: 70%;
   }
   100% {
     opacity: 1;
-    -webkit-transform: translateY(0%);
-            transform: translateY(0%);
+    left: 0;
   }
 }
 
@@ -563,60 +561,180 @@ textarea.uploadForm {
   overflow: hidden;
   width: 100%;
   height: 200px;
+  background-color: #5F0F40;
 }
 
 .galleryCol img {
   max-width: 100%;
   width: 100%;
   height: auto;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
   display: block;
 }
 
-.galleryCol .dropDownImg {
-  position: absolute;
-  display: inline-block;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  color: #818181;
-  font-size: 12px;
+.galleryCol.needsEdit {
+  border: 2px solid #780116;
 }
 
-.galleryCol .dropDownImg .btnDropDownImg {
-  cursor: pointer;
-  background-color: #191716;
-  padding: 12px;
-  -webkit-box-shadow: 0 0 1em #DDD;
-          box-shadow: 0 0 1em #DDD;
-}
-
-.galleryCol .dropDownImg .dropDownList {
-  display: none;
-  position: absolute;
-  background-color: #191716;
-  min-width: 100px;
-  -webkit-box-shadow: 0 0 1em #DDD;
-          box-shadow: 0 0 1em #DDD;
+.galleryCol .overlay {
+  position: relative;
+  bottom: 100%;
+  left: 0;
   right: 0;
-  padding: 1rem;
-  text-align: right;
+  background-color: #5F0F40;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.galleryCol .dropDownImg .dropDownList a {
+.galleryCol .overlay .list {
+  text-align: left;
+  padding: 1rem;
+  font-size: 18px;
+}
+
+.galleryCol .overlay .list a {
   display: block;
   text-decoration: none;
-  color: #818181;
+  color: #FE5F55;
 }
 
-.galleryCol .dropDownImg .dropDownList a:hover {
+.galleryCol .overlay .list a:hover {
   color: #FFD700;
-  font-weight: bold;
 }
 
-.galleryCol .dropDownImg:hover .dropDownList {
+.galleryCol:hover .overlay {
+  bottom: 0;
+  height: 100%;
+}
+
+.editorOverlay {
+  right: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: .3s;
+  transition: .3s;
+  background-color: #191716;
+  color: #FFF;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+}
+
+.editorOverlay .editorColImg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+}
+
+.editorOverlay .editorColImg img {
+  margin: auto;
+}
+
+.editorOverlay .editorColData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+}
+
+.editorOverlay .editorColData .fieldContainer {
+  width: 100%;
+  margin: auto;
+}
+
+.editorOverlay .editorColData .fieldContainer input, .editorOverlay .editorColData .fieldContainer textarea {
+  padding: 14px;
   display: block;
+  border: none;
+  background: #333;
+  color: #AAA;
+  width: 95%;
+  margin: 1rem;
+}
+
+.editorOverlay .editorColData .fieldContainer textarea {
+  height: 100px;
+  resize: none;
+}
+
+.editorOverlay .editorColData .fieldContainer button.btnEditor {
+  border: 2px solid #5F0F40;
+  background: #191716;
+  color: #5F0F40;
+  font-size: 12px;
+  padding: 14px 28px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  margin-top: 1rem;
+  display: none;
+}
+
+.editorOverlay .editorColData .fieldContainer button.btnEditor:hover {
+  background: #5F0F40;
+  color: #191716;
+}
+
+.editorOverlay .closeEditorOverlay {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  z-index: 1;
+  padding: 5px;
+}
+
+.editorOverlay .closeEditorOverlay:hover {
+  font-weight: bold;
+  background-color: #DDD;
+  color: #000;
+}
+
+.slideEditorAnim {
+  display: none;
+}
+
+.slideEditor {
+  animation-name: slideEditor;
+  -webkit-animation-name: slideEditor;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@-webkit-keyframes slideEditor {
+  0% {
+    opacity: 0;
+    left: 70%;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes slideEditor {
+  0% {
+    opacity: 0;
+    left: 70%;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
 }
 
 /* [ADMIN TEMPLATE END]
@@ -857,7 +975,7 @@ div.closeRightSideText, div.closeLeftSideText {
 *******************************/
 .contactHeader {
   background: url("../img/delivery-envelopes-mail-1919343.jpg");
-  height: 50vh;
+  height: 25vh;
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -890,7 +1008,7 @@ input.contactField, textarea.contactField {
   padding: 14px;
 }
 
-input.contactField.fieldError {
+input.contactField.fieldError, textarea.contactField.fieldError {
   border: 1px solid red;
   color: #f93943;
   background: #fce4e4;
@@ -900,7 +1018,7 @@ input.contactField.fieldError {
   background-repeat: no-repeat;
 }
 
-input.contactField.fieldError[placeholder] {
+input.contactField.fieldError[placeholder], textarea.contactField.fieldError[placeholder] {
   font-weight: bold;
 }
 
@@ -920,6 +1038,12 @@ textarea.contactField {
 form#contactInquiries div.errorMsg {
   font-size: 12px;
   color: red;
+  padding: 1px;
+  width: auto;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 button.btnContact {
@@ -933,6 +1057,7 @@ button.btnContact {
   font-weight: bold;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+  margin-top: 1rem;
 }
 
 button.btnContact:hover {

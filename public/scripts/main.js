@@ -105,14 +105,14 @@ $(function() {
   })
 
   // Script de controle dynamique de la validité du formulaire de contact
-  $('form#contactInquiries input').on({
+  $('form#contactInquiries input, textarea').on({
     blur: function() {
-      var name = $(this).attr('name');
+      var name    = $(this).attr('name');
       $.ajax({
-        type: 'POST',
+        type:     'POST',
         dataType: 'json',
-        url: 'controller/AjaxRouter.php',
-        data: 'ajax=validation&' + name + '=' + $(this).val(),
+        url:      'controller/AjaxRouter.php',
+        data:     'ajax=validation&' + name + '=' + $(this).val(),
         complete: function(response) {
           fieldFound = Object.keys(response.responseJSON);
           $.each(fieldFound, function(key, value) {

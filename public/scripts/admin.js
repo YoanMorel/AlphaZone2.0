@@ -36,32 +36,32 @@ $(function() {
 
 /*****************************************
  >  [SCRIPT DU MODULE D'UPLOAD D'IMAGES]
-*****************************************/
+ * **************************************/
 
   // Liste de selecteurs couramment utilisés
-  var dropBox = $('#fileList');
-  var dataFields = $('div#onHoldTextarea');
-  var imgTitle = $('input#imgTitle');
-  var imgSection = $('input#imgSection');
+  var dropBox       = $('#fileList');
+  var dataFields    = $('div#onHoldTextarea');
+  var imgTitle      = $('input#imgTitle');
+  var imgSection    = $('input#imgSection');
   var imgSubSection = $('input#imgSubSection');
-  var textArea = $('textarea.onHoldTextImg');
-  var uploadBTN = $('button#upload');
-  var alertPopup = $('div.alertPopup');
+  var textArea      = $('textarea.onHoldTextImg');
+  var uploadBTN     = $('button#upload');
+  var alertPopup    = $('div.alertPopup');
 
   // Tableau stockage des images, tableau stockage des données concernant les images, tableaux pour l'autocompletion
-  var fileStorage = [];
-  var objsTab = [];
-  var autoCompleteSections = [];
+  var fileStorage             = [];
+  var objsTab                 = [];
+  var autoCompleteSections    = [];
   var autoCompleteSubSections = [];
 
   //Prototype de l'objet contenant les données concernant les images
   class ObjToUp {
     constructor(id, title, section, subSection, text) {
-      this.id = id;
-      this.title = title;
-      this.section = section;
+      this.id         = id;
+      this.title      = title;
+      this.section    = section;
       this.subSection = subSection;
-      this.text = text;
+      this.text       = text;
     }
   }
 
@@ -384,9 +384,9 @@ $(function() {
 
   $('div.inquireContainer').click(function() {
     $('div.messengerContainer').children('div').text('');
-    $(window).scrollTop(0);
     var inqId = $(this).attr('id');
-    $('div.messengerOverlay').addClass('slideMessenger');
+    $('div.messengerOverlay').css('top', $(window).scrollTop()).addClass('slideMessenger');
+    $('body').css('overflow','hidden');
     
     $.ajax({
       type:     'POST',
@@ -431,6 +431,7 @@ $(function() {
 
   $('span.closeMessengerOverlay').click(function() {
     $(this).parent().removeClass('slideMessenger');
+    $('body').css('overflow', 'visible');
   });
 
   $(document).on('click', '#reply', function() {
@@ -476,5 +477,63 @@ $(function() {
 /****************************
  > FIN SCRIPT DE MESSAGERIE
  * *************************/
+
+/*****************************************
+ > DEBUT SCRIPT DE GALERIE
+ * **************************************/
+
+  function isEqual(object1, object2) {
+    var object1Keys = Object.getOwnPropertyNames(object1);
+    var object2Keys = Object.getOwnPropertyNames(object2);
+
+    if (object1Keys.length != object2Keys.length) {
+      return false;
+    }
+
+    for (var i = 0; i < object1Keys.length; i++) {
+      var keyName = object1Keys[i];
+
+      if (object1[keyName] !== object2[keyName]) {
+          return false;
+      }
+    }
+    
+    return true;
+  }
+
+  var imgData   = {};
+  var fieldData = {};
+
+  $('a.editor').click(function(event) {
+    event.preventDefault();
+    $('div.editorOverlay').css('top', $(window).scrollTop());
+    $('div.editorOverlay').addClass('slideEditor');
+    $('body').css('overflow','hidden');
+    var imgSrc = $(this).parents().siblings('img').attr('src');
+    $.each($(this).parents().siblings('img').data(), function(key, value) {
+      imgData[key] = value;
+    });
+    $('div.editorOverlay img').attr('src', imgSrc);
+    $('input#title').val(imgData['title']);
+    $('input#creation').val(imgData['creation']);
+    $('input#update').val(imgData['update']);
+    $('textarea#story').val(imgData['story']);
+  });
+
+  $('.fieldContainer').children().on('blur', function() {
+    $.each($('.fieldContainer').children('input, textarea'), function() {
+      fieldData[$(this).attr('id')] = $(this).val();
+    });
+    if(!isEqual(imgData, fieldData)) {
+      $('button.btnEditor').css('display', 'block');
+    } else {
+      $('button.btnEditor').css('display', 'none');
+    }
+  });
+
+  $('span.closeEditorOverlay').click(function() {
+    $(this).parent().removeClass('slideEditor');
+    $('body').css('overflow', 'visible');
+  });
 
 });

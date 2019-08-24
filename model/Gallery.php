@@ -35,7 +35,13 @@ class Gallery extends DbConnection {
     }
 
     public function getAllPieces() {
-        $piecesData = $this->queryCall('SELECT * FROM T_PIECES');
+        $piecesData = $this->queryCall('SELECT pie.*, sec.SEC_SECTION, sub.SUB_SUBSECTION FROM T_PIECES pie LEFT JOIN T_SUBSECTIONS sub ON pie.SUB_ID = sub.SUB_ID LEFT JOIN T_SECTIONS sec ON sub.SEC_ID = sec.SEC_ID');
+
+        return $piecesData;
+    }
+
+    public function getNullStories() {
+        $piecesData = $this->queryCall('SELECT * FROM T_PIECES WHERE ISNULL(PIE_STORY)');
 
         return $piecesData;
     }

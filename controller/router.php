@@ -7,6 +7,7 @@ require_once 'controller/piecesCtrl.php';
 require_once 'controller/philosophyCtrl.php';
 require_once 'controller/biographyCtrl.php';
 require_once 'controller/contactCtrl.php';
+require_once 'controller/settingsCtrl.php';
 require_once 'view/View.php';
 
 class Router {
@@ -18,6 +19,7 @@ class Router {
     private $contactCtrl;
     private $mainAdminCtrl;
     private $uploadAdminCtrl;
+    private $adminSettings;
 
     public function __construct() {
         
@@ -28,6 +30,7 @@ class Router {
         $this->contactCtrl      = new ContactCtrl();
         $this->mainAdminCtrl    = new MainAdminCtrl(); 
         $this->uploadAdminCtrl  = new UploadAdminCtrl();
+        $this->adminSettings    = new AdminSettings();
     }
 
     public function getRoute() {
@@ -45,11 +48,11 @@ class Router {
                     else:
                         array_map('htmlspecialchars', $_POST);
 
-                        $lname = $this->getParams($_POST, 'lname');
-                        $organisme = $this->getParams($_POST, 'organisme');
-                        $mail = $this->getParams($_POST, 'mail');
-                        $subject = $this->getParams($_POST, 'subject');
-                        $inquire = $this->getParams($_POST, 'inquire');
+                        $lname      = $this->getParams($_POST, 'lname');
+                        $organisme  = $this->getParams($_POST, 'organisme');
+                        $mail       = $this->getParams($_POST, 'mail');
+                        $subject    = $this->getParams($_POST, 'subject');
+                        $inquire    = $this->getParams($_POST, 'inquire');
 
                         $this->contactCtrl->inquiries($lname, $organisme, $mail, $subject, $inquire);
                     endif;
@@ -70,13 +73,13 @@ class Router {
                             $this->piecesCtrl->piecesAdminView();
                         endif;
                         if ($_GET['module'] == 'contact'):
-                            $this->contactCtrl->contactAdminView();
+                            $this->contactCtrl->messengerView();
                         endif;
                         if ($_GET['module'] == 'events'):
                             $this->mainAdminCtrl->ucView();
                         endif;
                         if ($_GET['module'] == 'settings'):
-                            $this->mainAdminCtrl->ucView();
+                            $this->adminSettings->settingsView();
                         endif;
                     else:
                         $this->errorAlert('Index GET invalide !');

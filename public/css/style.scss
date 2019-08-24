@@ -44,7 +44,7 @@ a {
       color: #FFD700;
 
       &.red {
-        color: #f93943;
+        color: #F93943;
       }
     }
 
@@ -367,7 +367,6 @@ textarea.uploadForm {
   color: #FFF;
   position: absolute;
   display: flex;
-  // visibility: hidden;
   overflow: hidden;
 
   .messengerContainer {
@@ -425,7 +424,7 @@ textarea.uploadForm {
 }
 
 .slideMessengerAnim {
-  visibility: hidden;
+  display: none;
 }
 
 .slideMessenger {
@@ -433,17 +432,19 @@ textarea.uploadForm {
   -webkit-animation-name: slideMessenger;
   animation-duration: 1s;
   -webkit-animation-duration: 1s;
-  visibility: visible;
+  display: flex;
 }
 
 @keyframes slideMessenger {
   0% {
     opacity: 0;
-    transform: translateY(70%);
+    // transform: translateY(70%);
+    left: 70%;
   }
   100% {
     opacity: 1;
-    transform: translateY(0%);
+    // transform: translateY(0%);
+    left: 0;
   }
 }
 
@@ -485,168 +486,173 @@ textarea.uploadForm {
 /* [GALLERY ADMIN VIEW]
 ***************************/
 
-// .galleryCol {
-//   overflow: hidden;
-//   width: 100%;
-//   height: 200px;
-
-//   & img {
-//     max-width: 100%;
-//     width: 100%;
-//     height: auto;
-//     // transition: all 0.3s;
-//     // transform: scale(1);
-//     display: block;
-//   }
-
-//   & .overlay {
-//     position: relative;
-//     bottom: 100%;
-//     left: 0;
-//     right: 0;
-//     background-color: #008CBA;
-//     overflow: hidden;
-//     width: 100%;
-//     height:0;
-//     transition: .5s ease;
-//     display: flex;
-
-//     & .list {
-//       text-align: left;
-//       padding: 1rem;
-//       font-size: 18px;
-
-//       & a {
-//         display: block;
-//         text-decoration: none;
-//         color: #FFF;
-
-//         &:hover {
-//           color: #FFD700;
-//           font-weight: bold;
-//         }
-//       }
-//     }
-//   }
-  
-//   &:hover .overlay {
-//     bottom: 0;
-//     height: 100%;
-//   }
-  
-
-//   // &:hover img {
-//   //   transform: scale(1.1);
-//   // }
-
-//   // .dropDownImg {
-//   //   position: absolute;
-//   //   display: inline-block;
-//   //   top: 10px;
-//   //   right: 10px;
-//   //   z-index: 1;
-//   //   color: #818181;
-//   //   font-size: 12px;
-
-//     // & .btnDropDownImg {
-//     //   cursor: pointer;
-//     //   background-color: #191716;
-//     //   padding: 12px;
-//     //   box-shadow: 0 0 1em #DDD;
-//     //   z-index: 1;
-//     // }
-
-//   //   & .dropDownList {
-//   //     display: none;
-//   //     position: absolute;
-//   //     background-color: #191716;
-//   //     min-width: 100px;
-//   //     box-shadow: 0 0 1em #DDD;
-//   //     right: 0;
-//   //     padding: 1rem;
-//   //     text-align: right;
-
-//   //     & a {
-//   //       display: block;
-//   //       text-decoration: none;
-//   //       color: #818181;
-
-//   //       &:hover {
-//   //         color: #FFD700;
-//   //         font-weight: bold;
-//   //       }
-//   //     }
-//   //   }
-
-//   //   &:hover .dropDownList {
-//   //     display: block;
-//   //   }
-
-//   // }
-// }
-
-
 .galleryCol {
   overflow: hidden;
   width: 100%;
   height: 200px;
+  background-color: #5F0F40;
 
   & img {
     max-width: 100%;
     width: 100%;
     height: auto;
-    transition: all 0.3s;
+    // transition: all 0.3s;
     // transform: scale(1);
     display: block;
   }
 
-  // &:hover img {
-  //   transform: scale(1.1);
-  // }
+  &.needsEdit {
+    border: 2px solid #780116;
+  }
 
-  .dropDownImg {
-    position: absolute;
-    display: inline-block;
-    top: 10px;
-    right: 10px;
-    z-index: 1;
-    color: #818181;
-    font-size: 12px;
+  & .overlay {
+    position: relative;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background-color: #5F0F40;
+    overflow: hidden;
+    width: 100%;
+    height:0;
+    transition: .5s ease;
+    display: flex;
 
-    & .btnDropDownImg {
-      cursor: pointer;
-      background-color: #191716;
-      padding: 12px;
-      box-shadow: 0 0 1em #DDD;
-
-    }
-
-    & .dropDownList {
-      display: none;
-      position: absolute;
-      background-color: #191716;
-      min-width: 100px;
-      box-shadow: 0 0 1em #DDD;
-      right: 0;
+    & .list {
+      text-align: left;
       padding: 1rem;
-      text-align: right;
+      font-size: 18px;
 
       & a {
         display: block;
         text-decoration: none;
-        color: #818181;
+        color: #FE5F55;
 
         &:hover {
           color: #FFD700;
-          font-weight: bold;
         }
       }
     }
+  }
+  
+  &:hover .overlay {
+    bottom: 0;
+    height: 100%;
+  }
+}
 
-    &:hover .dropDownList {
-      display: block;
+.editorOverlay {
+  right: 0;
+  // top: 0;
+  width: 100%;
+  height: 100%;
+  transition: .3s;
+  background-color: #191716;
+  color: #FFF;
+  position: absolute;
+  display: flex;
+  overflow: hidden;
+
+  // .editorContainer {
+  //   padding: 1rem;
+  //   width: 75%;
+  //   height: 100vh;
+  //   background-color: #444857;
+  //   font-family: 'Titillium Web';
+  //   position: relative;
+  //   margin: 0 auto 0 auto;
+  // }
+
+  & .editorColImg {
+    display: flex;
+    height: 100vh;
+
+    & img {
+      margin: auto;
     }
+  }
 
+  & .editorColData {
+    display: flex;
+    height: 100vh;
+
+    & .fieldContainer {
+      width: 100%;
+      margin: auto;
+    
+      & input, textarea {
+        padding: 14px;
+        display: block;
+        border: none;
+        background: #333;
+        color: #AAA;
+        width: 95%;
+        margin: 1rem;
+      }
+
+      & textarea {
+        height: 100px;
+        resize: none;
+      }
+
+      & button.btnEditor {
+        border: 2px solid #5F0F40;
+        background: #191716;
+        color: #5F0F40;
+        font-size: 12px;
+        padding: 14px 28px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s ease;
+        margin-top: 1rem;
+        display: none;
+
+        &:hover {
+          background: #5F0F40;
+          color: #191716;
+        }
+      }
+    }
+  }
+
+
+  & .closeEditorOverlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    z-index: 1;
+    padding: 5px;
+
+    &:hover {
+      font-weight: bold;
+      background-color: #DDD;
+      color: #000;
+    }
+  }
+}
+
+.slideEditorAnim {
+  display: none;
+}
+
+.slideEditor {
+  animation-name: slideEditor;
+  -webkit-animation-name: slideEditor;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  display: flex;
+}
+
+@keyframes slideEditor {
+  0% {
+    opacity: 0;
+    left: 70%;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
   }
 }
 
@@ -874,7 +880,7 @@ div.closeRightSideText, div.closeLeftSideText {
 
 .contactHeader {
   background: url('../img/delivery-envelopes-mail-1919343.jpg');
-  height: 50vh;
+  height: 25vh;
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -905,7 +911,7 @@ input.contactField, textarea.contactField {
   padding: 14px;
 }
 
-input.contactField.fieldError {
+input.contactField.fieldError, textarea.contactField.fieldError {
   border: 1px solid rgba(255, 0, 0, 1);
   color: #f93943;
   background: #fce4e4;
@@ -935,6 +941,11 @@ textarea.contactField {
 form#contactInquiries div.errorMsg {
   font-size: 12px;
   color: red;
+  padding: 1px;
+  width: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 button.btnContact {
@@ -947,6 +958,7 @@ button.btnContact {
   border-radius: 5px;
   font-weight: bold;
   transition: 0.3s ease;
+  margin-top: 1rem;
 }
 
 button.btnContact:hover {

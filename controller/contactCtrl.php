@@ -18,10 +18,11 @@ class ContactCtrl {
         $view->generate($content);
     }
 
-    public function contactAdminView() {
-        $view = new View('contactAdmin');
-        $contacts = $this->inquiries->getContacts()->fetchAll();
-        $inquiries = $this->inquiries->getInquiries()->fetchAll();
+    public function messengerView() {
+        $view       = new View('messenger');
+        $contacts   = $this->inquiries->getContacts()->fetchAll();
+        $inquiries  = $this->inquiries->getInquiries()->fetchAll();
+        
         $view->generate(['contacts' => $contacts, 'inquiries' => $inquiries], true);
     }
 
