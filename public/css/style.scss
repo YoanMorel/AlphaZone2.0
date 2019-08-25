@@ -567,17 +567,20 @@ textarea.uploadForm {
     height: 100vh;
 
     & img {
+      max-width: 100%;
+      max-height: 100vh;
       margin: auto;
     }
   }
 
   & .editorColData {
     display: flex;
+    flex-direction: column;
     height: 100vh;
 
     & .fieldContainer {
       width: 100%;
-      margin: auto;
+      margin: auto auto 0 auto;
     
       & input, textarea {
         padding: 14px;
@@ -593,24 +596,39 @@ textarea.uploadForm {
         height: 100px;
         resize: none;
       }
+    }
+
+    & .btnContainer {
+      display: flex;
+      width: 100%;
+      margin: 0 0 auto 0;
 
       & button.btnEditor {
-        border: 2px solid #5F0F40;
-        background: #191716;
-        color: #5F0F40;
+        color: #191716;
         font-size: 12px;
         padding: 14px 28px;
         cursor: pointer;
         border-radius: 5px;
         font-weight: bold;
         transition: 0.3s ease;
-        margin-top: 1rem;
-        display: none;
+        margin: auto;
 
-        &:hover {
+        &.disabled {
           background: #5F0F40;
-          color: #191716;
+
+          &:hover {
+            background: #C455A8;
+          }
         }
+
+        &.enabled {
+          background: #065143;
+
+          &:hover {
+            background: #129490;
+          }
+        }
+
       }
     }
   }
@@ -1127,13 +1145,13 @@ a.downArrow {
     -ms-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    border: 1px solid #F1F1F1;
+    border: 2px solid #F1F1F1;
 
     & i {
       color: #fff;
       margin: 0;
       position: relative;
-      left: 16px;
+      left: 15px;
       top: 13px;
       font-size: 19px;
       -webkit-transition: all 0.3s ease;

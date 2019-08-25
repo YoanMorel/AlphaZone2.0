@@ -46,7 +46,9 @@
                     <input id="update" type="text" disabled />
                     <textarea id="story" name="">
                     </textarea>
-                    <button class="btnEditor">Modifier</button>
+                </div>
+                <div class="btnContainer">
+                    <button type="button" class="btn btnEditor disabled" disabled>Modifier</button>               
                 </div>
             </div>
         </div>

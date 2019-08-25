@@ -195,6 +195,9 @@ $(function() {
 
   // Le click déclenche l'upload en instançiant l'obj UploadFiles
   $('button#upload').on('click', function() {
+    if (autoSaveTimer) {
+      clearTimeout(autoSaveTimer);
+    }
     $.each(fileStorage, function(i, file) {
       new UploadFiles(file, i);
     });
@@ -507,6 +510,7 @@ $(function() {
   $('a.editor').click(function(event) {
     event.preventDefault();
     $('div.editorOverlay').css('top', $(window).scrollTop());
+    $('div.sidebar').css('background', '#333');
     $('div.editorOverlay').addClass('slideEditor');
     $('body').css('overflow','hidden');
     var imgSrc = $(this).parents().siblings('img').attr('src');
@@ -525,15 +529,16 @@ $(function() {
       fieldData[$(this).attr('id')] = $(this).val();
     });
     if(!isEqual(imgData, fieldData)) {
-      $('button.btnEditor').css('display', 'block');
+      $('button.btnEditor').prop('disabled', false).removeClass('disabled').addClass('enabled');
     } else {
-      $('button.btnEditor').css('display', 'none');
+      $('button.btnEditor').prop('disabled', true).removeClass('enabled').addClass('disabled');
     }
   });
 
   $('span.closeEditorOverlay').click(function() {
     $(this).parent().removeClass('slideEditor');
     $('body').css('overflow', 'visible');
+    $('div.sidebar').css('background', '#191716');
   });
 
 });
