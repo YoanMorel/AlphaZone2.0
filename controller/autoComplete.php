@@ -1,8 +1,5 @@
 <?php
 
-require_once '../model/DbConnection.php';
-require_once '../model/Gallery.php';
-
 class AutoComplete {
 
   private $gallery;

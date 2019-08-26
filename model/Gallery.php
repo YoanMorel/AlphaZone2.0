@@ -46,5 +46,16 @@ class Gallery extends DbConnection {
         return $piecesData;
     }
 
+    public function getNullStoryFrom($pieceId) {
+        $pieceData = $this->queryCall(
+            'SELECT PIE_STORY FROM T_PIECES WHERE PIE_ID = :pieceId',
+            [
+                ['pieceId', $pieceId, PDO::PARAM_INT]
+            ]
+        );
+
+        return $pieceData;
+    }
+
 }
 ?>

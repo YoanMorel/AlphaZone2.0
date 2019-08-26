@@ -102,7 +102,7 @@ $(function() {
   // Evenement Modal
   $('a#closeModal').click(function() {
     $('div#openModal').removeClass('showModal');
-  })
+  });
 
   // Script de controle dynamique de la validité du formulaire de contact
   $('form#contactInquiries input, textarea').on({

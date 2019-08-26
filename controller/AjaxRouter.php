@@ -2,11 +2,12 @@
 
 if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'):
 
+    array_map('htmlspecialchars', $_POST);
+
     // [Controleur de la validation formulaire de contact]
     if(isset($_POST['ajax']) && !empty($_POST) && $_POST['ajax'] == 'validation'):
         require_once 'FormValidator.php';
 
-        array_map('htmlspecialchars', $_POST);
         $validator = new FormValidator();
         $validator->validationFilter();
         if($validator->hasErrors()):
@@ -18,11 +19,70 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
         exit;
     endif;
 
+    // [Controleur de l'upload]
+    if(isset($_POST['ajax']) && !empty($_POST) && $_POST['ajax'] == 'upload'):
+        require_once '../model/DbConnection.php';
+        require_once '../model/DataHandler.php';
+        require_once 'uploadHandlerCtrl.php'; 
+
+        extract($_POST);
+        $uploadHandler = new UploadHandler($section, $subSection, $title, $text, '../gallery/', $file);
+        if($uploadHandler->uploader()):
+            $response = $uploadHandler->getName().' loaded in gallery/'.$uploadHandler->getSection().'/'.$uploadHandler->getSubSection().'/ at '.date('H:i:s', time()).' ...';
+        else:
+            $response = 'upload failed ...';
+        endif;
+
+        echo $response;
+        exit;
+    endif;
+
+    // [Controleur de l'update]
+    if(isset($_POST['ajax']) && !empty($_POST) && $_POST['ajax'] == 'update'):
+        require_once '../model/DbConnection.php';
+        require_once '../model/DataHandler.php';
+
+        extract($_POST);
+
+        $dataHandler = new DataHandler();
+        $dataHandler->setData($title, $story, $link, $creationDate);
+        if($dataHandler->updateDataFrom($pieceId)):
+            $response = 'Mise à jour réussie...';
+        else:
+            $response = 'Echec de la mise à jour...';
+        endif;
+
+        echo $response;
+        exit;
+    endif;
+
+    // [Controleur de suppression]
+    if(isset($_POST['ajax']) && !empty($_POST) && $_POST['ajax'] == 'delete'):
+        require_once '../model/DbConnection.php';
+        require_once '../model/DataHandler.php';
+
+        extract($_POST);
+
+        $dataHandler = new DataHandler();
+        if(is_file('../'.$path))
+            unlink('../'.$path);
+
+        if($dataHandler->deleteDataFrom((int) $pieceId)):
+            $response = 'Suppression réussie...';
+        else:
+            $response = 'Echec de la suppression...';
+        endif;
+
+        echo $response;
+        exit;
+    endif;
+
     // [Controleur de l'autocomplétion]
     if(isset($_POST['ajax']) && !empty($_POST) && $_POST['ajax'] == 'autoComplete'):
+        require_once '../model/DbConnection.php';
+        require_once '../model/Gallery.php';
         require_once 'autoComplete.php';
     
-        array_map('htmlspecialchars', $_POST);
         extract($_POST);
         $sections = new AutoComplete($imgSection);
         echo json_encode(['data' => $sections->sections()]);
@@ -33,7 +93,6 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
     if(isset($_POST['ajax']) && !empty($_POST) && $_POST['ajax'] == 'autoSave'):
         require_once 'autoSave.php';
 
-        array_map('htmlspecialchars', $_POST);
         extract($_POST);
         $autoSave = new autoSave(__DIR__.'/autoSaveBuffer.json', $data);
         if(isset($order) && $order == '66'):
@@ -51,7 +110,6 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
         require_once '../model/DbConnection.php';
         require_once '../model/Inquiries.php';
 
-        array_map('htmlspecialchars', $_POST);
         $inquiries = new Inquiries();
 
         if(isset($_POST['action']) && $_POST['action'] == 'reply'):

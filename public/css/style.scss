@@ -613,12 +613,8 @@ textarea.uploadForm {
         transition: 0.3s ease;
         margin: auto;
 
-        &.disabled {
-          background: #5F0F40;
-
-          &:hover {
-            background: #C455A8;
-          }
+        &.btn-danger {
+          cursor: not-allowed;
         }
 
         &.enabled {
@@ -986,7 +982,7 @@ button.btnContact:hover {
 
 .modalWindow {
   position: fixed;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(0, 0, 0, .3);
   top: 0;
   right: 0;
   bottom: 0;
@@ -996,11 +992,31 @@ button.btnContact:hover {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s;
+
   &.showModal {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
   }
+
+  & div.modalClose {
+    line-height: 50px;
+    font-size: 80%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    width: 70px;
+  
+    & a {
+      color: #aaa;
+      text-decoration: none;
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
   & > div {
     width: 50vw;
     position: absolute;
@@ -1010,42 +1026,39 @@ button.btnContact:hover {
     padding: 2em;
     background: #fff;
     overflow: hidden;
-    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.75);
-  }
-  header {
-    font-weight: bold;
-  }
-  h1 {
-    font-size: 150%;
-    margin: 0 0 15px;
-  }
-  small {
-    color: #aaa;
-  }
-}
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, .75);
 
-div.modalClose {
-  line-height: 50px;
-  font-size: 80%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-align: center;
-  width: 70px;
+    &.erase {
+      box-shadow: 0px 0px 5px 5px rgba(252, 3, 3, 1);
+    }
 
-  a {
-    color: #aaa;
-    text-decoration: none;
-    &:hover {
-      color: black;
+    & div.validErase {
+      position: relative;
+      text-align: right;
+    }
+
+    & header {
+      font-weight: bold;
+    }
+  
+    & h1 {
+      font-size: 150%;
+      margin: 0 0 15px;
+  
+      &.erase {
+        color: rgb(252, 3, 3);
+      }
+    }
+  
+    & small {
+      color: #aaa;
     }
   }
-}
 
-.modalWindow div:not(:last-of-type) {
-  margin-bottom: 15px;
+  & div:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
 }
-
 
 /* [END CONTACT VIEW]
 *******************************/

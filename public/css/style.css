@@ -691,12 +691,8 @@ textarea.uploadForm {
   margin: auto;
 }
 
-.editorOverlay .editorColData .btnContainer button.btnEditor.disabled {
-  background: #5F0F40;
-}
-
-.editorOverlay .editorColData .btnContainer button.btnEditor.disabled:hover {
-  background: #C455A8;
+.editorOverlay .editorColData .btnContainer button.btnEditor.btn-danger {
+  cursor: not-allowed;
 }
 
 .editorOverlay .editorColData .btnContainer button.btnEditor.enabled {
@@ -1089,7 +1085,7 @@ button.btnContact:hover {
 
 .modalWindow {
   position: fixed;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(0, 0, 0, 0.3);
   top: 0;
   right: 0;
   bottom: 0;
@@ -1108,6 +1104,25 @@ button.btnContact:hover {
   pointer-events: auto;
 }
 
+.modalWindow div.modalClose {
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  width: 70px;
+}
+
+.modalWindow div.modalClose a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+.modalWindow div.modalClose a:hover {
+  color: black;
+}
+
 .modalWindow > div {
   width: 50vw;
   position: absolute;
@@ -1118,40 +1133,35 @@ button.btnContact:hover {
   padding: 2em;
   background: #fff;
   overflow: hidden;
-  -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.75);
-          box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
 }
 
-.modalWindow header {
+.modalWindow > div.erase {
+  -webkit-box-shadow: 0px 0px 5px 5px #fc0303;
+          box-shadow: 0px 0px 5px 5px #fc0303;
+}
+
+.modalWindow > div div.validErase {
+  position: relative;
+  text-align: right;
+}
+
+.modalWindow > div header {
   font-weight: bold;
 }
 
-.modalWindow h1 {
+.modalWindow > div h1 {
   font-size: 150%;
   margin: 0 0 15px;
 }
 
-.modalWindow small {
+.modalWindow > div h1.erase {
+  color: #fc0303;
+}
+
+.modalWindow > div small {
   color: #aaa;
-}
-
-div.modalClose {
-  line-height: 50px;
-  font-size: 80%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-align: center;
-  width: 70px;
-}
-
-div.modalClose a {
-  color: #aaa;
-  text-decoration: none;
-}
-
-div.modalClose a:hover {
-  color: black;
 }
 
 .modalWindow div:not(:last-of-type) {

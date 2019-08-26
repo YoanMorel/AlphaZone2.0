@@ -18,7 +18,7 @@ class View {
         $content = $this->viewGenerator($this->file, $data);
 
         if (!$admin):
-            $request = $this->overlayPics->getPicturesLink('4');
+            $request = $this->overlayPics->getPicturesLink(4);
             $pics = $request->fetchAll(PDO::FETCH_NUM);
             $links = [];
             
@@ -26,9 +26,9 @@ class View {
                 $links[] = 'gallery/'.$section.'/'.$subSection.'/'.$img;
             endforeach;
 
-            $view = $this->viewGenerator('view/template.php', array('title' => $this->title, 'content' => $content, 'overlay' => $links));
+            $view = $this->viewGenerator('view/template.php', ['title' => $this->title, 'content' => $content, 'overlay' => $links]);
         else:
-            $view = $this->viewGenerator('view/adminTemplate.php', array('title' => $this->title, 'content' => $content));
+            $view = $this->viewGenerator('view/adminTemplate.php', ['title' => $this->title, 'content' => $content]);
         endif;
 
         echo $view;

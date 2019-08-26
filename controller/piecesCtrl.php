@@ -2,11 +2,16 @@
 
 require_once 'model/DbConnection.php';
 require_once 'model/Gallery.php';
-require_once 'model/UploadHandler.php';
-require_once 'controller/scanDirCtrl.php';
 require_once 'view/View.php';
 
 class PiecesCtrl {
+
+    private $gallery;
+
+    public function __construct() {
+        $this->gallery = new Gallery();
+    }
+
     public function piecesView() {
         $view = new View('pieces');
         $view->generate([null]);
@@ -14,13 +19,10 @@ class PiecesCtrl {
 
     public function piecesAdminView() {
         $view       = new View('piecesAdmin');
-        $gallery    = new Gallery();
-        $scanDir    = new ScanDir('gallery');
-        $pieces     = $gallery->getAllPieces()->fetchAll();
-        $sections   = $gallery->getSections()->fetchAll();
-        $imgLinks   = $scanDir->getDataScan();
+        $pieces     = $this->gallery->getAllPieces()->fetchAll();
+        $sections   = $this->gallery->getSections()->fetchAll();
 
-        $view->generate(['pieces' => $pieces, 'sections' => $sections, 'imgLinks' => $imgLinks], true);
+        $view->generate(['pieces' => $pieces, 'sections' => $sections], true);
     }
 }
 

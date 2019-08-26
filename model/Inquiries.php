@@ -19,7 +19,7 @@ class Inquiries extends DbConnection {
             $this->startTransaction();
 
             if(!$exists):
-                $success = $this->queryCall(
+                $result = $this->queryCall(
                     'INSERT INTO T_CONTACTS (CON_LAST_NAME, CON_ORGANISME, CON_MAIL) VALUES (:lname, :organisme, :mail)',
                     [
                         ['lname', $lname, PDO::PARAM_STR],
@@ -31,7 +31,7 @@ class Inquiries extends DbConnection {
                 $contactID = $this->getLastInsertId();
             endif;
 
-            $success = $this->queryCall(
+            $result = $this->queryCall(
                 'INSERT INTO T_INQUIRIES (INQ_SUBJECT, INQ_INQUIRE, INQ_POST_DATE, INQ_OPENED, INQ_REPLIED, CON_ID) VALUES (:subject, :inquire, NOW(), false, false, :contactID)',
                 [
                     ['subject', $subject, PDO::PARAM_STR],
@@ -41,7 +41,7 @@ class Inquiries extends DbConnection {
             );
             
             if($this->commitTransaction())
-                return $success;
+                return $result;
         } catch (PDOException $error) {
             $this->preventTransaction();
             $msg = 'ERREUR PDO within ' . $error->getFile() . ' L.' . $error->getLine() . ' : ' . $error->getMessage();
@@ -50,18 +50,18 @@ class Inquiries extends DbConnection {
     }
 
     public function getContacts() {
-        $success = $this->queryCall('SELECT * FROM T_CONTACTS');
+        $result = $this->queryCall('SELECT * FROM T_CONTACTS');
 
-        return $success;
+        return $result;
     }
 
     public function getInquiries($contactID = NULL) {
         if(!$contactID):
-            $success = $this->queryCall(
+            $result = $this->queryCall(
                 'SELECT inq.*, con.* FROM T_INQUIRIES inq LEFT JOIN T_CONTACTS con ON con.CON_ID = inq.CON_ID ORDER BY inq.INQ_POST_DATE DESC'
             );
         else:
-            $success = $this->queryCall(
+            $result = $this->queryCall(
                 'SELECT inq.*, con.* FROM T_INQUIRIES inq INNER JOIN T_CONTACTS con ON :contactID = inq.CON_ID ORDER BY inq.INQ_POST_DATE DESC',
                 [
                     ['contactID', $contactID, PDO::PARAM_STR]
@@ -69,76 +69,76 @@ class Inquiries extends DbConnection {
             );
         endif;
 
-        return $success;
+        return $result;
     }
 
     public function getInquire($inquireID) {
-        $success = $this->queryCall(
+        $result = $this->queryCall(
             'SELECT inq.*, con.* FROM T_INQUIRIES inq INNER JOIN T_CONTACTS con ON con.CON_ID = inq.CON_ID AND inq.INQ_ID = :inquireID',
             [
                 ['inquireID', $inquireID, PDO::PARAM_INT]
             ]
         );
 
-        return $success;
+        return $result;
     }
 
     public function getSealedInquiries() {
-        $success = $this->queryCall('SELECT INQ_OPENED FROM T_INQUIRIES WHERE INQ_OPENED = 0');
+        $result = $this->queryCall('SELECT INQ_OPENED FROM T_INQUIRIES WHERE INQ_OPENED = 0');
 
-        return $success;
+        return $result;
     }
 
     public function getSealedInquire($inquireID) {
-        $success = $this->queryCall(
+        $result = $this->queryCall(
             'SELECT INQ_OPENED FROM T_INQUIRIES WHERE INQ_OPENED = 0 AND INQ_ID = :inquireID',
             [
                 ['inquireID', $inquireID, PDO::PARAM_INT]
             ]
         );
 
-        return $success;
+        return $result;
     }
 
     public function getRepliedInquiries() {
-        $success = $this->queryCall('SELECT INQ_REPLIED FROM T_INQUIRIES');
+        $result = $this->queryCall('SELECT INQ_REPLIED FROM T_INQUIRIES');
 
-        return $success;
+        return $result;
     }
 
     // TOGGLED BOOL
     public function setOpenedInquire($inquireID) {
-        $success = $this->queryCall(
+        $result = $this->queryCall(
             'UPDATE T_INQUIRIES SET INQ_OPENED = NOT INQ_OPENED WHERE INQ_ID = :inquireID',
             [
                 ['inquireID', $inquireID, PDO::PARAM_INT]
             ]
         );
 
-        return $success;
+        return $result;
     }
 
     public function setOpenedAllInquieries() {
-        $success = $this->queryCall('UPDATE T_INQUIRIES SET INQ_OPENED = 1');
+        $result = $this->queryCall('UPDATE T_INQUIRIES SET INQ_OPENED = 1');
 
-        return $success;
+        return $result;
     }
 
     public function setSealedAllInquieries() {
-        $success = $this->queryCall('UPDATE T_INQUIRIES SET INQ_OPENED = 0');
+        $result = $this->queryCall('UPDATE T_INQUIRIES SET INQ_OPENED = 0');
 
-        return $success;
+        return $result;
     }
 
     // TOGGLED BOOL
     public function setRepliedInquire($inquireID) {
-        $success = $this->queryCall(
+        $result = $this->queryCall(
             'UPDATE T_INQUIRIES SET INQ_REPLIED = NOT INQ_OPENED WHERE INQ_ID = :inquireID',
             [
                 ['inquireID', $inquireID, PDO::PARAM_INT]
             ]
         );
 
-        return $success;
+        return $result;
     }
 }

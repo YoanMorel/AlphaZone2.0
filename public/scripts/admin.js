@@ -30,8 +30,27 @@ $(function() {
   }
 
   function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    if (i < 10) {i = "0" + i};
     return i;
+  }
+
+  function isEqual(object1, object2) {
+    var object1Keys = Object.getOwnPropertyNames(object1);
+    var object2Keys = Object.getOwnPropertyNames(object2);
+
+    if (object1Keys.length != object2Keys.length) {
+      return false;
+    }
+
+    for (var i = 0; i < object1Keys.length; i++) {
+      var keyName = object1Keys[i];
+
+      if (object1[keyName] !== object2[keyName]) {
+          return false;
+      }
+    }
+    
+    return true;
   }
 
 /*****************************************
@@ -175,12 +194,12 @@ $(function() {
         img.section = objInTab.section;
         img.subSection = objInTab.subSection;
         img.text = objInTab.text;
+        img.ajax = 'upload';
       }
       var postUrl = $.param(img); // Transforme les objets en parametres transmissibles par méthode POST. Dans ce cas, img.file=IMGBASE64
-      console.log(img.file);
       $.ajax({
         type: 'POST',
-        url: 'controller/uploadHandlerCtrl.php',
+        url: 'controller/AjaxRouter.php',
         data: postUrl,
         success: function(response) {
           console.log(response);
@@ -352,7 +371,6 @@ $(function() {
         url: 'controller/AjaxRouter.php',
         data: 'ajax=autoSave&order=' + order + '&data=' + null,
         complete: function(response) {
-          console.log(response);
           snackBar(response.responseText);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -481,39 +499,25 @@ $(function() {
  > FIN SCRIPT DE MESSAGERIE
  * *************************/
 
-/*****************************************
+/**************************
  > DEBUT SCRIPT DE GALERIE
- * **************************************/
-
-  function isEqual(object1, object2) {
-    var object1Keys = Object.getOwnPropertyNames(object1);
-    var object2Keys = Object.getOwnPropertyNames(object2);
-
-    if (object1Keys.length != object2Keys.length) {
-      return false;
-    }
-
-    for (var i = 0; i < object1Keys.length; i++) {
-      var keyName = object1Keys[i];
-
-      if (object1[keyName] !== object2[keyName]) {
-          return false;
-      }
-    }
-    
-    return true;
-  }
+ * ***********************/
 
   var imgData   = {};
   var fieldData = {};
+  var imgNode;
+  var imgId;
+  var imgSrc;
 
   $('a.editor').click(function(event) {
     event.preventDefault();
+    imgNode = $(this).parents().siblings('img');
     $('div.editorOverlay').css('top', $(window).scrollTop());
     $('div.sidebar').css('background', '#333');
     $('div.editorOverlay').addClass('slideEditor');
     $('body').css('overflow','hidden');
-    var imgSrc = $(this).parents().siblings('img').attr('src');
+    imgSrc = imgNode.attr('src');
+    imgId = imgNode.attr('id');
     $.each($(this).parents().siblings('img').data(), function(key, value) {
       imgData[key] = value;
     });
@@ -524,21 +528,87 @@ $(function() {
     $('textarea#story').val(imgData['story']);
   });
 
+  $('a.erase').click(function(event) {
+    event.preventDefault();
+    imgNode = $(this).parents().children('img');
+    $('div.modalWindow').addClass('showModal');
+    imgId = imgNode.attr('id');
+    imgSrc = imgNode.attr('src');
+  });
+
+  $('button.btnErase').click(function() {
+    $('div.modalWindow').removeClass('showModal');
+    $.ajax({
+      type: 'POST',
+      url: 'controller/AjaxRouter.php',
+      data: 'ajax=delete&pieceId=' + imgId + '&path=' + imgSrc,
+      complete: function(response) {
+        snackBar(response.responseText);
+        imgNode.parent().parent().remove();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log('Status :' + textStatus + ' Error:' + errorThrown);
+      }
+    });
+  });
+
+  // Evenement Modal
+  $('a#closeModal').click(function() {
+    $('div#openModal').removeClass('showModal');
+  });
+
   $('.fieldContainer').children().on('blur', function() {
     $.each($('.fieldContainer').children('input, textarea'), function() {
       fieldData[$(this).attr('id')] = $(this).val();
     });
     if(!isEqual(imgData, fieldData)) {
-      $('button.btnEditor').prop('disabled', false).removeClass('disabled').addClass('enabled');
+      $('button.btnEditor').prop('disabled', false).removeClass('btn-danger').addClass('enabled');
     } else {
-      $('button.btnEditor').prop('disabled', true).removeClass('enabled').addClass('disabled');
+      $('button.btnEditor').prop('disabled', true).removeClass('enabled').addClass('btn-danger');
     }
+  });
+
+  $('button.btnEditor').on('click', function() {
+    var btnEditor = $(this);
+    var updateVars = {
+      title: fieldData['title'],
+      creationDate: fieldData['creation'],
+      update: fieldData['update'],
+      story: fieldData['story'],
+      pieceId: imgId,
+      link: imgSrc.split('/')[3],
+      ajax: 'update'
+    }
+
+    var params = $.param(updateVars);
+    $.ajax({
+      type: 'POST',
+      url: 'controller/AjaxRouter.php',
+      data: params,
+      complete: function(response) {
+        console.log(response.responseText);
+        snackBar(response.responseText);
+        if(imgNode.parents('div.galleryCol').hasClass('needsEdit')) {
+          imgNode.parents('div.galleryCol').removeClass('needsEdit');
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log('Status :' + textStatus + ' Error:' + errorThrown);
+      }
+    });
+
+    $(this).prop('desabled', true).removeClass('enabled').addClass('btn-danger');
   });
 
   $('span.closeEditorOverlay').click(function() {
     $(this).parent().removeClass('slideEditor');
+    $('button.btnEditor').prop('desabled', true).removeClass('enabled').addClass('btn-danger');
     $('body').css('overflow', 'visible');
     $('div.sidebar').css('background', '#191716');
   });
+
+/****************************
+ > FIN SCRIPT DE GALERIE
+ * *************************/
 
 });

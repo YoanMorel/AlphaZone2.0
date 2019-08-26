@@ -22,6 +22,7 @@
                 data-story="<?= ($piece['PIE_STORY']) ? $piece['PIE_STORY'] : 'Non commenté'; ?>"  
                 src="gallery/<?= $piece['SEC_SECTION'].'/'.$piece['SUB_SUBSECTION'].'/'.$piece['PIE_IMG_LINK'] ?>" 
                 alt="image"
+                id="<?= $piece['PIE_ID'] ?>"
             />
         </div>
     </div>
@@ -48,9 +49,22 @@
                     </textarea>
                 </div>
                 <div class="btnContainer">
-                    <button type="button" class="btn btnEditor disabled" disabled>Modifier</button>               
+                    <button type="button" class="btn btnEditor btn-danger" disabled>Modifier</button> 
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="openModal" class="modalWindow">
+    <div class="erase">
+        <div class=modalClose><a href="javascript:void(0);" id="closeModal">Fermer</a></div>
+        <h1 class="erase">Attention !</h1>
+        <div>
+            Cette action supprimera toutes les informations de cette œuvre et ne seront pas récupérables. Pour valider, cliquez sur <i>Valider la suppression</i>
+        </div>
+        <div class="validErase">
+            <button type="button" class="btn btn-danger btnErase">Valider la suppression</button>
         </div>
     </div>
 </div>

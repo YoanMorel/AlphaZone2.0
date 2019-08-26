@@ -4,7 +4,7 @@ class ScanDir {
 
     private $dirToScan;
     private $gallery;
-    private $uploadHandler;
+    private $dataHandler;
     private $imagesPathList = [];
     private $dataScan       = [];
     private $dirScan        = [];
@@ -19,7 +19,7 @@ class ScanDir {
 
     public function __construct($pathToScan) {
         $this->gallery          = new Gallery();
-        $this->uploadHandler    = new UploadHandler();
+        $this->dataHandler      = new DataHandler();
         $this->dirToScan        = $pathToScan;
     }
 
@@ -58,14 +58,14 @@ class ScanDir {
                 $ifSubSectionExists = false;
                 if($pathTab[0] == $section['SEC_SECTION']):
                     $ifSectionExists = true;
-                    $this->uploadHandler->setSection($section['SEC_SECTION']);
+                    $this->dataHandler->setSection($section['SEC_SECTION']);
                     $subSections = $this->gallery->getSubSections($section['SEC_SECTION'])->fetchAll();
                     foreach($subSections as $subSection):
                         if($pathTab[1] == $subSection['SUB_SUBSECTION']):
                             $ifSubSectionExists = true;
-                            $this->uploadHandler->setSubSection($subSection['SUB_SUBSECTION']);
-                            $this->uploadHandler->setData(null, null, $pathTab[2]);
-                            if($this->uploadHandler->insertDataInDB()):
+                            $this->dataHandler->setSubSection($subSection['SUB_SUBSECTION']);
+                            $this->dataHandler->setData(null, null, $pathTab[2]);
+                            if($this->dataHandler->insertDataInDB()):
                                 $this->loglog[$pathTab[2]]['LVL0'] = '>Release< Done Level 0. Files loaded';
                             else:
                                 $this->loglog[$pathTab[2]]['LVL0'] = '>Release< Something\'s wrong appened on Level 0';
@@ -73,10 +73,10 @@ class ScanDir {
                         endif;
                     endforeach;
                     if(!$ifSubSectionExists):
-                        $this->uploadHandler->setSubSection($pathTab[1]);
-                        $this->uploadHandler->setData(null, null, $pathTab[2]);
-                        $this->uploadHandler->insertSubSectionInDB();                    
-                        if($this->uploadHandler->insertDataInDB()):
+                        $this->dataHandler->setSubSection($pathTab[1]);
+                        $this->dataHandler->setData(null, null, $pathTab[2]);
+                        $this->dataHandler->insertSubSectionInDB();                    
+                        if($this->dataHandler->insertDataInDB()):
                             $this->log[$pathTab[2]]['LVL1'] = '>Release< Done Level 1. Subsection made and Files loaded';
                         else:
                             $this->log[$pathTab[2]]['LVL1'] = '>Release< Something\'s wrong appened on Level 1';
@@ -85,11 +85,11 @@ class ScanDir {
                 endif;
             endforeach;
             if(!$ifSectionExists):
-                $this->uploadHandler->setSection($pathTab[0]);
-                $this->uploadHandler->setSubSection($pathTab[1]);
-                $this->uploadHandler->setData(null, null, $pathTab[2]);
-                $this->uploadHandler->insertSectionInDB();
-                $this->uploadHandler->insertSubSectionInDB();                                       if($this->uploadHandler->insertDataInDB()):
+                $this->dataHandler->setSection($pathTab[0]);
+                $this->dataHandler->setSubSection($pathTab[1]);
+                $this->dataHandler->setData(null, null, $pathTab[2]);
+                $this->dataHandler->insertSectionInDB();
+                $this->dataHandler->insertSubSectionInDB();                                       if($this->dataHandler->insertDataInDB()):
                     $this->log[$pathTab[2]]['LVL2'] = '>Release< Done Level 2. Section, Subection made and Files loaded';
                 else:
                     $this->log[$pathTab[2]]['LVL2'] = '>Release< Something\'s wrong appened on Level 2';
