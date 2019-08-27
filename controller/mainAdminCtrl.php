@@ -19,13 +19,11 @@ class MainAdminCtrl {
         $view           = new View('mainAdmin');
         $pieces         = $this->gallery->getAllPieces()->rowCount();
         $inquiries      = $this->inquiries->getSealedInquiries()->rowCount();
-        $contacts       = $this->inquiries->getContacts()->rowCount();
         $nullStories    = $this->gallery->getNullStories()->rowCount();
 
         $view->generate([
             'pieces'        => $pieces,
             'inquiries'     => $inquiries,
-            'contacts'      => $contacts,
             'nullStories'   => $nullStories]
             , true
         );

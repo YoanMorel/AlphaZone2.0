@@ -13,15 +13,16 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <link href="https://fonts.googleapis.com/css?family=Charm|Italianno|Marck+Script|Bilbo+Swash+Caps|Tangerine&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="public/css/style.css" />
+    <link rel="stylesheet" href="public/css/main.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <title><?= $title; ?></title>
 </head>
 
 <body>
     <a href="javascript:" id="returnToTop"><i class="fas fa-chevron-up"></i></a>
-    <div class="header">
+    <div class="header <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
         <span class="headerTitle">L'atelier de Jean-François</span>
-        <div class="rightHeader">
+        <div class="rightHeader <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
             <a href="index.php">Accueil</a>
             <a href="index.php?action=pieces">Œuvres</a>
             <a href="index.php?action=philosophy">Philosophie</a>
@@ -48,11 +49,11 @@
     </div>
     <div class="container-fluid p-0">
         <?= $content; ?>
-        <div class="footer">
-            <div class="textBoxFooter"><a href="index.php?action=admin&module=main">Admin</a></div>
-        </div>
-    </div>
 
+    </div>
+    <div class="footer">
+            <div class="textBoxFooter"><a href="index.php?action=admin&module=main">Admin</a></div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

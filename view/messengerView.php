@@ -3,9 +3,12 @@
 <?php
     setlocale(LC_ALL, 'fr_FR.UTF8');
 
-    foreach($inquiries as $inquire):
+    $inquiries = [];
 
-    $inquireTime = strftime('%A %e %B %Y à %k:%M', strtotime($inquire['INQ_POST_DATE']));
+    if($inquiries):
+      foreach($inquiries as $inquire):
+
+      $inquireTime = strftime('%A %e %B %Y à %k:%M', strtotime($inquire['INQ_POST_DATE']));
 
 
 ?>
@@ -20,7 +23,18 @@
 
 <?php
 
-    endforeach;
+      endforeach;
+    else:
+      ?>
+      <div style="display: flex; height: 100vh;">
+        <div style="margin: auto; text-align: center;">
+          <i class="fas fa-fw fa-7x fa-comment-slash m-4" style="color: #F9B4ED;"></i>
+          <div>Vous n'avez <b>pas ou plus de messages à découvrir</b>.</div>
+          <div>C'est bien aussi le <b>silence</b> non ?</div>
+        </div>
+      </div>
+      <?php
+    endif;
 
 ?>
 <div class="messengerOverlay slideMessengerAnim">

@@ -12,40 +12,42 @@
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <link rel="stylesheet" href="public/css/style.css" />
+    <link rel="stylesheet" href="public/css/admin.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     <title><?= $title; ?></title>
 </head>
 
 <body onload="startTime()">
-
+  <a href="javascript:" id="returnToTop"><i class="fas fa-chevron-up"></i></a>
   <div class="container-fluid p-0">
       <div class="row no-gutters">
-          <div class="col-12 col-md-2">
+          <div class="col-12 col-lg-12 col-xl-2">
             <div class="sidebar">
-                <a href="index.php?action=admin&module=main">
+                <a class="main" href="index.php?action=admin&module=main">
                   <i class="fas fa-fw fa-home"></i> Accueil
                 </a>
-                <a href="index.php?action=admin&module=upload">
+                <a class="upload" href="index.php?action=admin&module=upload">
                   <i class="fas fa-fw fa-upload"></i> Envoyer
                 </a>
-                <a href="index.php?action=admin&module=update">
+                <a class="update" href="index.php?action=admin&module=update">
                   <i class="fas fa-fw fa-image"></i> Galerie
                 </a>
-                <a href="index.php?action=admin&module=contact">
+                <a class="contact" href="index.php?action=admin&module=contact">
                   <i class="fas fa-fw fa-envelope"></i> Messagerie
                 </a>
-                <a href="index.php?action=admin&module=events">
+                <a class="events" href="index.php?action=admin&module=events">
                   <i class="far fa-fw fa-calendar-alt"></i> Évènements
                 </a>
-                <a href="index.php?action=admin&module=settings">
+                <a class="settings" href="index.php?action=admin&module=settings">
                   <i class="fas fa-fw fa-cogs"></i> Paramètres
-                <a href="index.php" class="red">
+                </a>
+                <a class="red shutdown" href="index.php">
                   <i class="fas fa-fw fa-power-off"></i> Déconnexion
                 </a>
             </div>
           </div>
-          <div class="col-12 col-md-10">
+          <div class="col-12 col-lg-12 col-xl-10">
             <div id="snackBar"></div>
             <?= $content; ?>
           </div>
@@ -59,6 +61,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <!-- JSmaiSON -->
+  <script type="text/javascript" src="public/scripts/main.js"></script>
   <script type="text/javascript" src="public/scripts/admin.js"></script>
 </body>
 

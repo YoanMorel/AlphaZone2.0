@@ -1,0 +1,841 @@
+/* [ADMIN TEMPLATE]
+  **************************/
+/* [SIDEBAR ADMIN SECTION]
+  ***********************************/
+.sidebar {
+  height: 100vh;
+  width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  /* position: fixed;
+    z-index: 1; */
+  top: 0;
+  left: 0;
+  background-color: #191716;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+
+.sidebar a:hover {
+  color: #FFD700;
+}
+
+.sidebar a:hover.red {
+  color: #F93943;
+}
+
+@media screen and (max-width: 500px) {
+  .sidebar {
+    height: auto;
+    width: 100%;
+    /* position: fixed;
+      z-index: 1; */
+    top: 0;
+    left: 0;
+    background-color: #191716;
+    overflow-x: hidden;
+    padding-top: 16px;
+  }
+  .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    text-align: left;
+    width: 100%;
+  }
+  .sidebar a.upload, .sidebar a.update, .sidebar a.events {
+    display: none;
+  }
+  .sidebar a:hover {
+    color: #FFD700;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar {
+    height: auto;
+    width: 100%;
+    /* position: fixed;
+      z-index: 1; */
+    top: 0;
+    left: 0;
+    background-color: #191716;
+    overflow-x: hidden;
+    padding-top: 16px;
+  }
+  .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    text-align: left;
+    width: 100%;
+  }
+  .sidebar a:hover {
+    color: #FFD700;
+  }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1200px) {
+  .sidebar {
+    height: auto;
+    width: 100%;
+    /* position: fixed;
+      z-index: 1; */
+    top: 0;
+    left: 0;
+    background-color: #191716;
+    overflow-x: hidden;
+    padding-top: 16px;
+  }
+  .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    float: left;
+    text-align: left;
+    width: auto;
+    display: initial;
+  }
+  .sidebar a:hover {
+    color: #FFD700;
+  }
+}
+
+/* [SNACKBAR]
+  ************************/
+#snackBar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #2196F3;
+  color: #FFF;
+  text-align: center;
+  border-radius: 2px;
+  padding: 12px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 20px;
+}
+
+#snackBar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 20px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: 20px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: 20px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+/* [ADMIN MAIN VIEW]
+  *************************/
+.topBar {
+  width: 100%;
+  height: 40px;
+  background-color: #191716;
+  position: relative;
+  top: 0;
+  left: 0;
+  color: #FFF;
+  text-align: left;
+  line-height: 40px;
+}
+
+.topBar .clockTime {
+  width: auto;
+  float: right;
+  padding-right: 1rem;
+}
+
+.card {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #191716;
+  color: #FFF;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.card:hover {
+  color: #FFD700;
+}
+
+.card .far, .card .fas {
+  font-size: 50px;
+}
+
+.slideCardAnim {
+  visibility: hidden;
+}
+
+.slideTopBar {
+  animation-name: slideTopBar;
+  -webkit-animation-name: slideTopBar;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  visibility: visible;
+}
+
+.slideCard {
+  animation-name: slideCard;
+  -webkit-animation-name: slideCard;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  visibility: visible;
+}
+
+@-webkit-keyframes slideCard {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(70%);
+            transform: translateY(70%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@keyframes slideCard {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(70%);
+            transform: translateY(70%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@-webkit-keyframes slideTopBar {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-70%);
+            transform: translateY(-70%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@keyframes slideTopBar {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-70%);
+            transform: translateY(-70%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@media (max-width: 500px) {
+  .topBar {
+    display: none;
+  }
+}
+
+/* [UPLOAD VIEW]
+  *************************/
+div#fileList {
+  border: 3px dashed #BBB;
+  border-radius: 10px;
+  min-height: 300px;
+}
+
+div.showDataFields {
+  display: none;
+}
+
+.btnOverImg {
+  position: relative;
+  display: inline-block;
+  width: 10rem;
+  height: auto;
+}
+
+.btnOverImg .imgDrop {
+  width: 10rem;
+  padding: 2pt;
+}
+
+.btnOverImg .btn {
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  padding: 5px 5px;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  color: white;
+  background-color: #f93943;
+  font-size: 10px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btnOverImg .btn:hover {
+  background-color: #780116;
+  padding: 5px 5px;
+  border-radius: 5px;
+}
+
+input.uploadForm,
+textarea.uploadForm {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  display: block;
+  width: 85%;
+  height: 35px;
+  border: none;
+  border-bottom: 2px solid #BBB;
+  background: transparent;
+  margin: 0 auto 1rem auto;
+  font: 16px Arial, Helvetica, sans-serif;
+  resize: none;
+  overflow: hidden;
+}
+
+.alertPopup {
+  padding: 15px;
+  color: white;
+  margin-bottom: 15px;
+  display: none;
+  font-size: 15px;
+}
+
+.danger {
+  background-color: #f44336;
+}
+
+.warning {
+  background-color: #ff9800;
+}
+
+.success {
+  background-color: #4CAF50;
+}
+
+.info {
+  background-color: #2196F3;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+/* [UNDERCONSTRUCTION VIEW]
+  ******************************************/
+.ucView {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../img/coming-soon-construction-data-211122.jpg");
+  background-size: cover;
+}
+
+/* [CONTACT ADMIN VIEW]
+  ***************************/
+.inquireContainer {
+  border: 2px solid #CCC;
+  background-color: #EEE;
+  padding: 16px;
+  margin: 16px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.inquireContainer:hover {
+  border: 2px solid #2196F3;
+}
+
+.inquireContainer::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.inquireContainer.opened {
+  background-color: #DDD;
+}
+
+.inquireContainer img {
+  float: left;
+  margin-right: 20px;
+  width: 90px;
+}
+
+.inquireContainer span {
+  font-size: 15px;
+  margin-right: 15px;
+}
+
+.inquireContainer .time {
+  float: right;
+  color: #AAA;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.inquireContainer.opened .time {
+  color: #FFF;
+}
+
+.messengerOverlay {
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: .3s;
+  transition: .3s;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #AAA;
+  position: absolute;
+  overflow: hidden;
+}
+
+.messengerOverlay .messengerContainer {
+  padding: 1rem;
+  width: 75%;
+  height: 100vh;
+  background-color: #191716;
+  font-family: 'Titillium Web';
+  position: relative;
+  margin: 0 auto 0 auto;
+}
+
+.messengerOverlay .messengerContainer .contactName {
+  padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.messengerOverlay .messengerContainer .inquirePostDate {
+  padding: 10px;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.messengerOverlay .messengerContainer .inquireSubject {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.messengerOverlay .messengerContainer .inquire {
+  padding: 10px;
+  background-color: #333;
+  border: 1px solid #AAA;
+}
+
+.messengerOverlay .messengerContainer .btnInquire {
+  color: #191716;
+  font-size: 12px;
+  padding: 7px 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  background: #006494;
+  border: none;
+  margin: 1rem;
+}
+
+.messengerOverlay .messengerContainer .btnInquire:hover {
+  background: #247ba0;
+}
+
+.messengerOverlay .closeMessengerOverlay {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 1;
+  padding: 5px;
+}
+
+.messengerOverlay .closeMessengerOverlay:hover {
+  font-weight: bold;
+  background-color: #DDD;
+  color: #000;
+}
+
+.slideMessengerAnim {
+  display: none;
+}
+
+.slideMessenger {
+  animation-name: slideMessenger;
+  -webkit-animation-name: slideMessenger;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@-webkit-keyframes slideMessenger {
+  0% {
+    opacity: 0;
+    left: 70%;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes slideMessenger {
+  0% {
+    opacity: 0;
+    left: 70%;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    overflow: visible;
+  }
+  .inquireContainer {
+    text-align: center;
+  }
+  .inquireContainer img {
+    margin: auto;
+    float: none;
+    display: block;
+  }
+  .inquireContainer .time {
+    margin: auto;
+    float: none;
+    display: block;
+  }
+  .messengerOverlay {
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: .3s;
+    transition: .3s;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #FFF;
+    position: absolute;
+  }
+  .messengerOverlay .messengerContainer {
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+/* [GALLERY ADMIN VIEW]
+  ***************************/
+.galleryCol {
+  overflow: hidden;
+  width: 100%;
+  height: 200px;
+  background-color: #5F0F40;
+}
+
+.galleryCol img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.galleryCol.needsEdit {
+  border: 2px solid #780116;
+}
+
+.galleryCol .overlay {
+  position: relative;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: #5F0F40;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.galleryCol .overlay .list {
+  text-align: left;
+  padding: 1rem;
+  font-size: 18px;
+}
+
+.galleryCol .overlay .list a {
+  display: block;
+  text-decoration: none;
+  color: #FE5F55;
+}
+
+.galleryCol .overlay .list a:hover {
+  color: #FFD700;
+}
+
+.galleryCol:hover .overlay {
+  bottom: 0;
+  height: 100%;
+}
+
+.editorOverlay {
+  right: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: .3s;
+  transition: .3s;
+  background-color: #191716;
+  color: #FFF;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+}
+
+.editorOverlay .editorColImg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+}
+
+.editorOverlay .editorColImg .containerImg {
+  margin: auto;
+  position: relative;
+}
+
+.editorOverlay .editorColImg .containerImg img {
+  max-width: 100%;
+  max-height: 100vh;
+  margin: auto;
+}
+
+.editorOverlay .editorColImg .containerImg .textBlock {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #FFF;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 13px;
+}
+
+.editorOverlay .editorColData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100vh;
+}
+
+.editorOverlay .editorColData .fieldContainer {
+  width: 100%;
+  margin: auto auto 0 auto;
+}
+
+.editorOverlay .editorColData .fieldContainer label {
+  margin: 1rem auto 0 1rem;
+  font-size: 13px;
+  color: #666;
+}
+
+.editorOverlay .editorColData .fieldContainer input, .editorOverlay .editorColData .fieldContainer textarea {
+  padding: 14px;
+  display: block;
+  border: none;
+  background: #333;
+  color: #AAA;
+  width: 95%;
+  margin: auto auto 1rem auto;
+}
+
+.editorOverlay .editorColData .fieldContainer textarea {
+  height: 100px;
+  resize: none;
+}
+
+.editorOverlay .editorColData .btnContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin: 0 0 auto 0;
+}
+
+.editorOverlay .editorColData .btnContainer button.btnEditor {
+  color: #191716;
+  font-size: 12px;
+  padding: 14px 28px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  margin: auto;
+}
+
+.editorOverlay .editorColData .btnContainer button.btnEditor.btn-danger {
+  cursor: not-allowed;
+}
+
+.editorOverlay .editorColData .btnContainer button.btnEditor.enabled {
+  background: #065143;
+}
+
+.editorOverlay .editorColData .btnContainer button.btnEditor.enabled:hover {
+  background: #129490;
+}
+
+.editorOverlay .closeEditorOverlay {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  z-index: 1;
+  padding: 5px;
+}
+
+.editorOverlay .closeEditorOverlay:hover {
+  font-weight: bold;
+  background-color: #DDD;
+  color: #000;
+}
+
+.slideEditorAnim {
+  display: none;
+}
+
+.slideEditor {
+  animation-name: slideEditor;
+  -webkit-animation-name: slideEditor;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@-webkit-keyframes slideEditor {
+  0% {
+    opacity: 0;
+    left: 70%;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes slideEditor {
+  0% {
+    opacity: 0;
+    left: 70%;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+/* [ADMIN TEMPLATE END]
+  ***************************/
+/*# sourceMappingURL=admin.css.map */

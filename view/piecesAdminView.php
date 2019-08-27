@@ -1,10 +1,12 @@
-<?php $this->title = 'Galerie' ?>
+<?php $this->title = 'Galerie';
+    $pieces = []; ?>
 
-<div class="row no-gutters galleryRow">
+<div class="row no-gutters galleryRow" <?= $pieces ? '' : 'style="height: 100vh;"'?>>
 
 <?php
 
-    foreach($pieces as $piece):
+    if($pieces):
+        foreach($pieces as $piece):
 
 ?>
     <div class="col-12 col-md-4 p-1">
@@ -29,7 +31,18 @@
 
 <?php
 
-    endforeach;
+        endforeach;
+    else:
+        ?>
+        
+        <div class="noGallery" style="margin: auto; text-align: center;">
+            <i class="fas fa-fw fa-7x fa-exclamation m-4" style="color: #FF784F;"></i>
+            <div>Aucune œuvre dans votre toute <b>nouvelle galerie en ligne</b>.</div>
+            <div>Pour envoyer vos œuvres, <b><a href="index.php?action=admin&module=upload">cliquez ici</a></b></div>
+        </div>
+        
+        <?php
+    endif;
 
 ?>
 
@@ -38,13 +51,23 @@
     <div class="container">
         <div class="row no-gutters mx-auto">
             <div class="col-6 editorColImg">
-                <img class="img-fluid" src="" alt="image" />
+                <div class="containerImg">
+                    <img class="img-fluid" src="" alt="image" />
+                    <div class="textBlock">
+                        <div class="section"></div>
+                        <div class="subSection"></div>
+                    </div>
+                </div>
             </div>
             <div class="col-6 editorColData">
                 <div class="fieldContainer">
+                    <label for="title">Titre</label>
                     <input id="title" type="text" />
+                    <label for="creation">Date de création</label>
                     <input id="creation" type="text" />
+                    <label for="update">Date de l'envoi</label>
                     <input id="update" type="text" disabled />
+                    <label for="story">Commentaire</label>
                     <textarea id="story" name="">
                     </textarea>
                 </div>

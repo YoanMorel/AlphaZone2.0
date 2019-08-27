@@ -1,0 +1,482 @@
+/* [CLIENT TEMPLATE]
+***************************/
+
+.header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    font-size: 35px;
+    line-height: 70px;
+    height: 70px;
+    padding-left: 10pt;
+    font-family: 'PT Sans', sans-serif;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    color: #000;
+  
+    &.main {
+      color: #fafdf6;
+    }
+  
+    &.sticky {
+      font-size: 24px;
+      line-height: 48px;
+      height: 48px;
+      background: rgba(0,0,0,0.5);
+      text-align: left;
+      padding-left: 20px;
+      color: #FFF;
+    }
+  
+    & .headerTitle {
+      font-family: 'Charm', cursive;
+      float: left;
+    }
+  
+    & .rightHeader {
+      float: right;
+    
+      &.main a {
+        color: #FFF;
+      }
+    }
+    
+    & .rightHeader a {
+      float: left;
+      padding-right: 2rem;
+      font-size: 1rem;
+    }
+    
+  }
+  
+  img.sample {
+    width: 100vw;
+  }
+  
+  /* [MAIN VIEW]
+  ************************/
+  
+  .overlayGallery {
+    height: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    background-color: rgb(0, 0, 0);
+    transition: 0.5s;
+    overflow: hidden;
+    display: flex;
+  
+    & .closeOverlay {
+      position: absolute;
+      top: 20px;
+      right: 45px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #fff;
+    }
+  
+    & img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      padding: 0.5rem;
+    }
+  }
+  
+  .parallaxTopMainView, 
+  .parallaxMiddleMainView, 
+  .parallaxBottomMainView {
+    position: relative;
+    display: flex;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .parallaxTopMainView {
+    background-image: url('../img/IMG_20190804_181455.jpg');
+    background-position: bottom;
+  }
+  
+  .parallaxMiddleMainView {
+    background-image: url('../img/IMG_20190804_181419.jpg');
+    background-position: center;
+  }
+  
+  .parallaxBottomMainView {
+    background-image: url('../img/IMG_20190804_181611.jpg');
+    background-position: center;
+  }
+  
+  .parallaxExtraMainView {
+    height: 100vh;
+    width: auto;
+    position: relative;
+  }
+  
+  .parallaxExtraMainView > img {
+    width: 100%;
+    height: 100vh;
+    display: block;
+    object-fit: cover;
+    object-position: bottom;
+    transition: 0.3s;
+  }
+  
+  .centeredLinkGallery {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  a.mainToGallery {
+    border: 2px solid #fff;
+    background: rgba(255, 255, 255, 0);
+    color: #fff;
+    font-size: 20px;
+    padding: 14px 28px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    text-decoration: none;
+  
+    &:hover {
+      background: #fff;
+      color: #000;
+    }
+  }
+  
+  /* [Zone de texte superposée de la MainView]
+  *********************************************/
+  
+  .leftSideText, .rightSideText {
+    color: #fff;
+    margin: 0;
+    position: absolute;
+    width: 50%;
+    height: 60%;
+    background: rgba(0, 0, 0, 0.4);
+    top: 75%;
+    transform: translateY(-75%);
+    transition: 0.5s;
+    overflow: hidden;
+    display: flex;
+  
+    & .sideTextBox {
+      margin: auto; 
+      width: 75%; 
+      text-align: justify; 
+      font-family: 'charm', cursive; 
+      font-size: 20px;
+    }
+  }
+  
+  .leftSideText {
+    left: 2rem;
+    border-radius: 10px 10px 10px 10px;
+  }
+  
+  .rightSideText {
+    right: 2rem;
+    border-radius: 10px 10px 10px 10px;
+  }
+  
+  div.closeRightSideText, div.closeLeftSideText {
+    width: 35px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    cursor: pointer;
+  }
+  
+  .closeLeftSideText {
+    border-radius: 0 10px 10px 0;
+    right: 0;
+    display: inline-flex;
+  }
+  
+  .closeRightSideText {
+    border-radius: 10px 0 0 10px;
+    left: 0;
+    display: inline-flex;
+  }
+  
+  .fas.fa-chevron-left {
+    margin: auto;
+    transition: 0.5s;
+    opacity: 0.5;
+    color: #fff;
+  }
+  
+  .fas.fa-chevron-right {
+    margin: auto;
+    transition: 0.5s;
+    opacity: 0.5;
+    color: #fff;
+  }
+  
+  /* [END MAIN VIEW]
+  *******************************/
+  
+  /* [CONTACT VIEW]
+  *******************************/
+  
+  .contactTitle {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    font-weight: bold;
+    font-size: 2rem;
+    border-bottom: 1px solid #f1f1f1;
+  }
+  
+  .boxTitle {
+    margin: auto;
+  }
+  
+  label {
+    display: block;
+  }
+  
+  input.contactField, 
+  textarea.contactField {
+    width: 90%;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 1);
+    padding: 14px;
+  }
+  
+  input.contactField.fieldError, 
+  textarea.contactField.fieldError {
+    border: 1px solid rgba(255, 0, 0, 1);
+    color: #f93943;
+    background: #fce4e4;
+    background-image: url('../img/xicon.svg');
+    background-size: 20px;
+    background-position: right 2% center;
+    background-repeat: no-repeat;
+  
+    &[placeholder] {
+      font-weight: bold;
+    }
+  }
+  
+  input.contactField.fieldGood {
+    border: 1px solid rgba(0, 255, 0, 1);
+    background-image: url('../img/vicon.svg');
+    background-size: 20px;
+    background-position: right 2% center;
+    background-repeat: no-repeat;
+  }
+  
+  textarea.contactField {
+    height: 100px;
+    resize: none;
+  }
+  
+  form#contactInquiries div.errorMsg {
+    font-size: 12px;
+    color: red;
+    padding: 1px;
+    width: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  button.btnContact {
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+    font-size: 12px;
+    padding: 14px 28px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  button.btnContact:hover {
+    background: #000;
+    color: #fff;
+  }
+  
+  /* [END CONTACT VIEW]
+  *******************************/
+  
+  a.downArrow {
+    position: absolute;
+    top: 92%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-animation: sdb04 2s infinite;
+    animation: sdb04 2s infinite;
+    box-sizing: border-box;
+  }
+  
+  a.downArrow {
+    opacity: 1;
+  }
+  
+  @-webkit-keyframes sdb04 {
+    0% {
+      -webkit-transform: rotate(-45deg) translate(0, 0);
+    }
+    20% {
+      -webkit-transform: rotate(-45deg) translate(-10px, 10px);
+    }
+    40% {
+      -webkit-transform: rotate(-45deg) translate(0, 0);
+    }
+  }
+  
+  @keyframes sdb04 {
+    0% {
+      transform: rotate(-45deg) translate(0, 0);
+    }
+    20% {
+      transform: rotate(-45deg) translate(-10px, 10px);
+    }
+    40% {
+      transform: rotate(-45deg) translate(0, 0);
+    }
+  }
+  
+  .philosophy {
+    width: 100%;
+    background: #f1f1f1;
+  
+    & img {
+      width: 100%;
+      background-size: cover;
+    }
+  }
+  
+  
+  /* [FOOTER]
+  *************************/
+  
+    .footer {
+      margin-top: auto;
+      width: 100%;
+      height: 150px;
+      background: rgba(0, 0, 0, 1);
+      color: #FFF;
+      display: flex;
+    }
+  
+    .textBoxFooter {
+      margin: auto;
+    }
+  
+  /* [BOITE A IDEES]
+  ***********************/
+  
+  // .leftSideText, .rightSideText {
+  //   color: #fff;
+  //   margin: 0;
+  //   position: absolute;
+  //   width: 50%;
+  //   height: 60%;
+  //   background: rgba(0, 0, 0, 0.4);
+  //   top: 75%;
+  //   transform: translateY(-75%);
+  //   transition: 0.5s;
+  //   overflow: hidden;
+  //   display: flex;
+  
+  //   & .sideTextBox {
+  //     margin: auto; 
+  //     width: 75%; 
+  //     text-align: justify; 
+  //     font-family: 'charm', cursive; 
+  //     font-size: 20px;
+  //   }
+  // }
+  
+  .containertest {
+    width: 50%;
+    height: 60%;
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    overflow: hidden;
+    display: flex;
+  
+    & p {
+      margin: auto;
+      text-align: justify; 
+      font-family: 'charm', cursive; 
+      font-size: 19px;
+      color: #f2f2f2;
+      display: block;
+      padding: 2rem;
+      margin: auto;
+      width: 75%;
+      transition: transform 300ms ease-in-out;
+      transition: 600ms ease-in-out;
+      opacity: 0;
+      border-radius: 10px;
+  
+      &.animatetest {
+        background: rgba(51,51,51,0.4);
+        transform: scale(1.1, 1.1);
+        box-shadow: 0px 2px 14px 5px rgba(0,0,0,0.75);
+        opacity: 1;
+      }
+    }
+  }
+  
+  // .text-boxtest {
+  //   text-align: center;
+  //   background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/autumn-river-lights-jessica-jenney.jpg");
+  //   background-size: cover;
+  //   width: auto;
+  //   height: 400px;
+  // }
+  
+  .ripple {
+    top: 20%;
+    left: 20%;
+    margin-top: 5rem;
+    background-color: rgba(255, 255, 255, .6);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    position:absolute;
+    animation: ripple 3s linear infinite;
+    cursor: pointer;
+  }
+  .ripple::before,
+  .ripple::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    border-radius: 50%;
+    animation: ripple 3s linear infinite 1s;
+  }
+  .ripple::after {
+    animation: ripple 3s linear infinite 2s;
+  }
+  @keyframes ripple {
+    0% {
+      box-shadow: 0 0 0 .7rem rgba(255,255,255, 0.2);
+    }
+    100% {
+      box-shadow: 0 0 0 8rem rgba(255,255,255, 0);
+    }
+  }

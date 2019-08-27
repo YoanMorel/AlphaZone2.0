@@ -1,0 +1,772 @@
+  /* [ADMIN TEMPLATE]
+  **************************/
+  
+  /* [SIDEBAR ADMIN SECTION]
+  ***********************************/
+  
+  .sidebar {
+    height: 100vh;
+    width: 100%;
+    position: -webkit-sticky;
+    position: sticky;
+    /* position: fixed;
+    z-index: 1; */
+    top: 0;
+    left: 0;
+    background-color: #191716;
+    overflow-x: hidden;
+    padding-top: 16px;
+  
+    & a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #818181;
+      display: block;
+      text-align: left;
+      width: 100%;
+  
+      &:hover {
+        color: #FFD700;
+  
+        &.red {
+          color: #F93943;
+        }
+      }
+  
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+  
+    .sidebar {
+      height: auto;
+      width: 100%;
+      /* position: fixed;
+      z-index: 1; */
+      top: 0;
+      left: 0;
+      background-color: #191716;
+      overflow-x: hidden;
+      padding-top: 16px;
+    
+      & a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #818181;
+        display: block;
+        text-align: left;
+        width: 100%;
+  
+        &.upload,
+        &.update,
+        &.events {
+          display: none;
+        }
+    
+        &:hover {
+          color: #FFD700;
+        }
+      }
+    }
+  
+  }
+  
+  @media screen and (max-width: 1000px) {
+  
+    .sidebar {
+      height: auto;
+      width: 100%;
+      /* position: fixed;
+      z-index: 1; */
+      top: 0;
+      left: 0;
+      background-color: #191716;
+      overflow-x: hidden;
+      padding-top: 16px;
+    
+      & a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #818181;
+        display: block;
+        text-align: left;
+        width: 100%;
+    
+        &:hover {
+          color: #FFD700;
+        }
+      }
+    }
+  }
+  
+  @media screen and (min-width: 1000px) and (max-width: 1200px) {
+  
+    .sidebar {
+      height: auto;
+      width: 100%;
+      /* position: fixed;
+      z-index: 1; */
+      top: 0;
+      left: 0;
+      background-color: #191716;
+      overflow-x: hidden;
+      padding-top: 16px;
+    
+      & a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #818181;
+        float: left;
+        text-align: left;
+        width: auto;
+        display: initial;
+    
+        &:hover {
+          color: #FFD700;
+        }
+      }
+    }
+  }
+  
+  
+  /* [SNACKBAR]
+  ************************/
+  
+  #snackBar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #2196F3;
+    color: #FFF;
+    text-align: center;
+    border-radius: 2px;
+    padding: 12px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 20px;
+  
+    &.show {
+      visibility: visible;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    
+    @-webkit-keyframes fadein {
+      from {top: 0; opacity: 0;}
+      to {top: 20px; opacity: 1;}
+    }
+    
+    @keyframes fadein {
+      from {top: 0; opacity: 0;}
+      to {top: 20px; opacity: 1;}
+    }
+    
+    @-webkit-keyframes fadeout {
+      from {top: 20px; opacity: 1;}
+      to {top: 0; opacity: 0;}
+    }
+    
+    @keyframes fadeout {
+      from {top: 20px; opacity: 1;}
+      to {top: 0; opacity: 0;}
+    }
+  }
+  
+  /* [ADMIN MAIN VIEW]
+  *************************/
+  
+  .topBar {
+    width: 100%;
+    height: 40px;
+    background-color: #191716;
+    position: relative;
+    top: 0;
+    left: 0;
+    color: #FFF;
+    text-align: left;
+    line-height: 40px;
+  
+    & .clockTime {
+      width: auto;
+      float: right;
+      padding-right: 1rem;
+    }
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #191716;
+    color: #FFF;
+    margin: 1rem;
+    cursor: pointer;
+  
+    &:hover {
+      color: #FFD700;
+    }
+  
+    & .far, .fas {
+      font-size: 50px;
+    }
+  }
+  
+  .slideCardAnim {
+    visibility:hidden;
+  }
+  
+  .slideTopBar {
+    animation-name: slideTopBar;
+    -webkit-animation-name: slideTopBar;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    visibility: visible;
+  }
+  
+  .slideCard {
+    animation-name: slideCard;
+    -webkit-animation-name: slideCard;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    visibility: visible;
+  }
+  
+  @keyframes slideCard {
+    0% {
+      opacity: 0;
+      transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  
+  @keyframes slideTopBar {
+    0% {
+      opacity: 0;
+      transform: translateY(-70%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .topBar {
+      display: none;
+    }
+  }
+  
+  /* [UPLOAD VIEW]
+  *************************/
+  
+  div#fileList {
+    border: 3px dashed #BBB;
+    border-radius: 10px;
+    min-height: 300px;
+  }
+  
+  div.showDataFields {
+    display: none;
+  }
+  
+  .btnOverImg {
+    position: relative;
+    display: inline-block;
+    width: 10rem;
+    height: auto;
+  
+    & .imgDrop {
+      width: 10rem;
+      padding: 2pt;
+    }
+  
+    & .btn {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      padding: 5px 5px;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      color: white;
+      background-color: #f93943;
+      font-size: 10px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+  
+      &:hover {
+        background-color: #780116;
+        padding: 5px 5px;
+        border-radius: 5px;
+      }
+    }
+  }
+  
+  input.uploadForm,
+  textarea.uploadForm {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 85%;
+    height: 35px;
+    border: none;
+    border-bottom: 2px solid #BBB;
+    background: transparent;
+    margin: 0 auto 1rem auto;
+    font: 16px Arial, Helvetica, sans-serif;
+    resize: none;
+    overflow: hidden;
+  }
+  
+  .alertPopup {
+    padding: 15px;
+    color: white;
+    margin-bottom: 15px;
+    display: none;
+    font-size: 15px;
+  }
+  
+  .danger   {background-color: #f44336;}
+  .warning  {background-color: #ff9800;}
+  .success  {background-color: #4CAF50;}
+  .info     {background-color: #2196F3;}
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  
+    &:hover {
+      color: black;
+    }
+  }
+  
+  /* [UNDERCONSTRUCTION VIEW]
+  ******************************************/
+  
+  .ucView {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../img/coming-soon-construction-data-211122.jpg');
+    background-size: cover;
+  }
+  
+  /* [CONTACT ADMIN VIEW]
+  ***************************/
+  
+  .inquireContainer {
+    border: 2px solid #CCC;
+    background-color: #EEE;
+    padding: 16px;
+    margin: 16px;
+    font-size: 12px;
+    cursor: pointer;
+  
+    &:hover {
+      border: 2px solid #2196F3;
+    }
+  
+    &::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  
+    &.opened {
+      background-color: #DDD;
+    }
+  
+    & img {
+      float: left;
+      margin-right: 20px;
+      width: 90px;
+    }
+  
+    & span {
+      font-size: 15px;
+      margin-right: 15px;
+    }
+  
+    & .time {
+      float: right;
+      color: #AAA;
+      font-weight: bold;
+      font-size: 12px;
+    }
+  
+    &.opened .time {
+      color: #FFF;
+    }
+  }
+  
+  .messengerOverlay {
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: .3s;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #AAA;
+    position: absolute;
+    overflow: hidden;
+  
+    & .messengerContainer {
+      padding: 1rem;
+      width: 75%;
+      height: 100vh;
+      background-color: #191716;
+      font-family: 'Titillium Web';
+      position: relative;
+      margin: 0 auto 0 auto;
+  
+      & .contactName {
+        padding: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: left;
+        width: 100%;
+      }
+  
+      & .inquirePostDate {
+        padding: 10px;
+        font-size: 16px;
+        text-align: left;
+        width: 100%;      
+      }
+    
+      & .inquireSubject {
+        padding: 10px;
+        font-size: 20px;
+      }
+    
+      & .inquire {
+        padding: 10px;
+        background-color: #333;
+        border: 1px solid #AAA;
+      }
+  
+      & .btnInquire {
+        color: #191716;
+        font-size: 12px;
+        padding: 7px 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s ease;
+        background: #006494;
+        border: none;
+        margin: 1rem;
+  
+        &:hover {
+          background: #247ba0;
+        }
+      }
+    }
+  
+    & .closeMessengerOverlay {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 1;
+      padding: 5px;
+  
+      &:hover {
+        font-weight: bold;
+        background-color: #DDD;
+        color: #000;
+      }
+    }
+  }
+  
+  .slideMessengerAnim {
+    display: none;
+  }
+  
+  .slideMessenger {
+    animation-name: slideMessenger;
+    -webkit-animation-name: slideMessenger;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    display: flex;
+  }
+  
+  @keyframes slideMessenger {
+    0% {
+      opacity: 0;
+      // transform: translateY(70%);
+      left: 70%;
+    }
+    100% {
+      opacity: 1;
+      // transform: translateY(0%);
+      left: 0;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    body {
+      overflow: visible;
+    }
+  
+    .inquireContainer {
+      text-align: center;
+  
+      & img {
+        margin: auto;
+        float: none;
+        display: block;
+      }
+  
+      & .time {
+        margin: auto;
+        float: none;
+        display: block;
+      }
+    }
+  
+    .messengerOverlay {
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transition: .3s;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #FFF;
+      position: absolute;
+  
+      .messengerContainer {
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+    }
+  }
+  
+  /* [GALLERY ADMIN VIEW]
+  ***************************/
+  
+  .galleryCol {
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    background-color: #5F0F40;
+  
+    & img {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      // transition: all 0.3s;
+      // transform: scale(1);
+      display: block;
+    }
+  
+    &.needsEdit {
+      border: 2px solid #780116;
+    }
+  
+    & .overlay {
+      position: relative;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      background-color: #5F0F40;
+      overflow: hidden;
+      width: 100%;
+      height:0;
+      transition: .5s ease;
+      display: flex;
+  
+      & .list {
+        text-align: left;
+        padding: 1rem;
+        font-size: 18px;
+  
+        & a {
+          display: block;
+          text-decoration: none;
+          color: #FE5F55;
+  
+          &:hover {
+            color: #FFD700;
+          }
+        }
+      }
+    }
+    
+    &:hover .overlay {
+      bottom: 0;
+      height: 100%;
+    }
+  }
+  
+  .editorOverlay {
+    right: 0;
+    // top: 0;
+    width: 100%;
+    height: 100%;
+    transition: .3s;
+    background-color: #191716;
+    color: #FFF;
+    position: absolute;
+    display: flex;
+    overflow: hidden;
+  
+    // .editorContainer {
+    //   padding: 1rem;
+    //   width: 75%;
+    //   height: 100vh;
+    //   background-color: #444857;
+    //   font-family: 'Titillium Web';
+    //   position: relative;
+    //   margin: 0 auto 0 auto;
+    // }
+  
+    & .editorColImg {
+      display: flex;
+      height: 100vh;
+  
+      & .containerImg {
+        margin: auto;
+        position: relative;
+  
+        & img {
+          max-width: 100%;
+          max-height: 100vh;
+          margin: auto;
+        }
+  
+        & .textBlock {
+          position: absolute;
+          bottom: 20px;
+          right: 20px;
+          background-color: rgba(0, 0, 0, .6);
+          color: #FFF;
+          padding-left: 20px;
+          padding-right: 20px;
+          font-size: 13px;
+        }
+      }
+    }
+  
+    & .editorColData {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+  
+      & .fieldContainer {
+        width: 100%;
+        margin: auto auto 0 auto;
+  
+        & label {
+          margin: 1rem auto 0 1rem;
+          font-size: 13px;
+          color: #666;
+        }
+      
+        & input, textarea {
+          padding: 14px;
+          display: block;
+          border: none;
+          background: #333;
+          color: #AAA;
+          width: 95%;
+          margin: auto auto 1rem auto;
+        }
+  
+        & textarea {
+          height: 100px;
+          resize: none;
+        }
+      }
+  
+      & .btnContainer {
+        display: flex;
+        width: 100%;
+        margin: 0 0 auto 0;
+  
+        & button.btnEditor {
+          color: #191716;
+          font-size: 12px;
+          padding: 14px 28px;
+          cursor: pointer;
+          border-radius: 5px;
+          font-weight: bold;
+          transition: 0.3s ease;
+          margin: auto;
+  
+          &.btn-danger {
+            cursor: not-allowed;
+          }
+  
+          &.enabled {
+            background: #065143;
+  
+            &:hover {
+              background: #129490;
+            }
+          }
+  
+        }
+      }
+    }
+  
+  
+    & .closeEditorOverlay {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 25px;
+      z-index: 1;
+      padding: 5px;
+  
+      &:hover {
+        font-weight: bold;
+        background-color: #DDD;
+        color: #000;
+      }
+    }
+  }
+  
+  .slideEditorAnim {
+    display: none;
+  }
+  
+  .slideEditor {
+    animation-name: slideEditor;
+    -webkit-animation-name: slideEditor;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    display: flex;
+  }
+  
+  @keyframes slideEditor {
+    0% {
+      opacity: 0;
+      left: 70%;
+    }
+    100% {
+      opacity: 1;
+      left: 0;
+    }
+  }
+  
+  /* [ADMIN TEMPLATE END]
+  ***************************/

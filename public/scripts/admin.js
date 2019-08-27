@@ -407,7 +407,21 @@ $(function() {
     $('div.messengerContainer').children('div').text('');
     var inqId = $(this).attr('id');
     $('div.messengerOverlay').css('top', $(window).scrollTop()).addClass('slideMessenger');
-    $('body').css('overflow','hidden');
+
+    var mediaQueries = window.matchMedia('(max-width: 500px)');
+
+    function checkMediaQueries(mediaQuerie) {
+      if(mediaQuerie.matches) {
+        $(window).scrollTop(0);
+        $('body').css('overflow', 'auto');
+      }
+      else {
+        $('body').css('overflow', 'hidden');
+      }
+    }
+
+    checkMediaQueries(mediaQueries);
+    mediaQueries.addListener(checkMediaQueries);
     
     $.ajax({
       type:     'POST',
@@ -441,7 +455,7 @@ $(function() {
         $('div.contactName').html('<i class="fas fa-fw fa-user"></i> De la part de ' + lastName + ' (' + organisme + ')');
         $('div.inquirePostDate').html('<i class="far fa-fw fa-clock"></i> le ' + frenchDate.toLocaleDateString('fr-FR', options))
         $('div.inquireSubject').html('Objet : <span class="subject">' + subject + '</span>');
-        $('div.inquireCtrl').html('<button name="' + inqId + '" id="reply" class="inquireBTN"><i class="fas fa-fw fa-reply"></i>Répondre</button><button name="' + inqId + '" id="unread" class="inquireBTN"><i class="fas fa-fw fa-envelope"></i>Marquer comme non lu</button>');
+        $('div.inquireCtrl').html('<button name="' + inqId + '" id="reply" class="btnInquire"><i class="fas fa-fw fa-reply"></i>Répondre</button><button name="' + inqId + '" id="unread" class="btnInquire"><i class="fas fa-fw fa-envelope"></i>Marquer comme non lu</button>');
         $('div.inquire').html(inquire);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -508,6 +522,7 @@ $(function() {
   var imgNode;
   var imgId;
   var imgSrc;
+  var splitedSrc;
 
   $('a.editor').click(function(event) {
     event.preventDefault();
@@ -518,9 +533,12 @@ $(function() {
     $('body').css('overflow','hidden');
     imgSrc = imgNode.attr('src');
     imgId = imgNode.attr('id');
+    splitedSrc = imgSrc.split('/');
     $.each($(this).parents().siblings('img').data(), function(key, value) {
       imgData[key] = value;
     });
+    $('div.textBlock div.section').text('Section : ' + splitedSrc[1]);
+    $('div.textBlock div.subSection').text('Sous-Section : ' + splitedSrc[2]);
     $('div.editorOverlay img').attr('src', imgSrc);
     $('input#title').val(imgData['title']);
     $('input#creation').val(imgData['creation']);
@@ -557,7 +575,7 @@ $(function() {
     $('div#openModal').removeClass('showModal');
   });
 
-  $('.fieldContainer').children().on('blur', function() {
+  $('.fieldContainer').children().on('keyup', function() {
     $.each($('.fieldContainer').children('input, textarea'), function() {
       fieldData[$(this).attr('id')] = $(this).val();
     });

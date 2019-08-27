@@ -133,4 +133,9 @@ $(function() {
     }
   });
 
+
+  $('div.ripple').click(function() {
+    $('div.containertest p').addClass('animatetest');
+  });
+
 });
