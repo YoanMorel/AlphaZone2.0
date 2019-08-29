@@ -2,10 +2,28 @@
 
 require_once 'Setting.php';
 
+/**
+ * Classe abstraite DbConnection
+ * Centralise les services d'accès à la base de données
+ * Utilise l'API PDO
+ * 
+ * @version 1.2
+ * @author 	Yoan Morel
+ */
 abstract class DbConnection {
 
+	/**
+	 * Objet PDO relatif à l'instance des classes filles
+	 */
 	private static $spdo;
 
+	/**
+	 * Methode de service de requêtes SQL
+	 * 
+	 * @param 	string $sql Requête mySQL
+	 * @param 	array $params Paramétrage de la requête
+	 * @return 	PDOStmt Résultat de la requête
+	 */
 	protected function queryCall($sql, Array $params = null) {
 		if($params):
 			$returnedData = self::dbConnect()->prepare($sql);
@@ -22,26 +40,56 @@ abstract class DbConnection {
 		return $returnedData;
 	}
 
+	/**
+	 * Methode de service d'initialisation de transaction PDO
+	 * 
+	 * @return PDO Objet PDO
+	 */
 	protected function startTransaction() {
 		return self::dbConnect()->beginTransaction();
 	}
 
+	/**
+	 * Methode de service de dépot de transaction PDO
+	 * 
+	 * @return PDO Objet PDO
+	 */
 	protected function commitTransaction() {
 		return self::dbConnect()->commit();
 	}
 
+	/**
+	 * Methode de service d'annulation de transaction PDO
+	 * 
+	 * @return PDO Objet PDO
+	 */
 	protected function preventTransaction() {
 		return self::dbConnect()->rollBack();
 	}
 
+	/**
+	 * Methode de service de récupération de la dernière entrée mySQL
+	 * 
+	 * @return PDO Object PDO
+	 */
 	protected function getLastInsertId() {
 		return self::dbConnect()->lastInsertId();
 	}
 
+	/**
+	 * Methode de service de comptage de ligne retournée par PDO
+	 * 
+	 * @return PDO objet PDO
+	 */
 	protected function getRowCount() {
 		return self::dbConnect()->rowCount();
 	}
 
+	/**
+	 * Methode de connexion PDO au besoin
+	 * 
+	 * @return PDO Objet PDO spdo
+	 */
 	private static function dbConnect(){
 		try {
 			if(self::$spdo === null):
