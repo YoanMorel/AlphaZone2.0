@@ -1,5 +1,5 @@
 <?php $this->title = 'Galerie';
-    $pieces = []; ?>
+    // $pieces = []; ?>
 
 <div class="row no-gutters galleryRow" <?= $pieces ? '' : 'style="height: 100vh;"'?>>
 
@@ -10,12 +10,12 @@
 
 ?>
     <div class="col-12 col-md-4 p-1">
-        <div class="galleryCol <?= (empty($piece['PIE_STORY'])) ? ' needsEdit' : ''; ?>">
+        <div class="galleryCol">
             <div class="overlay">
                 <div class="list">
-                    <a class="show" href="#">Afficher</a>
-                    <a class="editor" href="#">Editer</a>
-                    <a class="erase" href="#">Supprimer</a>
+                    <a class="show" href="javascript:void(0)">Afficher</a>
+                    <a class="editor" href="javascript:void(0)">Editer</a>
+                    <a class="erase" href="javascript:void(0)">Supprimer</a>
                 </div>
             </div>
             <img 
@@ -25,6 +25,7 @@
                 src="gallery/<?= $piece['SEC_SECTION'].'/'.$piece['SUB_SUBSECTION'].'/'.$piece['PIE_IMG_LINK'] ?>" 
                 alt="image"
                 id="<?= $piece['PIE_ID'] ?>"
+                class="<?= (empty($piece['PIE_STORY'])) ? ' needsEdit' : ''; ?>"
             />
         </div>
     </div>
@@ -84,12 +85,29 @@
         <div class=modalClose><a href="javascript:void(0);" id="closeModal">Fermer</a></div>
         <h1 class="erase">Attention !</h1>
         <div>
-            Cette action supprimera toutes les informations de cette œuvre et ne seront pas récupérables. Pour valider, cliquez sur <i>Valider la suppression</i>
+            Cette action <b>supprimera toutes les informations de cette œuvre</b> et ne seront <b>pas récupérables</b>. Pour valider, cliquez sur <i>Valider la suppression</i> puis sur le boutton <i>Suppression</i>.
         </div>
-        <div class="validErase">
-            <button type="button" class="btn btn-danger btnErase">Valider la suppression</button>
+        <div class="container">
+            <div class="row no-gutters">
+            <div class="col-5 justify-content-end d-flex align-items-center">
+                <label class="p-2" for="cbErase">Valider la suppression</label>
+            </div>
+            <div class="col-1">
+                <input id="cbErase" type="checkbox" />
+                <span></span>
+            </div>
+            <div class="col-6 text-center">
+                <button type="button" class="btn btn-danger btnErase" disabled>Suppression</button>
+            </div>
+            </div>
         </div>
     </div>
+</div>
+
+<div id="myModal" class="modalImg">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
 </div>
 
 </div>

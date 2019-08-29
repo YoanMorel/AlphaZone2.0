@@ -477,7 +477,7 @@ $(function() {
       url:    'controller/AjaxRouter.php',
       data:   'ajax=messenger&inqId=' + inqId + '&action=reply',
       complete: function(response) {
-        var mailto_link = 'mailto:' + $('.contactMail').text() + '?subject=' + $('.subject').text();
+        var mailto_link = 'mailto:' + $('.contactMail').text() + '?subject=(RE:) ' + $('.subject').text();
     
         win = window.open(mailto_link, 'emailWindow');
         if (win && win.open && !win.closed) win.close();
@@ -554,6 +554,15 @@ $(function() {
     imgSrc = imgNode.attr('src');
   });
 
+  $('input[type="checkbox"]').click(function(){
+    if($(this).prop("checked") == true){
+      $('button.btnErase').prop('disabled', false);
+    }
+    else {
+      $('button.btnErase').prop('disabled', true);   
+    }
+  });
+
   $('button.btnErase').click(function() {
     $('div.modalWindow').removeClass('showModal');
     $.ajax({
@@ -628,5 +637,7 @@ $(function() {
 /****************************
  > FIN SCRIPT DE GALERIE
  * *************************/
+
+ console.log(window.location);
 
 });

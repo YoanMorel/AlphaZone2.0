@@ -3,7 +3,7 @@
 <?php
     setlocale(LC_ALL, 'fr_FR.UTF8');
 
-    $inquiries = [];
+    // $inquiries = [];
 
     if($inquiries):
       foreach($inquiries as $inquire):

@@ -1,15 +1,16 @@
 <?php
 
-class FormValidator {
+class FormValidator extends User {
 
     private static $ERROR_EMPTY_ELEMENT = [
-        'lname'     => 'Vous devez renseigner un nom',
-        'mail'      => 'Vous devez renseigner une adresse mail',
-        'subject'   => 'Vous devez renseigner un objet',
-        'inquire'   => 'Vous devez saisir un commentaire',
-        'login'     => 'Vous devez renseigner un identifiant',
-        'password'  => 'Vous devez saisir un mot de passe',
-        'repeatPwd' => 'Vous devez saisir une deuxième fois votre mot de passe'
+        'lname'     => 'Saisissez un nom',
+        'mail'      => 'Saisissez une adresse mail',
+        'subject'   => 'Saisissez l\'objet du commentaire',
+        'inquire'   => 'Saisissez un commentaire',
+        'login'     => 'Saisissez un identifiant',
+        'password'  => 'Saisissez un mot de passe',
+        'newPwd'    => 'Saisissez un nouveau mot de passe',
+        'repNewPwd' => 'Saisissez une deuxième fois votre nouveau mot de passe'
     ];
 
     private static $ERROR_INVALID_ELEMENT = [
@@ -18,13 +19,15 @@ class FormValidator {
         'subject'   => 'Ce n\'est pas un nom d\'objet valide',
         'inquire'   => 'Ce commentaire n\'est pas valide',
         'login'     => 'Cet identifiant/mot de passe n\'est pas valide ou n\'éxiste pas',
-        'password'  => 'Cet identifiant/mot de passe n\'est pas valide ou n\'existe pas',
-        'repeatPwd' => 'Les mots de passe saisis ne coïncident pas'
+        'password'  => 'Cet identifiant/mot de passe n\'est pas valide',
+        'newLogin'  => 'Cet identifiant n\'est pas valide',
+        'newPwd'    => 'Ce mot de passe n\'est pas valide',
+        'repNewPwd' => 'Les mots de passe saisis ne coïncident pas'
     ];
 
     private static $ERROR_ALREADY_EXISTS_ELEMENT = [
-        'login'     => 'Vous utilisez déjà cet identifiant',
-        'password'  => 'Vous devez saisir un nouveau mot de passe'
+        'newLogin'  => 'Vous utilisez déjà cet identifiant',
+        'newPwd'    => 'Vous devez saisir un nouveau mot de passe'
     ];
 
     private $errors         = [];
@@ -39,21 +42,29 @@ class FormValidator {
 
     public function __construct() {
         $this->filterRules = [
-            'lname' => [
+            'lname'     => [
                 'filter'    => FILTER_CALLBACK,
                 'options'   => [$this, 'lnameFilter']
             ],
-            'mail'  => [
+            'mail'      => [
                 'filter'    => FILTER_CALLBACK,
                 'options'   => [$this, 'mailAdressFilter']
             ],
-            'subject' => [
+            'subject'   => [
                 'filter'    => FILTER_CALLBACK,
                 'options'   => [$this, 'subjectFilter']
             ],
-            'inquire' => [
+            'inquire'   => [
                 'filter'    => FILTER_CALLBACK,
                 'options'   => [$this, 'inquireFilter']
+            ],
+            'login'     => [
+                'filter'    => FILTER_CALLBACK,
+                'options'   => [$this, 'loginFilter']
+            ],
+            'password'  => [
+                'filter'    => FILTER_CALLBACK,
+                'options'   => [$this, 'passwordFilter']
             ]
         ];
     }
@@ -128,9 +139,50 @@ class FormValidator {
 
         return $filter;
     }
+
+    private function loginFilter($input) {
+        $filter = NULL;
+        if(!empty($input)):
+            $login = filter_var($input, FILTER_SANITIZE_STRING);
+            if($login === false):
+                $this->errors['login'] = self::$ERROR_INVALID_ELEMENT['login'];
+            else:
+                if($this->getUser($login)->fetchAll()):
+                    $filter = $login;
+                else:
+                    $this->errors['login'] = self::$ERROR_INVALID_ELEMENT['login'];
+                endif;
+            endif;
+        endif;
+
+        return $filter;
+    }
+
+    private function passwordFilter($input) {
+        $filter = NULL;
+        if(!empty($input)):
+            $pwd = filter_var($input, FILTER_SANITIZE_STRING);
+            if($pwd === false):
+                $this->errors['password'] = self::$ERROR_INVALID_ELEMENT['password'];
+            else:
+                $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
+                if($registeredPwd = $this->getPassword($login)->fetchAll()):
+                    if(password_verify($pwd, $registeredPwd[0]['USE_PWD'])):
+                        $filter = $pwd;
+                    else:
+                        $this->errors['password'] = self::$ERROR_INVALID_ELEMENT['password'];
+                    endif;
+                endif;
+            endif;
+        endif;
+
+        return $filter;
+    }
 }
 
-// vvv HTML DE TEST POUR LA CLASS DE VALIDATION vvv
+//                      ---- [HTML DE TEST POUR LA CLASS DE VALIDATION] ----
 // INPUT_POST n'est pas initialisée si la REQUEST_METHOD n'est pas égale à POST
 // Donc aucun test ne peut se faire en initialisant la variable POST directement dans le code
+// excepté si l'on crée un formulaire sur la page
+// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 ?>

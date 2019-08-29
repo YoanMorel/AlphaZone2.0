@@ -29,7 +29,7 @@
             </div>
             <div class="pb-3">
                 <label for="inquire">Votre Message : *</label>
-                <textarea class="contactField <?= isset($errors['inquire']) ? 'fieldError' : ''; ?>" id="inquire" name="inquire" value="<?= isset($varsValue['inquire']) ? $varsValue['inquire'] : ''; ?>"></textarea>
+                <textarea class="contactField <?= isset($errors['inquire']) ? 'fieldError' : ''; ?>" placeholder="Votre message ici" id="inquire" name="inquire" value="<?= isset($varsValue['inquire']) ? $varsValue['inquire'] : ''; ?>"></textarea>
                 <?= isset($errors['inquire']) ? '<div class="errorMsg">'.$errors['inquire'].'</div>' : ''; ?>
             </div>
             <div>

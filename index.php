@@ -1,6 +1,6 @@
 <?php
 
-    require 'controller/router.php';
+    require 'controller/Router.php';
 
     $router = new Router();
     $router->getRoute();

@@ -1,12 +1,20 @@
 $(function() {
 
+  var regex = /[.]/g;
+  console.log(window.location.pathname.search(regex));
+
   // Evènement pour le Header
   $(window).scroll(function() {
-    if ($(this).scrollTop() > 50) {  
-      $('div.header').addClass('sticky');
+    var regex = /[.]/g;
+    if ($(this).scrollTop() > 50) {
+      if(window.location.pathname.search(regex) != -1) {
+        $('div.header').addClass('stickyWhite');
+      } else {
+        $('div.header').addClass('sticky');
+      }
     }
     else {
-      $('div.header').removeClass('sticky');
+      $('div.header').removeClass('sticky stickyWhite');
     }
   });
   if($(window).scrollTop() > 50) {
@@ -51,61 +59,13 @@ $(function() {
     }, 500);
   });
 
-  // Evenement pour le sideText
-  $('.closeLeftSideText, .closeRightSideText').click(function() {
-    
-    if ($(this).parent().css("width") === "35px") {
-      $(this).siblings('.sideTextBox').show();
-      if($(this).parent().hasClass('rightSideText')) {
-        $(this).parent().css({
-          "width": "50%",
-          "right": "2rem",
-          "border-radius": "10px 10px 10px 10px"
-        });
-      } else {
-        $(this).parent().css({
-          "width": "50%",
-          "left": "2rem",
-          "border-radius": "10px 10px 10px 10px"
-        });
-      }
-      $(this).css("background", "rgba(0, 0, 0, 0.7)");
-      if ($(this).children().hasClass('fa-chevron-right')) {
-        $(this).children().removeClass().addClass('fas fa-chevron-left');
-      } else {
-        $(this).children().removeClass().addClass('fas fa-chevron-right');
-      }
-    } else {
-      if($(this).parent().hasClass('rightSideText')) {
-        $(this).parent().css({
-          "width": "35px",
-          "right": "0",
-          "border-radius": "10px 0 0 10px"
-        });
-      } else {
-        $(this).parent().css({
-          "width": "35px",
-          "left": "0",
-          "border-radius": "0 10px 10px 0"
-        });
-      }
-      $(this).css("background", "rgba(0, 0, 0, 0.05)");
-      $(this).siblings('.sideTextBox').hide();
-      if ($(this).children().hasClass('fa-chevron-right')) {
-        $(this).children().removeClass().addClass('fas fa-chevron-left');
-      } else {
-        $(this).children().removeClass().addClass('fas fa-chevron-right');
-      }
-    }
-  });
-
   // Evenement Modal
   $('a#closeModal').click(function() {
     $('div#openModal').removeClass('showModal');
   });
 
   // Script de controle dynamique de la validité du formulaire de contact
-  $('form#contactInquiries input, textarea').on({
+  $('form#contactInquiries input, form#contactInquiries textarea').on({
     blur: function() {
       var name    = $(this).attr('name');
       $.ajax({
@@ -117,9 +77,9 @@ $(function() {
           fieldFound = Object.keys(response.responseJSON);
           $.each(fieldFound, function(key, value) {
             if(value == name) {
-              $('input#' + name).addClass('fieldError').after('<div class="errorMsg">'+ response.responseJSON[value] +'</div>');
-            } else if ($('input#' + name).val() && !$('input#' + name).hasClass('fieldError')) {
-              $('input#' + name).addClass('fieldGood').siblings('form#contactInquiries div.errorMsg').empty();
+              $('input#' + name + ', textarea#' + name).addClass('fieldError').after('<div class="errorMsg">'+ response.responseJSON[value] +'</div>');
+            } else if ($('input#' + name + ', textarea#' + name).val() && !$('input#' + name + ', textarea#' + name).hasClass('fieldError')) {
+              $('input#' + name + ', textarea#' + name).addClass('fieldGood').siblings('form#contactInquiries div.errorMsg').empty();
             }
           });
         },
@@ -134,8 +94,21 @@ $(function() {
   });
 
 
-  $('div.ripple').click(function() {
-    $('div.containertest p').addClass('animatetest');
+  $('div.ondine').click(function() {
+    $(this).siblings().children('p').addClass('animateSideText');
+  });
+
+  $('.galleryCol a.show').click(function() {
+    $('body').css('overflow', 'hidden');
+    var imgSrc    = $(this).parents('.overlay').siblings('img').attr('src');
+    var imgStory  = $(this).parents('.overlay').siblings('img').data('story');
+
+    $('.modalImg').css('display', 'block').children('img').attr('src', imgSrc).siblings('#caption').text(imgStory);
+  });
+
+  $('.close').click(function() {
+    $('body').css('overflow', 'visible');
+    $('.modalImg').css('display', 'none');
   });
 
 });

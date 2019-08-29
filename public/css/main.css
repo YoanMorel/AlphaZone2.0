@@ -1,6 +1,17 @@
 @charset "UTF-8";
 /* [CLIENT TEMPLATE]
 ***************************/
+/* [UNDERCONSTRUCTION VIEW]
+  ******************************************/
+.ucView {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../img/coming-soon-construction-data-211122.jpg");
+  background-size: cover;
+}
+
+/* [MAIN VIEW]
+  ************************/
 .header {
   position: fixed;
   z-index: 1;
@@ -30,6 +41,17 @@
   color: #FFF;
 }
 
+.header.stickyWhite {
+  font-size: 24px;
+  line-height: 48px;
+  height: 48px;
+  background: #FFF;
+  text-align: left;
+  padding-left: 20px;
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
 .header .headerTitle {
   font-family: 'Charm', cursive;
   float: left;
@@ -53,8 +75,6 @@ img.sample {
   width: 100vw;
 }
 
-/* [MAIN VIEW]
-  ************************/
 .overlayGallery {
   height: 0;
   width: 100%;
@@ -100,12 +120,12 @@ img.sample {
 }
 
 .parallaxTopMainView {
-  background-image: url("../img/IMG_20190804_181455.jpg");
+  background-image: url("../img/IMG_20190804_181455_new.jpg");
   background-position: bottom;
 }
 
 .parallaxMiddleMainView {
-  background-image: url("../img/IMG_20190804_181419.jpg");
+  background-image: url("../img/IMG_20190804_181419_new.jpg");
   background-position: center;
 }
 
@@ -161,80 +181,124 @@ a.mainToGallery:hover {
 
 /* [Zone de texte superposée de la MainView]
   *********************************************/
-.leftSideText, .rightSideText {
-  color: #fff;
-  margin: 0;
-  position: absolute;
+.rightSideText, .leftSideText {
   width: 50%;
   height: 60%;
-  background: rgba(0, 0, 0, 0.4);
-  top: 75%;
-  -webkit-transform: translateY(-75%);
-          transform: translateY(-75%);
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0;
 }
 
-.leftSideText .sideTextBox, .rightSideText .sideTextBox {
+.rightSideText p, .leftSideText p {
   margin: auto;
-  width: 75%;
   text-align: justify;
   font-family: 'charm', cursive;
-  font-size: 20px;
+  font-size: 19px;
+  color: #f2f2f2;
+  display: block;
+  padding: 2rem;
+  margin: auto;
+  width: 75%;
+  -webkit-transition: -webkit-transform 300ms ease-in-out;
+  transition: -webkit-transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
+  -webkit-transition: 600ms ease-in-out;
+  transition: 600ms ease-in-out;
+  opacity: 0;
+  border-radius: 10px;
+}
+
+.rightSideText p.animateSideText, .leftSideText p.animateSideText {
+  background: rgba(51, 51, 51, 0.4);
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  -webkit-box-shadow: 0px 2px 14px 5px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 2px 14px 5px rgba(0, 0, 0, 0.75);
+  opacity: 1;
 }
 
 .leftSideText {
   left: 2rem;
-  border-radius: 10px 10px 10px 10px;
 }
 
 .rightSideText {
   right: 2rem;
-  border-radius: 10px 10px 10px 10px;
 }
 
-div.closeRightSideText, div.closeLeftSideText {
-  width: 35px;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+.ondine {
+  top: 20%;
+  left: 20%;
+  margin-top: 5rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
   position: absolute;
+  -webkit-animation: ondine 3s linear infinite;
+          animation: ondine 3s linear infinite;
   cursor: pointer;
 }
 
-.closeLeftSideText {
-  border-radius: 0 10px 10px 0;
-  right: 0;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-}
-
-.closeRightSideText {
-  border-radius: 10px 0 0 10px;
+.ondine::before, .ondine::after {
+  content: "";
+  position: absolute;
+  top: 0;
   left: 0;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  -webkit-animation: ondine 3s linear infinite 1s;
+          animation: ondine 3s linear infinite 1s;
 }
 
-.fas.fa-chevron-left {
-  margin: auto;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  opacity: 0.5;
-  color: #fff;
+.ondine::after {
+  -webkit-animation: ondine 3s linear infinite 2s;
+          animation: ondine 3s linear infinite 2s;
 }
 
-.fas.fa-chevron-right {
-  margin: auto;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  opacity: 0.5;
-  color: #fff;
+.ondine.top {
+  top: 20%;
+  left: 20%;
+}
+
+.ondine.middle {
+  top: 30%;
+  left: 70%;
+}
+
+.ondine.bottom {
+  top: 45%;
+  left: 17%;
+}
+
+@-webkit-keyframes ondine {
+  0% {
+    -webkit-box-shadow: 0 0 0 0.7rem rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 0.7rem rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 8rem rgba(255, 255, 255, 0);
+            box-shadow: 0 0 0 8rem rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes ondine {
+  0% {
+    -webkit-box-shadow: 0 0 0 0.7rem rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 0.7rem rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 8rem rgba(255, 255, 255, 0);
+            box-shadow: 0 0 0 8rem rgba(255, 255, 255, 0);
+  }
 }
 
 /* [END MAIN VIEW]
@@ -243,16 +307,17 @@ div.closeRightSideText, div.closeLeftSideText {
   *******************************/
 .contactTitle {
   width: 100%;
-  height: 60vh;
+  height: 50vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  font-weight: bold;
-  font-size: 2rem;
   border-bottom: 1px solid #f1f1f1;
 }
 
 .boxTitle {
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
   margin: auto;
 }
 
@@ -406,100 +471,18 @@ a.downArrow {
 
 /* [BOITE A IDEES]
   ***********************/
-.containertest {
-  width: 50%;
-  height: 60%;
-  position: absolute;
-  top: 50%;
-  right: 2rem;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  overflow: hidden;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.containertest p {
-  margin: auto;
-  text-align: justify;
-  font-family: 'charm', cursive;
-  font-size: 19px;
-  color: #f2f2f2;
-  display: block;
-  padding: 2rem;
-  margin: auto;
-  width: 75%;
-  -webkit-transition: -webkit-transform 300ms ease-in-out;
-  transition: -webkit-transform 300ms ease-in-out;
-  transition: transform 300ms ease-in-out;
-  transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
-  -webkit-transition: 600ms ease-in-out;
-  transition: 600ms ease-in-out;
-  opacity: 0;
-  border-radius: 10px;
-}
-
-.containertest p.animatetest {
-  background: rgba(51, 51, 51, 0.4);
-  -webkit-transform: scale(1.1, 1.1);
-          transform: scale(1.1, 1.1);
-  -webkit-box-shadow: 0px 2px 14px 5px rgba(0, 0, 0, 0.75);
-          box-shadow: 0px 2px 14px 5px rgba(0, 0, 0, 0.75);
-  opacity: 1;
-}
-
-.ripple {
-  top: 20%;
-  left: 20%;
-  margin-top: 5rem;
-  background-color: rgba(255, 255, 255, 0.6);
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  position: absolute;
-  -webkit-animation: ripple 3s linear infinite;
-          animation: ripple 3s linear infinite;
-  cursor: pointer;
-}
-
-.ripple::before,
-.ripple::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50%;
-  -webkit-animation: ripple 3s linear infinite 1s;
-          animation: ripple 3s linear infinite 1s;
-}
-
-.ripple::after {
-  -webkit-animation: ripple 3s linear infinite 2s;
-          animation: ripple 3s linear infinite 2s;
-}
-
-@-webkit-keyframes ripple {
-  0% {
-    -webkit-box-shadow: 0 0 0 0.7rem rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 0 0.7rem rgba(255, 255, 255, 0.2);
-  }
-  100% {
-    -webkit-box-shadow: 0 0 0 8rem rgba(255, 255, 255, 0);
-            box-shadow: 0 0 0 8rem rgba(255, 255, 255, 0);
-  }
-}
-
-@keyframes ripple {
-  0% {
-    -webkit-box-shadow: 0 0 0 0.7rem rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 0 0.7rem rgba(255, 255, 255, 0.2);
-  }
-  100% {
-    -webkit-box-shadow: 0 0 0 8rem rgba(255, 255, 255, 0);
-            box-shadow: 0 0 0 8rem rgba(255, 255, 255, 0);
-  }
+.float {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 40px;
+  left: 40px;
+  background-color: #0C9;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 50px;
+  -webkit-box-shadow: 2px 2px 3px #999;
+          box-shadow: 2px 2px 3px #999;
 }
 /*# sourceMappingURL=main.css.map */

@@ -1,7 +1,20 @@
 /* [CLIENT TEMPLATE]
 ***************************/
 
-.header {
+  /* [UNDERCONSTRUCTION VIEW]
+  ******************************************/
+  
+  .ucView {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../img/coming-soon-construction-data-211122.jpg');
+    background-size: cover;
+  }
+
+  /* [MAIN VIEW]
+  ************************/
+
+  .header {
     position: fixed;
     z-index: 1;
     width: 100%;
@@ -26,6 +39,16 @@
       text-align: left;
       padding-left: 20px;
       color: #FFF;
+    }
+
+    &.stickyWhite {
+      font-size: 24px;
+      line-height: 48px;
+      height: 48px;
+      background: #FFF;
+      text-align: left;
+      padding-left: 20px;
+      box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
     }
   
     & .headerTitle {
@@ -52,9 +75,6 @@
   img.sample {
     width: 100vw;
   }
-  
-  /* [MAIN VIEW]
-  ************************/
   
   .overlayGallery {
     height: 0;
@@ -95,12 +115,12 @@
   }
   
   .parallaxTopMainView {
-    background-image: url('../img/IMG_20190804_181455.jpg');
+    background-image: url('../img/IMG_20190804_181455_new.jpg');
     background-position: bottom;
   }
   
   .parallaxMiddleMainView {
-    background-image: url('../img/IMG_20190804_181419.jpg');
+    background-image: url('../img/IMG_20190804_181419_new.jpg');
     background-position: center;
   }
   
@@ -151,71 +171,101 @@
   
   /* [Zone de texte superposée de la MainView]
   *********************************************/
-  
-  .leftSideText, .rightSideText {
-    color: #fff;
-    margin: 0;
-    position: absolute;
+
+  .rightSideText, .leftSideText {
     width: 50%;
     height: 60%;
-    background: rgba(0, 0, 0, 0.4);
-    top: 75%;
-    transform: translateY(-75%);
-    transition: 0.5s;
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
     overflow: hidden;
     display: flex;
+    margin: 0;
   
-    & .sideTextBox {
-      margin: auto; 
-      width: 75%; 
+    & p {
+      margin: auto;
       text-align: justify; 
       font-family: 'charm', cursive; 
-      font-size: 20px;
+      font-size: 19px;
+      color: #f2f2f2;
+      display: block;
+      padding: 2rem;
+      margin: auto;
+      width: 75%;
+      transition: transform 300ms ease-in-out;
+      transition: 600ms ease-in-out;
+      opacity: 0;
+      border-radius: 10px;
+  
+      &.animateSideText {
+        background: rgba(51,51,51,0.4);
+        transform: scale(1.1, 1.1);
+        box-shadow: 0px 2px 14px 5px rgba(0,0,0,0.75);
+        opacity: 1;
+      }
     }
   }
-  
+
   .leftSideText {
     left: 2rem;
-    border-radius: 10px 10px 10px 10px;
   }
   
   .rightSideText {
     right: 2rem;
-    border-radius: 10px 10px 10px 10px;
   }
   
-  div.closeRightSideText, div.closeLeftSideText {
-    width: 35px;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    position: absolute;
+  .ondine {
+    top: 20%;
+    left: 20%;
+    margin-top: 5rem;
+    background-color: rgba(255, 255, 255, .6);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    position:absolute;
+    animation: ondine 3s linear infinite;
     cursor: pointer;
+
+    &::before,
+    &::after {
+        content:"";
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        border-radius: 50%;
+        animation: ondine 3s linear infinite 1s;
+    }
+
+    &::after {
+        animation: ondine 3s linear infinite 2s;
+    }
+
+    &.top {
+        top: 20%;
+        left: 20%;
+    }
+
+    &.middle {
+        top: 30%;
+        left: 70%;
+    }
+
+    &.bottom {
+        top: 45%;
+        left: 17%;
+    }
   }
-  
-  .closeLeftSideText {
-    border-radius: 0 10px 10px 0;
-    right: 0;
-    display: inline-flex;
-  }
-  
-  .closeRightSideText {
-    border-radius: 10px 0 0 10px;
-    left: 0;
-    display: inline-flex;
-  }
-  
-  .fas.fa-chevron-left {
-    margin: auto;
-    transition: 0.5s;
-    opacity: 0.5;
-    color: #fff;
-  }
-  
-  .fas.fa-chevron-right {
-    margin: auto;
-    transition: 0.5s;
-    opacity: 0.5;
-    color: #fff;
+
+  @keyframes ondine {
+    0% {
+      box-shadow: 0 0 0 .7rem rgba(255,255,255, 0.2);
+    }
+    100% {
+      box-shadow: 0 0 0 8rem rgba(255,255,255, 0);
+    }
   }
   
   /* [END MAIN VIEW]
@@ -226,14 +276,15 @@
   
   .contactTitle {
     width: 100%;
-    height: 60vh;
+    height: 50vh;
     display: flex;
-    font-weight: bold;
-    font-size: 2rem;
     border-bottom: 1px solid #f1f1f1;
   }
   
   .boxTitle {
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
     margin: auto;
   }
   
@@ -381,102 +432,16 @@
   
   /* [BOITE A IDEES]
   ***********************/
-  
-  // .leftSideText, .rightSideText {
-  //   color: #fff;
-  //   margin: 0;
-  //   position: absolute;
-  //   width: 50%;
-  //   height: 60%;
-  //   background: rgba(0, 0, 0, 0.4);
-  //   top: 75%;
-  //   transform: translateY(-75%);
-  //   transition: 0.5s;
-  //   overflow: hidden;
-  //   display: flex;
-  
-  //   & .sideTextBox {
-  //     margin: auto; 
-  //     width: 75%; 
-  //     text-align: justify; 
-  //     font-family: 'charm', cursive; 
-  //     font-size: 20px;
-  //   }
-  // }
-  
-  .containertest {
-    width: 50%;
-    height: 60%;
-    position: absolute;
-    top: 50%;
-    right: 2rem;
-    transform: translateY(-50%);
-    overflow: hidden;
-    display: flex;
-  
-    & p {
-      margin: auto;
-      text-align: justify; 
-      font-family: 'charm', cursive; 
-      font-size: 19px;
-      color: #f2f2f2;
-      display: block;
-      padding: 2rem;
-      margin: auto;
-      width: 75%;
-      transition: transform 300ms ease-in-out;
-      transition: 600ms ease-in-out;
-      opacity: 0;
-      border-radius: 10px;
-  
-      &.animatetest {
-        background: rgba(51,51,51,0.4);
-        transform: scale(1.1, 1.1);
-        box-shadow: 0px 2px 14px 5px rgba(0,0,0,0.75);
-        opacity: 1;
-      }
-    }
-  }
-  
-  // .text-boxtest {
-  //   text-align: center;
-  //   background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/autumn-river-lights-jessica-jenney.jpg");
-  //   background-size: cover;
-  //   width: auto;
-  //   height: 400px;
-  // }
-  
-  .ripple {
-    top: 20%;
-    left: 20%;
-    margin-top: 5rem;
-    background-color: rgba(255, 255, 255, .6);
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    position:absolute;
-    animation: ripple 3s linear infinite;
-    cursor: pointer;
-  }
-  .ripple::before,
-  .ripple::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    border-radius: 50%;
-    animation: ripple 3s linear infinite 1s;
-  }
-  .ripple::after {
-    animation: ripple 3s linear infinite 2s;
-  }
-  @keyframes ripple {
-    0% {
-      box-shadow: 0 0 0 .7rem rgba(255,255,255, 0.2);
-    }
-    100% {
-      box-shadow: 0 0 0 8rem rgba(255,255,255, 0);
-    }
+  .float{
+    position:fixed;
+    width: 50px;
+    height: 50px;
+    bottom: 40px;
+    left: 40px;
+    background-color: #0C9;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 50px;
+    box-shadow: 2px 2px 3px #999;
   }

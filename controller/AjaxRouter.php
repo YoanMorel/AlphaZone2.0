@@ -6,6 +6,8 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
 
     // [Controleur de la validation formulaire de contact]
     if(isset($_POST['ajax']) && !empty($_POST) && $_POST['ajax'] == 'validation'):
+        require_once '../model/DbConnection.php';
+        require_once '../model/User.php';
         require_once 'FormValidator.php';
 
         $validator = new FormValidator();
@@ -134,7 +136,7 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
     endif;
 
 else:
-    echo 'Vous n\'êtes pas AJAX ! Vous ne passerez PAS !';
+    echo 'Vous n\'êtes pas AJAX ! Vous ne passerez PAS !<br />';
 endif;
 
 ?>

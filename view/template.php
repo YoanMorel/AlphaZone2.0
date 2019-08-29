@@ -23,11 +23,11 @@
     <div class="header <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
         <span class="headerTitle">L'atelier de Jean-François</span>
         <div class="rightHeader <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
-            <a href="index.php">Accueil</a>
-            <a href="index.php?action=pieces">Œuvres</a>
-            <a href="index.php?action=philosophy">Philosophie</a>
-            <a href="index.php?action=biography">Biographie</a>
-            <a href="index.php?action=contact">Contact</a>
+            <a href="home">Accueil</a>
+            <a href="home/pieces.html">Œuvres</a>
+            <a href="home/philosophy.html">Philosophie</a>
+            <a href="home/biography.html">Biographie</a>
+            <a href="home/contact.html">Contact</a>
             <a class="overlayDrop" href="javascript:void(0)"><i class="fas fa-th-large"></i></a>
         </div>
     </div>
@@ -49,10 +49,16 @@
     </div>
     <div class="container-fluid p-0">
         <?= $content; ?>
-
+        <?php
+            if(isset($_SESSION['user'])):
+        ?>
+        <a class="float" href="admin/main.html">
+            <i class="fas fa-fw fa-user-cog"></i>
+        </a>
+        <?php endif; ?>
     </div>
     <div class="footer">
-            <div class="textBoxFooter"><a href="index.php?action=admin&module=main">Admin</a></div>
+        <div class="textBoxFooter"><a href="home/admin.html">Admin</a></div>
     </div>
 
     <!-- Optional JavaScript -->
