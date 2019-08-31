@@ -11,7 +11,7 @@ class UploadHandler {
   private $subSectionLink;
   private $dataHandler;
 
-  public function __construct($section, $subSection, $title, $text, $gallery, $file) {
+  public function __construct($section, $subSection, $title, $text = null, $gallery, $file) {
     $this->dataHandler = new DataHandler();
     $this->dataHandler->setSection($section);
     $this->dataHandler->setSubSection($subSection);
@@ -28,7 +28,7 @@ class UploadHandler {
   public function uploader() {
     if(is_dir($this->sectionLink)):
       if(is_dir($this->subSectionLink)):
-        file_put_contents($this->subSectionLink.'/'.$this->name, $this->decodeData);
+        file_put_contents($this->subSectionLink.'/'.$this->name, $this->decodedData);
         $stmt = $this->dataHandler->insertDataInDB();
       else:
         mkdir($this->subSectionLink);

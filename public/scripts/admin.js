@@ -128,7 +128,7 @@ $(function() {
   // Lecture du fichier JSON pour remplir le tableaux de données de fichiers si il y a une sauvegarde. Dans le cas où elle existe, on affiche une alerte
   $.getJSON('controller/autoSaveBuffer.json', function(data) {
     $.each(data, function(key, val) {
-      if (val.text.length) {
+      if (val.text.length || val.section.length || val.subSection.length) {
         objsTab.push(val);
       }
       if (objsTab.length) {
@@ -241,6 +241,7 @@ $(function() {
 
     if (imgId != textArea.attr('name') && dataFields.is(':visible')) {
       textArea.val('');
+      $('input').val('');
       dataFields.css("display", "none");
     }
 
@@ -320,6 +321,7 @@ $(function() {
         counter++;
       }
     });
+  
     if (objsTab && counter == fileStorage.length) {
       uploadBTN.removeClass('btn-danger').addClass('btn-success').prop('disabled', false);
     } else {
@@ -358,7 +360,6 @@ $(function() {
           data: JSON.stringify(objsTab)
         },
         complete: function(response) {
-          console.log(response);
           snackBar(response.responseJSON.msg);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -613,7 +614,7 @@ $(function() {
       url: 'controller/AjaxRouter.php',
       data: params,
       complete: function(response) {
-        console.log(response.responseText);
+
         snackBar(response.responseText);
         if(imgNode.parents('div.galleryCol').hasClass('needsEdit')) {
           imgNode.parents('div.galleryCol').removeClass('needsEdit');
@@ -637,7 +638,5 @@ $(function() {
 /****************************
  > FIN SCRIPT DE GALERIE
  * *************************/
-
- console.log(window.location);
 
 });

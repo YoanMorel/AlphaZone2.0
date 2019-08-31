@@ -17,7 +17,7 @@ class DataHandler extends DbConnection {
         $this->subSection = $dataSubSection;
     }
 
-    public function setData($title, $story, $link, $creationDate = null) {
+    public function setData($title, $story = null, $link, $creationDate = null) {
         $this->dataTitle        = $title;
         $this->dataStory        = $story;
         $this->dataLink         = $link;

@@ -59,7 +59,7 @@ class ScanDir {
                 if($pathTab[0] == $section['SEC_SECTION']):
                     $ifSectionExists = true;
                     $this->dataHandler->setSection($section['SEC_SECTION']);
-                    $subSections = $this->gallery->getSubSections($section['SEC_SECTION'])->fetchAll();
+                    $subSections = $this->gallery->getSubSectionsFrom($section['SEC_SECTION'])->fetchAll();
                     foreach($subSections as $subSection):
                         if($pathTab[1] == $subSection['SUB_SUBSECTION']):
                             $ifSubSectionExists = true;
@@ -114,7 +114,7 @@ class ScanDir {
     public function getDataScan() {
         $sectionsList = $this->gallery->getSections()->fetchAll();
         foreach($sectionsList as $section):
-            $subSectionsList = $this->gallery->getSubSections($section['SEC_SECTION'])->fetchAll();
+            $subSectionsList = $this->gallery->getSubSectionsFrom($section['SEC_SECTION'])->fetchAll();
             $i = 0;
             foreach($subSectionsList as $subSection):
                 $pieces = $this->gallery->getPiecesFrom($section['SEC_SECTION'], $subSection['SUB_SUBSECTION'])->fetchAll();

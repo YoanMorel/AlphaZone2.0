@@ -46,8 +46,8 @@
                 <a class="red shutdown" href="admin/exit.html">
                   <i class="fas fa-fw fa-power-off"></i> Déconnexion
                 </a>
-                <a style="position: absolute; bottom: 0;" href="home">
-                <i class="far fa-fw fa-window-maximize"></i> Voir le site
+                <a class="seeSite" href="home">
+                  <i class="far fa-fw fa-window-maximize"></i> Voir le site
                 </a>
             </div>
           </div>

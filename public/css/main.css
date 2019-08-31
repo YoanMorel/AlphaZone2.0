@@ -57,22 +57,89 @@
   float: left;
 }
 
-.header .rightHeader {
+.header .headerLinks {
   float: right;
 }
 
-.header .rightHeader.main a {
-  color: #FFF;
-}
-
-.header .rightHeader a {
+.header .headerLinks a {
   float: left;
   padding-right: 2rem;
   font-size: 1rem;
 }
 
-img.sample {
-  width: 100vw;
+.header .headerLinks.main a {
+  color: #FFF;
+}
+
+.header .headerIcon {
+  top: 0;
+  right: 0;
+  position: absolute;
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    font-size: 20px;
+    line-height: 35px;
+    height: auto;
+    padding-left: 10pt;
+    font-family: 'PT Sans', sans-serif;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    color: #000;
+  }
+  .header.main {
+    color: #fafdf6;
+  }
+  .header.sticky {
+    font-size: 15px;
+    line-height: 35px;
+    height: auto;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: left;
+    color: #FFF;
+  }
+  .header.stickyWhite {
+    font-size: 15px;
+    line-height: 35px;
+    height: auto;
+    background: #FFF;
+    text-align: left;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  }
+  .header .headerTitle {
+    font-family: 'Charm', cursive;
+    float: left;
+    display: block;
+    width: 100%;
+  }
+  .header .headerLinks {
+    position: relative;
+    display: block;
+    float: none;
+  }
+  .header .headerLinks a {
+    display: block;
+    float: none;
+    width: 100%;
+    padding: 0;
+    font-size: 1rem;
+  }
+  .header .headerLinks.main a {
+    color: #FFF;
+  }
+  .header .headerIcon {
+    top: 0;
+    right: 2rem;
+    position: absolute;
+    display: block;
+  }
 }
 
 .overlayGallery {
@@ -237,7 +304,7 @@ a.mainToGallery:hover {
   top: 20%;
   left: 20%;
   margin-top: 5rem;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.9);
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
@@ -303,6 +370,85 @@ a.mainToGallery:hover {
 
 /* [END MAIN VIEW]
   *******************************/
+/* [GALLERY VIEW]
+  *******************************/
+.gallery {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  /* Compensate for excess margin on outer gallery flex items */
+  margin: -1rem -1rem;
+}
+
+.galleryItem {
+  /* Minimum width of 24rem and grow to fit available space */
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 24rem;
+          flex: 1 0 24rem;
+  /* Margin value should be half of grid-gap value as margins on flex items don't collapse */
+  margin: 1rem;
+  -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.containImage {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+}
+
+.containImage .galleryImage {
+  display: block;
+  max-width: 100vw;
+  height: auto;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.containImage:hover .galleryImage {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+@media screen and (min-width: 801px) {
+  @supports (display: grid) {
+    .gallery {
+      display: -ms-grid;
+      display: grid;
+      -ms-grid-columns: (minmax(24rem, 1fr))[auto-fit];
+          grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+      grid-gap: 2rem;
+    }
+    .gallery,
+    .galleryItem {
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  @supports (display: grid) {
+    .gallery {
+      display: -ms-grid;
+      display: grid;
+      grid-gap: 2rem;
+    }
+    .gallery,
+    .galleryItem {
+      margin: 0;
+    }
+  }
+}
+
 /* [CONTACT VIEW]
   *******************************/
 .contactTitle {

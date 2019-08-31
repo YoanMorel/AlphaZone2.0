@@ -12,9 +12,17 @@ class PiecesCtrl {
         $this->gallery = new Gallery();
     }
 
-    public function piecesView() {
-        $view = new View('pieces');
-        $view->generate([null]);
+    public function galleryView() {
+        $view = new View('gallery');
+        $gallery = [];
+        $piecesLink = $this->gallery->getPiecesLink()->fetchAll();
+        foreach($piecesLink as $row):
+            $links = explode(',', $row['linkPieces']);
+            foreach($links as $link):
+                $gallery[$row['SEC_SECTION']][] = $link;
+            endforeach;
+        endforeach;
+        $view->generate(['gallery' => $gallery]);
     }
 
     public function piecesAdminView() {

@@ -21,10 +21,11 @@
 <body>
     <a href="javascript:" id="returnToTop"><i class="fas fa-chevron-up"></i></a>
     <div class="header <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
-        <span class="headerTitle">L'atelier de Jean-François</span>
-        <div class="rightHeader <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
+        <div class="headerTitle">L'atelier de Jean-François</div>
+        <div class="headerIcon"><i class="fas fa-fw fa-bars"></i></div>
+        <div class="headerLinks <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
             <a href="home">Accueil</a>
-            <a href="home/pieces.html">Œuvres</a>
+            <a href="home/gallery.html">Œuvres</a>
             <a href="home/philosophy.html">Philosophie</a>
             <a href="home/biography.html">Biographie</a>
             <a href="home/contact.html">Contact</a>

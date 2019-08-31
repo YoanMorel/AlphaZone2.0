@@ -28,6 +28,8 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
         require_once 'uploadHandlerCtrl.php'; 
 
         extract($_POST);
+        if(empty($text))
+            $text = NULL;
         $uploadHandler = new UploadHandler($section, $subSection, $title, $text, '../gallery/', $file);
         if($uploadHandler->uploader()):
             $response = $uploadHandler->getName().' loaded in gallery/'.$uploadHandler->getSection().'/'.$uploadHandler->getSubSection().'/ at '.date('H:i:s', time()).' ...';

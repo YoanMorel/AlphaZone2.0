@@ -66,8 +66,6 @@
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
-  /* position: fixed;
-    z-index: 1; */
   top: 0;
   left: 0;
   background-color: #191716;
@@ -83,6 +81,11 @@
   display: block;
   text-align: left;
   width: 100%;
+}
+
+.sidebar a.seeSite {
+  position: absolute;
+  bottom: 0;
 }
 
 .sidebar a:hover {
@@ -130,6 +133,10 @@
     text-align: left;
     width: 100%;
   }
+  .sidebar a.seeSite {
+    display: block;
+    position: relative;
+  }
   .sidebar a.upload, .sidebar a.update, .sidebar a.events {
     display: none;
   }
@@ -138,7 +145,7 @@
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (min-width: 501px) and (max-width: 1000px) {
   .sidebar {
     height: auto;
     width: 100%;
@@ -159,12 +166,19 @@
     text-align: left;
     width: 100%;
   }
+  .sidebar a.seeSite {
+    display: block;
+    position: relative;
+  }
+  .sidebar a.upload, .sidebar a.update, .sidebar a.events {
+    display: none;
+  }
   .sidebar a:hover {
     color: #FFD700;
   }
 }
 
-@media screen and (min-width: 1000px) and (max-width: 1200px) {
+@media screen and (min-width: 1001px) and (max-width: 1200px) {
   .sidebar {
     height: auto;
     width: 100%;
@@ -181,10 +195,13 @@
     text-decoration: none;
     font-size: 20px;
     color: #818181;
-    float: left;
+    display: block;
     text-align: left;
     width: auto;
-    display: initial;
+  }
+  .sidebar a.seeSite {
+    display: block;
+    position: relative;
   }
   .sidebar a:hover {
     color: #FFD700;

@@ -1,6 +1,6 @@
 <?php $this->title = 'Administration'; ?>
 
-<div class="container" style="padding: 0; margin: 0; display: flex; flex-direction: column; width: 100%; height: 100%; overflow: hidden;">
+<div class="container" style="padding: 0; margin: 0; display: flex; flex-direction: column; width: 100%; height: 100vh; overflow: hidden;">
     <div class="topBar slideTopBar">
         <span style="padding-left: 1rem;">Bienvenue sur votre console d'administration <?= $_SESSION['user']->use_name; ?></span>
         <div class="clockTime"></div>

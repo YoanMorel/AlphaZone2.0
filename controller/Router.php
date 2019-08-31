@@ -43,8 +43,8 @@ class Router {
             if(isset($_GET['action'])):
                 if($_GET['action'] == 'home'):
                     $this->homeCtrl->homeView();
-                elseif($_GET['action'] == 'pieces'):
-                    $this->piecesCtrl->piecesView();
+                elseif($_GET['action'] == 'gallery'):
+                    $this->piecesCtrl->galleryView();
                 elseif($_GET['action'] == 'philosophy'):
                     $this->philosophyCtrl->philosophyView();
                 elseif($_GET['action'] == 'biography'):

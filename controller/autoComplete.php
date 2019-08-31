@@ -16,7 +16,7 @@ class AutoComplete {
     if(empty($this->section)):
       $data = $this->gallery->getSections()->fetchAll(PDO::FETCH_NUM);
     else:
-      $data = $this->gallery->getSubSections($this->section)->fetchAll(PDO::FETCH_NUM);
+      $data = $this->gallery->getSubSectionsFrom($this->section)->fetchAll(PDO::FETCH_NUM);
     endif;
 
     return $data;

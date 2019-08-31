@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Classe gestionnaire de paramètres de configuration pour la classe DbConnection
+ * Administrator for configuration settings Class for DbConnection Class
  * 
  * @version 0.1
  * @author  Yoan Morel
@@ -9,16 +9,16 @@
 class Setting {
 
     /** 
-     * Tableau des paramètres de configuration 
+     * Array of configuration settings
      */
     private static $params;
 
     /**
-     * Retourne le paramètre de configuration recherché
+     * Returns desired configuration settings 
      * 
-     * @param   string $paramVal Nom du paramètre
-     * @param   string $defaultValue Valeur par défaut
-     * @return  string $val Valeur du paramètre
+     * @param   string $paramVal Parameter's name
+     * @param   string $defaultValue Default value
+     * @return  string $val Parameter's name
      */
     public static function param($paramVal, $defaultValue = null) {
         if (isset(self::getParams()[$paramVal])):
@@ -30,11 +30,11 @@ class Setting {
     }
 
     /**
-     * Retourne le tableau de paramètres en le chargeant si nécessaire depuis un fichier de configuration
-     * Le fichier de configuration recherché est config.ini
+     * Returns the parameter's array, charged if necessary from a configuration file
+     * The searched configuration file is config.ini
      * 
-     * @return array Tableau des paramètres
-     * @throws Exception si aucun fichier de configuration trouvé
+     * @return array Parameter's array
+     * @throws Exception If no configuration's file found
      */
     private static function getParams() {
         if (self::$params === null):

@@ -3,9 +3,10 @@
 require_once 'Setting.php';
 
 /**
- * Classe abstraite DbConnection
- * Centralise les services d'accès à la base de données
- * Utilise l'API PDO
+ * Abstract Class DbConnection
+ * 
+ * Centralizes access services to the database
+ * Use PDO API
  * 
  * @version 1.2
  * @author 	Yoan Morel
@@ -13,25 +14,25 @@ require_once 'Setting.php';
 abstract class DbConnection {
 
 	/**
-	 * Objet PDO relatif à l'instance des classes filles
+	 * PDO object related to the instance of the child classes
 	 */
 	private static $spdo;
 
 	/**
-	 * Methode de service de requêtes SQL
+	 * SQL queries service method
 	 * 
-	 * @param 	string $sql Requête mySQL
-	 * @param 	array $params Paramétrage de la requête
-	 * @return 	PDOStmt Résultat de la requête
+	 * @param 	string $sql mySQL queries
+	 * @param 	array $params Query's parameters
+	 * @return 	PDOStmt Query's results
 	 */
 	protected function queryCall($sql, Array $params = null) {
 		if($params):
 			$returnedData = self::dbConnect()->prepare($sql);
-			// boucle sur les paramètres à binder
+			// loop on the parameters to bind
 			foreach ($params as $param):
 				$returnedData->bindParam($param[0], $param[1], $param[2]);
 			endforeach;
-			// execute la requete préparée
+			// execute the prepared query
 			$returnedData->execute();
 		else:
 			$returnedData = self::dbConnect()->query($sql);
@@ -41,63 +42,63 @@ abstract class DbConnection {
 	}
 
 	/**
-	 * Methode de service d'initialisation de transaction PDO
+	 * SQL transaction initialization service method
 	 * 
-	 * @return PDO Objet PDO
+	 * @return PDO PDO Object
 	 */
 	protected function startTransaction() {
 		return self::dbConnect()->beginTransaction();
 	}
 
 	/**
-	 * Methode de service de dépot de transaction PDO
+	 * SQL commit service method
 	 * 
-	 * @return PDO Objet PDO
+	 * @return PDO PDO Object
 	 */
 	protected function commitTransaction() {
 		return self::dbConnect()->commit();
 	}
 
 	/**
-	 * Methode de service d'annulation de transaction PDO
+	 * SQL rollBack service method
 	 * 
-	 * @return PDO Objet PDO
+	 * @return PDO PDO Object
 	 */
 	protected function preventTransaction() {
 		return self::dbConnect()->rollBack();
 	}
 
 	/**
-	 * Methode de service de récupération de la dernière entrée mySQL
+	 * Last mySQL entry recovery service method
 	 * 
-	 * @return PDO Object PDO
+	 * @return PDO PDO Object
 	 */
 	protected function getLastInsertId() {
 		return self::dbConnect()->lastInsertId();
 	}
 
 	/**
-	 * Methode de service de comptage de ligne retournée par PDO
+	 * SQL line counter service method
 	 * 
-	 * @return PDO objet PDO
+	 * @return PDO PDO Object
 	 */
 	protected function getRowCount() {
 		return self::dbConnect()->rowCount();
 	}
 
 	/**
-	 * Methode de connexion PDO au besoin
+	 * PDO connection service method if needed
 	 * 
-	 * @return PDO Objet PDO spdo
+	 * @return PDO $spdo PDO Object
 	 */
 	private static function dbConnect(){
 		try {
 			if(self::$spdo === null):
-				// récupération des paramètres de config
+				// saves configuration settings
 				$dsn = Setting::param("dsn");
 				$user = Setting::param("user");
 				$pwd = Setting::param("pwd");
-				// génère la connexion
+				// start connection
 				self::$spdo = new PDO($dsn, $user, $pwd,
 					[
 					PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -106,7 +107,7 @@ abstract class DbConnection {
 				);
 			endif;
 
-			// SI $spdo est différent de null, alors on retourne l'objet courant
+			// IF spdo's null, returns current object value
 			return self::$spdo;
 		} catch (PDOException $error) {
 			$msg = 'ERREUR PDO within ' . $error->getFile() . ' L.' . $error->getLine() . ' : ' . $error->getMessage();

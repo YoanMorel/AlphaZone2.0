@@ -1,8 +1,5 @@
 $(function() {
 
-  var regex = /[.]/g;
-  console.log(window.location.pathname.search(regex));
-
   // Evènement pour le Header
   $(window).scroll(function() {
     var regex = /[.]/g;
