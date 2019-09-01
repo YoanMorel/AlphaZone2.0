@@ -8,29 +8,55 @@
 </div>
 
 <div class="row no-gutters mt-2 mb-3">
-<div class="gallery">
   <?php
-    foreach($gallery as $section => $links):
+    if(isset($gallery)):
   ?>
+  <div class="gallery">
+    <?php
+      foreach($gallery as $section => $links):
+        $randIndex = rand(0, count($links) - 1);
+    ?>
 
       <div class="galleryItem">
           <div class="containImage">
-            <img class="galleryImage" src="<?= $links[0] ?>" alt="" />
+            <a href="pieces/<?= strtolower($section) ?>.html">
+              <img class="galleryImage" src="<?= $links[$randIndex] ?>" alt="" />
+            </a>
           </div>
           <div style="display: block; text-align: center;">
-            <?= $section ?>
+            <a href="pieces/<?= strtolower($section) ?>.html">
+              <?= $section ?>
+            </a>
           </div>
       </div>
 
-  <?php
+    <?php
     endforeach;
+    ?>
+  </div>
+  <?php
+    endif;
+    if(isset($sectionGallery)):
+  ?>
+
+    <div class="wrapper">
+      <div class="containerGrid">
+      <?php
+        foreach($sectionGallery as $link):
+      ?>
+        <div class="<?= $link[1] ?>">
+          <img src="<?= $link[0] ?>" alt="">
+        </div>
+      <?php
+        endforeach;
+      ?>
+      </div>
+    </div>
+  
+  <?php
+    endif;
   ?>
 </div>
-</div>
-
-<!-- <div style="display: flex; width: 100vw; flex-direction: row; flex: wrap; justify-content: space-between;">
-
-</div> -->
 
 <!-- <div style="display: flex; height: 50vh;">
     <div style="margin: auto; text-align: center;">

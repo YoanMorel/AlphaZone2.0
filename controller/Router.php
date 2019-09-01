@@ -9,7 +9,6 @@ require_once 'controller/biographyCtrl.php';
 require_once 'controller/contactCtrl.php';
 require_once 'controller/settingsCtrl.php';
 require_once 'controller/eventsAdminCtrl.php';
-require_once 'controller/Session.php';
 require_once 'view/View.php';
 
 class Router {
@@ -40,11 +39,17 @@ class Router {
 
     public function getRoute() {
         try {
+            array_map('htmlspecialchars', $_GET);
             if(isset($_GET['action'])):
                 if($_GET['action'] == 'home'):
                     $this->homeCtrl->homeView();
                 elseif($_GET['action'] == 'gallery'):
-                    $this->piecesCtrl->galleryView();
+                    if(!isset($_GET['section'])):
+                        $this->piecesCtrl->galleryView();
+                    else:
+                        $section = $this->getParams($_GET, 'section');
+                        $this->piecesCtrl->piecesView($section);
+                    endif;
                 elseif($_GET['action'] == 'philosophy'):
                     $this->philosophyCtrl->philosophyView();
                 elseif($_GET['action'] == 'biography'):
@@ -102,7 +107,7 @@ class Router {
                         endif;
                     endif;
                 else:
-                    $this->errorAlert('Index GET invalide !', true);  
+                    $this->errorAlert('Index GET invalide !');  
                 endif;
             else:
                 $this->homeCtrl->homeView();

@@ -23,17 +23,24 @@ class ScanDir {
         $this->dirToScan        = $pathToScan;
     }
 
+    public function hasLog() {
+        return !empty($this->log);
+    }
+
     public function regularize() {
+        $this->loadPendingData($this->dataScan, $this->dirScan);
+        $this->log['scan'] .= "\n\rOpération terminé à ".date('G:i', mktime());
+    }
+
+    public function getScans() {
         $this->getDirScan();
         $this->getDataScan();
         if($this->dataScan && $this->dirScan):
             if(count($this->dataScan) < count($this->dirScan)):
-                $this->log['scan'] = 'Irrégularités détéctées lors du Scan. Des informations sont manquantes dans la base de données. Lancement du régularisateur';
-                $this->loadPendingData($this->dataScan, $this->dirScan);
-                $this->log['scan'] .= "\n\rOpération terminé à ".date('G:i', mktime());
+                $this->log['scan']['error'] = 'Irrégularités détéctées lors du Scan. Des informations sont manquantes dans la base de données. Lancement du régularisateur';
             else:
-                $this->log['scan'] = 'Aucune irrégularité détéctée';
-                $this->log['scan'] .= "\n\rOpération terminée à ".date('G:i', mktime());
+                $this->log['scan']['ok'] = 'Aucune irrégularité détéctée';
+                $this->log['scan']['ok'] .= "\n\rOpération terminée à ".date('G:i', mktime());
             endif;
         endif;
     }
@@ -111,7 +118,7 @@ class ScanDir {
         endforeach;
     }
 
-    public function getDataScan() {
+    private function getDataScan() {
         $sectionsList = $this->gallery->getSections()->fetchAll();
         foreach($sectionsList as $section):
             $subSectionsList = $this->gallery->getSubSectionsFrom($section['SEC_SECTION'])->fetchAll();

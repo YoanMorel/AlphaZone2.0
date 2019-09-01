@@ -25,10 +25,10 @@
         <div class="headerIcon"><i class="fas fa-fw fa-bars"></i></div>
         <div class="headerLinks <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
             <a href="home">Accueil</a>
-            <a href="home/gallery.html">Œuvres</a>
-            <a href="home/philosophy.html">Philosophie</a>
-            <a href="home/biography.html">Biographie</a>
-            <a href="home/contact.html">Contact</a>
+            <a href="gallery.html">Œuvres</a>
+            <a href="philosophy.html">Philosophie</a>
+            <a href="biography.html">Biographie</a>
+            <a href="contact.html">Contact</a>
             <a class="overlayDrop" href="javascript:void(0)"><i class="fas fa-th-large"></i></a>
         </div>
     </div>

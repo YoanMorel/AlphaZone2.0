@@ -14,9 +14,14 @@ $(function() {
       $('div.header').removeClass('sticky stickyWhite');
     }
   });
+
   if($(window).scrollTop() > 50) {
     $('div.header').addClass('sticky');
   }
+
+  $('.headerIcon').click(function(){
+    $('.headerLinks').toggleClass('showing');
+  });
 
   // Handler pour l'évènement overlayGallery
   $('a.overlayDrop').click(function() {

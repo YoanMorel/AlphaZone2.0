@@ -4,7 +4,6 @@
 <div class="row no-gutters galleryRow" <?= $pieces ? '' : 'style="height: 100vh;"'?>>
 
 <?php
-
     if($pieces):
         foreach($pieces as $piece):
 
@@ -106,7 +105,7 @@
 
 <div id="myModal" class="modalImg">
   <span class="close">&times;</span>
-  <img class="modal-content" id="img01">
+  <img class="modalContent" id="img01">
   <div id="caption"></div>
 </div>
 

@@ -2,6 +2,8 @@
 
 require_once 'model/DbConnection.php';
 require_once 'model/Gallery.php';
+require_once 'model/DataHandler.php';
+require_once 'controller/scanDirCtrl.php';
 require_once 'view/View.php';
 
 class PiecesCtrl {
@@ -31,6 +33,28 @@ class PiecesCtrl {
         $sections   = $this->gallery->getSections()->fetchAll();
 
         $view->generate(['pieces' => $pieces, 'sections' => $sections], true);
+    }
+
+    public function piecesView($section) {
+        $view = new View('gallery');
+        $pieces = $this->gallery->getPiecesLink()->fetchAll();
+        $links = [];
+        foreach($pieces as $row):
+            if(strtolower($row['SEC_SECTION']) == $section):
+                $piecesLink = explode(',', $row['linkPieces']);
+                foreach($piecesLink as $link):
+                    if(getimagesize($link)[0] > getimagesize($link)[1])
+                        $direction = 'horizontal';
+                    if(getimagesize($link)[0] < getimagesize($link)[1])
+                        $direction = 'vertical';
+                    if(getimagesize($link)[0] == getimagesize($link)[1])
+                        $direction = 'big';
+                    $links[] = [$link, $direction];
+                endforeach;
+            endif;
+        endforeach;
+
+        $view->generate(['sectionGallery' => $links]);
     }
 }
 
