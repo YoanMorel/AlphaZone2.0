@@ -1,7 +1,7 @@
 <?php $this->title = 'uploader'; ?>
 
   <div class="row no-gutters">
-    <div class="col-12">
+    <div class="col-12 alertUpload">
         <div class="alertPopup">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             <span class="alertContent"></span>

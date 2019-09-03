@@ -8,13 +8,18 @@ $(function() {
     }, 3000);
   }
 
+  // [RESPONSIVE NAVBAR]
+  $('.iconSidebar .icon').click(function(){
+    $('.sidebar').toggleClass('showing');
+  });
+
   // [SLIDE EFFECT]
   $(".slideCardAnim").each(function(){
     $(this).addClass("slideCard");
   });
 
   // [CLOCK]
-  startTime();
+    startTime();
 
   function startTime() {
     var today = new Date();
@@ -65,7 +70,7 @@ $(function() {
   var imgSubSection = $('input#imgSubSection');
   var textArea      = $('textarea.onHoldTextImg');
   var uploadBTN     = $('button#upload');
-  var alertPopup    = $('div.alertPopup');
+  var alertPopup    = $('.alertUpload div.alertPopup');
 
   // Tableau stockage des images, tableau stockage des données concernant les images, tableaux pour l'autocompletion
   var fileStorage             = [];
@@ -628,7 +633,7 @@ $(function() {
     $(this).prop('desabled', true).removeClass('enabled').addClass('btn-danger');
   });
 
-  $('span.closeEditorOverlay').click(function() {
+  $('.closeEditor').click(function() {
     $(this).parent().removeClass('slideEditor');
     $('button.btnEditor').prop('desabled', true).removeClass('enabled').addClass('btn-danger');
     $('body').css('overflow', 'visible');

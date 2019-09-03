@@ -25,6 +25,6 @@
 <div id="extraPhilosophy" class="parallaxExtraMainView">
     <img src="public/img/IMG_20190804_181751_new.jpg" alt="" />
     <div class="centeredLinkGallery">
-        <a href="index.php?action=pieces" class="mainToGallery">Les Oeuvres</a>
+        <a href="gallery.html" class="mainToGallery">Les Oeuvres</a>
     </div>
 </div>

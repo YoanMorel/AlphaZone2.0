@@ -117,31 +117,22 @@ a:hover {
   margin-bottom: 15px;
 }
 
-/* The Modal (background) */
+/* [MODAL IMG]
+ * ************************/
 .modalImg {
   display: none;
-  /* Hidden by default */
   position: fixed;
-  /* Stay in place */
   z-index: 1;
-  /* Sit on top */
   padding-top: 100px;
-  /* Location of the box */
   left: 0;
   top: 0;
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */
   background-color: black;
-  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.9);
-  /* Black w/ opacity */
 }
 
-/* Modal Content (image) */
 .modalImg .modalContent {
   margin: auto;
   display: block;
@@ -149,7 +140,6 @@ a:hover {
   max-width: 800px;
 }
 
-/* Caption of Modal Image */
 .modalImg #caption {
   margin: auto;
   display: block;
@@ -161,8 +151,8 @@ a:hover {
   height: 150px;
 }
 
-/* Add Animation */
-.modalImg .modalContent, .modalImg #caption {
+.modalImg .modalContent,
+.modalImg #caption {
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
   animation-name: zoom;
@@ -172,9 +162,11 @@ a:hover {
 @-webkit-keyframes zoom {
   from {
     -webkit-transform: scale(0);
+            transform: scale(0);
   }
   to {
     -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 
@@ -189,7 +181,6 @@ a:hover {
   }
 }
 
-/* The Close Button */
 .close {
   position: absolute;
   top: 15px;
@@ -201,14 +192,12 @@ a:hover {
   transition: 0.3s;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px) {
   .modalContent {
     width: 100%;
@@ -256,8 +245,8 @@ a#returnToTop:hover i {
   top: 5px;
 }
 
-/* [END COMMON RULES]
-**********************/
+/* [CHECKBOX DESIGN]
+ * *************************/
 input[type="checkbox"]#cbErase {
   cursor: pointer;
   height: 30px;
@@ -282,7 +271,8 @@ input[type="checkbox"]#cbErase + span {
   transition: all .2s ease;
 }
 
-input[type="checkbox"]#cbErase + span::before, input[type="checkbox"]#cbErase + span::after {
+input[type="checkbox"]#cbErase + span::before,
+input[type="checkbox"]#cbErase + span::after {
   background: #fff;
   content: '';
   display: block;
@@ -326,6 +316,8 @@ input[type="checkbox"]#cbErase:checked + span::after {
   top: 8px;
 }
 
+/* [END COMMON RULES]
+**********************/
 /* [BOITE A OUTS]
  * *****************/
 /*# sourceMappingURL=style.css.map */

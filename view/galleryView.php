@@ -2,15 +2,13 @@
 
 <div class="contactTitle">
   <div style="margin: auto; text-align: center;">
-    <div class="boxTitle">Galerie</div>
+    <div class="boxTitle"><?= isset($sectionTitle) ? $sectionTitle : 'Galerie' ?></div>
     <div>Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis.</div>
   </div>
 </div>
 
 <div class="row no-gutters mt-2 mb-3">
-  <?php
-    if(isset($gallery)):
-  ?>
+  <?php if(isset($gallery)): ?>
   <div class="gallery">
     <?php
       foreach($gallery as $section => $links):
@@ -23,16 +21,14 @@
               <img class="galleryImage" src="<?= $links[$randIndex] ?>" alt="" />
             </a>
           </div>
-          <div style="display: block; text-align: center;">
+          <div style="display: block; text-align: center; height: 10%">
             <a href="pieces/<?= strtolower($section) ?>.html">
               <?= $section ?>
             </a>
           </div>
       </div>
 
-    <?php
-    endforeach;
-    ?>
+    <?php endforeach; ?>
   </div>
   <?php
     endif;
@@ -41,27 +37,19 @@
 
     <div class="wrapper">
       <div class="containerGrid">
-      <?php
-        foreach($sectionGallery as $link):
-      ?>
+      <?php foreach($sectionGallery as $link): ?>
         <div class="<?= $link[1] ?>">
-          <img src="<?= $link[0] ?>" alt="">
+          <img class="imgTrigger" src="<?= $link[0] ?>" alt="">
         </div>
-      <?php
-        endforeach;
-      ?>
+      <?php endforeach; ?>
       </div>
     </div>
   
-  <?php
-    endif;
-  ?>
+  <?php endif; ?>
 </div>
 
-<!-- <div style="display: flex; height: 50vh;">
-    <div style="margin: auto; text-align: center;">
-      <i class="far fa-fw fa-7x fa-images m-4" style="color: #391463;"></i>
-      <div>Elle arrive <b>bientôt</b> !</div>
-      <div>La galerie de l'<b>Atelier de Jean-François</b> prend forme.</div>
-    </div>
-</div> -->
+<div id="myModal" class="modalImg">
+  <span class="close">&times;</span>
+  <img class="modalContent" id="img01">
+  <div id="caption"></div>
+</div

@@ -108,6 +108,12 @@ $(function() {
     $('.modalImg').css('display', 'block').children('img').attr('src', imgSrc).siblings('#caption').text(imgStory);
   });
 
+  $('.imgTrigger').click(function() {
+    var imgSrc = $(this).attr('src');
+
+    $('.modalImg').css('display', 'block').children('img').attr('src', imgSrc);
+  });
+
   $('.close').click(function() {
     $('body').css('overflow', 'visible');
     $('.modalImg').css('display', 'none');

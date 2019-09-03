@@ -38,6 +38,8 @@ class ScanDir {
         if($this->dataScan && $this->dirScan):
             if(count($this->dataScan) < count($this->dirScan)):
                 $this->log['scan']['error'] = 'Irrégularités détéctées lors du Scan. Des informations sont manquantes dans la base de données. Lancement du régularisateur';
+                $this->log['scan']['dataScan'] = $this->dataScan;
+                $this->log['scan']['dirScan'] = $this->dirScan;
             else:
                 $this->log['scan']['ok'] = 'Aucune irrégularité détéctée';
                 $this->log['scan']['ok'] .= "\n\rOpération terminée à ".date('G:i', mktime());

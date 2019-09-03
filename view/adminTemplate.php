@@ -7,7 +7,7 @@
 
     <!-- Bootstrap setting -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Ubuntu&display=swap' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -24,6 +24,9 @@
       <div class="row no-gutters">
           <?php if(isset($_SESSION['user'])): ?>
           <div class="col-12 col-lg-12 col-xl-2">
+            <div class="iconSidebar">
+              <i class="fas fa-fw fa-bars icon"></i>
+            </div>
             <div class="sidebar">
                 <a class="main" href="admin/main.html">
                   <i class="fas fa-fw fa-home"></i> Accueil

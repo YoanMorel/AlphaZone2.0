@@ -20,7 +20,7 @@
 
 <body>
     <a href="javascript:" id="returnToTop"><i class="fas fa-chevron-up"></i></a>
-    <div class="header <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
+    <div class="header <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? 'white' : 'main'; ?>">
         <div class="headerTitle">L'atelier de Jean-François</div>
         <div class="headerIcon"><i class="fas fa-fw fa-bars"></i></div>
         <div class="headerLinks <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
@@ -36,30 +36,24 @@
         <div class="closeOverlay">Fermer</div>
         <div class="container mx-auto my-auto w-50">
             <div class="row">
-            <?php
-                foreach($overlay as $link): 
-            ?>
+            <?php foreach($overlay as $link): ?>
                 <div class="col-6">
                     <img src="<?= $link ?>" />
                 </div>
-            <?php
-                endforeach;
-            ?>
+            <?php endforeach; ?>
             </div>
         </div>
     </div>
-    <div class="container-fluid p-0">
-        <?= $content; ?>
-        <?php
-            if(isset($_SESSION['user'])):
-        ?>
-        <a class="float" href="admin/main.html">
+    <?php if(isset($_SESSION['user'])): ?>
+        <a class="floatAdminBtn" href="admin/main.html">
             <i class="fas fa-fw fa-user-cog"></i>
         </a>
         <?php endif; ?>
+    <div class="container-fluid p-0">
+        <?= $content; ?>
     </div>
     <div class="footer">
-        <div class="textBoxFooter"><a href="home/admin.html">Admin</a></div>
+        <div class="textBoxFooter"><a href="admin.html">Admin</a></div>
     </div>
 
     <!-- Optional JavaScript -->

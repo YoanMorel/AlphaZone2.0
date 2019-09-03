@@ -1,11 +1,11 @@
 <?php $this->title = 'Administration'; ?>
 
-<div class="container" style="padding: 0; margin: 0; display: flex; flex-direction: column; width: 100%; height: 100vh; overflow: hidden;">
+<div class="containMainAdmin">
     <div class="topBar slideTopBar">
         <span style="padding-left: 1rem;">Bienvenue sur votre console d'administration <?= $_SESSION['user']->use_name; ?></span>
         <div class="clockTime"></div>
     </div>
-    <div class="row slideCardAnim" style="margin: auto; width: 50%;">
+    <div class="row slideCardAnim containSlideCards">
         <div class="col-12 col-md-6">
             <div class="card contact" style="background: #28536b">
                 <p><i class="far fa-envelope"></i></p>

@@ -41,6 +41,7 @@ class PiecesCtrl {
         $links = [];
         foreach($pieces as $row):
             if(strtolower($row['SEC_SECTION']) == $section):
+                $sectionTitle = $row['SEC_SECTION'];
                 $piecesLink = explode(',', $row['linkPieces']);
                 foreach($piecesLink as $link):
                     if(getimagesize($link)[0] > getimagesize($link)[1])
@@ -54,7 +55,7 @@ class PiecesCtrl {
             endif;
         endforeach;
 
-        $view->generate(['sectionGallery' => $links]);
+        $view->generate(['sectionGallery' => $links, 'sectionTitle' => $sectionTitle]);
     }
 }
 

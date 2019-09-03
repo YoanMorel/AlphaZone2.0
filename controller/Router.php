@@ -86,7 +86,13 @@ class Router {
                             $this->eventsAdminCtrl->eventsView();
                         endif;
                         if($_GET['module'] == 'settings'):
-                            $this->adminSettings->settingsView();
+                            if(empty($_POST)):
+                                $this->adminSettings->settingsView();
+                            else:
+                                array_map('htmlspecialchars', $_POST);
+
+                                $this->adminSettings->updateUser();
+                            endif;
                         endif;
                         if($_GET['module'] == 'exit'):
                             $this->adminCtrl->exitAdmin();

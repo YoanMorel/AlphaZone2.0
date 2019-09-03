@@ -47,7 +47,7 @@
 ?>
 
 <div class="editorOverlay slideEditorAnim">
-    <span class="closeEditorOverlay">&times;</span>
+    <span class="closeEditor">&times;</span>
     <div class="container">
         <div class="row no-gutters mx-auto">
             <div class="col-6 editorColImg">

@@ -15,9 +15,7 @@
       position: relative;
       width: 100%;
 
-      & .spaceAround {
-        margin: 2.6rem 3.1rem 0 3rem;
-      }
+      & .spaceAround {margin: 2.6rem 3.1rem 0 3rem;}
 
       & form label {
         margin: 2rem auto 0 3.1rem;
@@ -42,9 +40,7 @@
           background-position: right 2% center;
           background-repeat: no-repeat;
   
-          &[placeholder] {
-            font-weight: bold;
-          }
+          &[placeholder] {font-weight: bold;}
         }
       }
 
@@ -63,6 +59,17 @@
   
   /* [SIDEBAR ADMIN SECTION]
   ***********************************/
+
+  .iconSidebar {
+    position: relative;
+    text-align: right;
+    display: none;
+    cursor: pointer;
+
+    & .icon {
+      margin-right: 1rem;
+    }
+  }
   
   .sidebar {
     height: 100vh;
@@ -92,42 +99,45 @@
       &:hover {
         color: #FFD700;
 
-        &.contact {
-            color: #7796CB;
-        }
-
-        &.upload {
-          color: #eec0c6;
-        }
-
-        &.update {
-          color: #E4572e;
-        }
-
-        &.events {
-          color: #fff07c;
-        }
-  
-        &.red {
-          color: #F93943;
-        }
+        &.contact {color: #7796CB;}
+        &.upload  {color: #eec0c6;}
+        &.update  {color: #E4572e;}
+        &.events  {color: #fff07c;} 
+        &.red     {color: #F93943;}
       }
     }
   }
   
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 760px) {
+
+    .iconSidebar {
+      position: relative;
+      text-align: right;
+      display: block;
+      cursor: pointer;
+      background: #000;
+
+      & .icon {
+        margin: 1rem;
+        font-size: 20px;
+        color: #FFF;
+      }
+    }
   
     .sidebar {
-      height: auto;
+      height: 0;
       width: 100%;
-      /* position: fixed;
-      z-index: 1; */
       top: 0;
       left: 0;
       background-color: #191716;
       overflow-x: hidden;
-      padding-top: 16px;
-    
+      padding-top: 0;
+
+      &.showing {
+        height: auto;
+        padding-top: 16px;
+      }
+      
       & a {
         padding: 6px 8px 6px 16px;
         text-decoration: none;
@@ -144,25 +154,19 @@
         
         &.upload,
         &.update,
-        &.events {
-          display: none;
-        }
+        &.events {display: none;}
     
-        &:hover {
-          color: #FFD700;
-        }
+        &:hover {color: #FFD700;}
       }
     }
   
   }
   
-  @media screen and (min-width: 501px) and (max-width: 1000px) {
+  @media screen and (min-width: 768px) and (max-width: 1180px) {
   
     .sidebar {
       height: auto;
       width: 100%;
-      /* position: fixed;
-      z-index: 1; */
       top: 0;
       left: 0;
       background-color: #191716;
@@ -174,57 +178,65 @@
         text-decoration: none;
         font-size: 20px;
         color: #818181;
-        display: block;
-        text-align: left;
-        width: 100%;
-
-        &.seeSite {
-          display: block;
-          position: relative;
-        }
-        &.upload,
-        &.update,
-        &.events {
-          display: none;
-        }
-    
-        &:hover {
-          color: #FFD700;
-        }
-      }
-    }
-  }
-  
-  @media screen and (min-width: 1001px) and (max-width: 1200px) {
-  
-    .sidebar {
-      height: auto;
-      width: 100%;
-      /* position: fixed;
-      z-index: 1; */
-      top: 0;
-      left: 0;
-      background-color: #191716;
-      overflow-x: hidden;
-      padding-top: 16px;
-    
-      & a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 20px;
-        color: #818181;
-        display: block;
+        float: left;
         text-align: left;
         width: auto;
 
         &.seeSite {
-          display: block;
+          // display: block;
           position: relative;
+          float: left;
+        }
+        &.upload,
+        &.update,
+        &.events {display: none;}
+    
+        &:hover {color: #FFD700;}
+      }
+    }
+  }
+  
+  @media screen and (min-width: 1180px) and (max-width: 1200px) {
+  
+    .sidebar {
+      height: auto;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: #191716;
+      overflow-x: hidden;
+      padding-top: 16px;
+    
+      // & a {
+      //   padding: 6px 8px 6px 16px;
+      //   text-decoration: none;
+      //   font-size: 20px;
+      //   color: #818181;
+      //   display: block;
+      //   text-align: left;
+      //   width: auto;
+
+      //   &.seeSite {
+      //     display: block;
+      //     position: relative;
+      //   }
+
+      & a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #818181;
+        float: left;
+        text-align: left;
+        width: auto;
+
+        &.seeSite {
+          // display: block;
+          position: relative;
+          float: left;
         }
     
-        &:hover {
-          color: #FFD700;
-        }
+        &:hover {color: #FFD700;}
       }
     }
   }
@@ -253,29 +265,41 @@
       animation: fadein 0.5s, fadeout 0.5s 2.5s;
     }
     
-    @-webkit-keyframes fadein {
-      from {top: 0; opacity: 0;}
-      to {top: 20px; opacity: 1;}
-    }
-    
     @keyframes fadein {
-      from {top: 0; opacity: 0;}
-      to {top: 20px; opacity: 1;}
-    }
-    
-    @-webkit-keyframes fadeout {
-      from {top: 20px; opacity: 1;}
-      to {top: 0; opacity: 0;}
+      from {
+        top: 0;
+        opacity: 0;
+      }
+      to {
+        top: 20px;
+        opacity: 1;
+      }
     }
     
     @keyframes fadeout {
-      from {top: 20px; opacity: 1;}
-      to {top: 0; opacity: 0;}
+      from {
+        top: 20px;
+        opacity: 1;
+      }
+      to {
+        top: 0;
+        opacity: 0;
+      }
     }
   }
   
   /* [ADMIN MAIN VIEW]
   *************************/
+
+  .containMainAdmin {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+  }
   
   .topBar {
     width: 100%;
@@ -295,6 +319,11 @@
     }
   }
   
+  .containSlideCards {
+    margin: auto;
+    width: 50%;
+  }
+
   .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 16px;
@@ -307,26 +336,13 @@
     &:hover {
       color: #FFD700;
 
-      &.contact {
-          color: #7796CB;
-      }
-
-      &.upload {
-          color: #eec0c6;
-      }
-
-      &.gallery {
-          color: #E4572e;
-      }
-
-      &.events {
-        color: #fff07c;
-      }
+      &.contact {color: #7796CB;}
+      &.upload  {color: #eec0c6;}
+      &.gallery {color: #E4572e;}
+      &.events  {color: #fff07c;}
     }
   
-    & .far, .fas {
-      font-size: 50px;
-    }
+    & .far, .fas {font-size: 50px;}
   }
   
   .slideCardAnim {
@@ -371,10 +387,20 @@
     }
   }
   
-  @media (max-width: 500px) {
-    .topBar {
-      display: none;
+  @media screen and (max-width: 500px) {
+    .topBar {display: none;}
+
+    .containSlideCards {
+      width: 100%;
+      margin: auto;
     }
+  }
+
+  @media screen and (min-width: 501px) and (max-width: 1000px) {
+    .containSlideCards {
+      width: 75%;
+      margin: auto;
+    }    
   }
   
   /* [UPLOAD VIEW]
@@ -386,9 +412,7 @@
     min-height: 300px;
   }
   
-  div.showDataFields {
-    display: none;
-  }
+  div.showDataFields {display: none;}
   
   .btnOverImg {
     position: relative;
@@ -440,6 +464,9 @@
     resize: none;
     overflow: hidden;
   }
+
+  /* [ALERT POPUP]
+   * ***********************/
   
   .alertPopup {
     padding: 15px;
@@ -447,6 +474,8 @@
     margin-bottom: 15px;
     display: none;
     font-size: 15px;
+
+    &.show {display: block;}
   }
   
   .danger   {background-color: #f44336;}
@@ -464,9 +493,7 @@
     cursor: pointer;
     transition: 0.3s;
   
-    &:hover {
-      color: black;
-    }
+    &:hover {color: black;}
   }
   
   /* [CONTACT ADMIN VIEW]
@@ -480,9 +507,7 @@
     font-size: 12px;
     cursor: pointer;
   
-    &:hover {
-      border: 2px solid #2196F3;
-    }
+    &:hover {border: 2px solid #2196F3;}
   
     &::after {
       content: "";
@@ -490,9 +515,7 @@
       display: table;
     }
   
-    &.opened {
-      background-color: #DDD;
-    }
+    &.opened {background-color: #DDD;}
   
     & img {
       float: left;
@@ -512,9 +535,7 @@
       font-size: 12px;
     }
   
-    &.opened .time {
-      color: #FFF;
-    }
+    &.opened .time {color: #FFF;}
   }
   
   .messengerOverlay {
@@ -575,32 +596,29 @@
         border: none;
         margin: 1rem;
   
-        &:hover {
-          background: #247ba0;
-        }
+        &:hover {background: #247ba0;}
       }
     }
-  
+
     & .closeMessengerOverlay {
       position: absolute;
       top: 15px;
-      right: 15px;
-      cursor: pointer;
-      font-size: 20px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
       z-index: 1;
-      padding: 5px;
-  
-      &:hover {
-        font-weight: bold;
-        background-color: #DDD;
-        color: #000;
+    
+      &:hover, &:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
       }
     }
   }
   
-  .slideMessengerAnim {
-    display: none;
-  }
+  .slideMessengerAnim {display: none;}
   
   .slideMessenger {
     animation-name: slideMessenger;
@@ -613,20 +631,16 @@
   @keyframes slideMessenger {
     0% {
       opacity: 0;
-      // transform: translateY(70%);
       left: 70%;
     }
     100% {
       opacity: 1;
-      // transform: translateY(0%);
       left: 0;
     }
   }
   
   @media screen and (max-width: 500px) {
-    body {
-      overflow: visible;
-    }
+    body {overflow: visible;}
   
     .inquireContainer {
       text-align: center;
@@ -679,10 +693,7 @@
       // transform: scale(1);
       display: block;
 
-      &.needsEdit {
-        // border: 2px solid #780116;
-        filter: grayscale(100%);
-      }
+      &.needsEdit {filter: grayscale(100%);}
     }
   
     & .overlay {
@@ -707,9 +718,7 @@
           text-decoration: none;
           color: #FE5F55;
   
-          &:hover {
-            color: #FFD700;
-          }
+          &:hover {color: #FFD700;}
         }
       }
     }
@@ -815,43 +824,36 @@
           transition: 0.3s ease;
           margin: auto;
   
-          &.btn-danger {
-            cursor: not-allowed;
-          }
+          &.btn-danger {cursor: not-allowed;}
   
           &.enabled {
             background: #065143;
   
-            &:hover {
-              background: #129490;
-            }
+            &:hover {background: #129490;}
           }
-  
         }
       }
     }
-  
-  
-    & .closeEditorOverlay {
+
+    & .closeEditor {
       position: absolute;
       top: 15px;
-      right: 15px;
-      cursor: pointer;
-      font-size: 25px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
       z-index: 1;
-      padding: 5px;
-  
-      &:hover {
-        font-weight: bold;
-        background-color: #DDD;
-        color: #000;
+    
+      &:hover, &:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
       }
     }
   }
   
-  .slideEditorAnim {
-    display: none;
-  }
+  .slideEditorAnim {display: none;}
   
   .slideEditor {
     animation-name: slideEditor;
@@ -870,6 +872,147 @@
       opacity: 1;
       left: 0;
     }
+  }
+
+  /* [GALLERY ADMIN END]
+  ***************************/
+
+  /* [SETTINGS ADMIN VIEW]
+  ***************************/
+
+  .wrapperSettings {
+    background: #F1F1F1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+
+    & .containSettings {
+      margin: auto auto 2rem auto;
+      width: 95%;
+      background: #FFF;
+      padding-bottom: 1rem;
+      border-radius: 5px;
+
+      & .settingTitle {
+        position: relative;
+        font-size: 3vw;
+        font-family: 'Ubuntu', sans-serif;
+        max-width: 100%;
+        margin: 0 0 1rem 1rem;
+      }
+
+      & .settingSubTitle {
+        margin: auto auto 1rem 1.5rem;
+        position: relative;
+        max-width: 100%;
+        font-size: 2.5vw;
+        font-family: 'Ubuntu', sans-serif;
+      }
+
+      & .settingBody {
+        margin: auto auto 1rem auto;
+        position: relative;
+        width: 95%;
+
+        & form {max-width: 35%;}
+    
+        & form label {font-size: 13px;}
+    
+        & form input {
+          display: block;
+          padding: 9px;
+          border: 1px solid #C52184;
+          background: #eeE9c6;
+          color: #870058;
+          width: 100%;
+          // color: #a30015; error
+    
+          &.fieldError {
+            border: 1px solid rgba(255, 0, 0, 1);
+            color: #f93943;
+            background: #fce4e4;
+            background-image: url('../img/xicon.svg');
+            background-size: 20px;
+            background-position: right 2% center;
+            background-repeat: no-repeat;
+    
+            &[placeholder] {
+              font-weight: bold;
+            }
+          }
+        }
+    
+        & button.btn {
+          background: #5F0F40;
+          color: #FE5F55;
+    
+          &:hover {
+            background: #870058;
+            color: #FE5F55;
+          }
+        }
+    
+        & form div.errorMsg {
+          text-align: left;
+          width: 35%;
+          font-size: 12px;
+          color: red;
+          padding: 1px;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .wrapperSettings .containSettings .settingTitle {
+      position: relative;
+      font-size: 10vw;
+      font-family: 'Ubuntu', sans-serif;
+      max-width: 100%;
+      margin: 0 0 1rem 1rem;
+    }
+
+    .wrapperSettings .containSettings .settingBody form {max-width: 100%;}
+
+    .wrapperSettings .containSettings .settingSubTitle {
+      margin: auto auto 1rem 1.5rem;
+      position: relative;
+      max-width: 100%;
+      font-size: 5vw;
+      font-family: 'Ubuntu', sans-serif;
+    }
+  }
+
+  @media screen and (min-width: 401px) and (max-width: 800px) {
+    .wrapperSettings .containSettings .settingTitle {
+      position: relative;
+      font-size: 5vw;
+      font-family: 'Ubuntu', sans-serif;
+      max-width: 100%;
+      margin: 0 0 1rem 1rem;
+    }
+
+    .wrapperSettings .containSettings .settingBody form {max-width: 100%;}
+
+    .wrapperSettings .containSettings .settingTitle .settingSubTitle {
+      margin: auto auto 1rem 1.5rem;
+      position: relative;
+      max-width: 100%;
+      font-size: 2.5vw;
+      font-family: 'Ubuntu', sans-serif;
+    }
+  }
+
+  @media screen and (min-width: 801px) and (max-width: 1200px) {
+    .wrapperSettings .containSettings .settingTitle {
+      position: relative;
+      font-size: 4vw;
+      font-family: 'Ubuntu', sans-serif;
+      max-width: 100%;
+      margin: 0 0 1rem 1rem;
+    };   
   }
   
   /* [ADMIN TEMPLATE END]
