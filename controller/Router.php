@@ -79,7 +79,7 @@ class Router {
                         if($_GET['module'] == 'update'):
                             $this->piecesCtrl->piecesAdminView();
                         endif;
-                        if($_GET['module'] == 'contact'):
+                        if($_GET['module'] == 'messenger'):
                             $this->contactCtrl->messengerView();
                         endif;
                         if($_GET['module'] == 'events'):

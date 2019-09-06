@@ -16,6 +16,12 @@
                     <a class="editor" href="javascript:void(0)">Editer</a>
                     <a class="erase" href="javascript:void(0)">Supprimer</a>
                 </div>
+                <?php if(empty($piece['PIE_STORY'])): ?>
+                <div style="font-size: 12px; text-align: center; margin: auto; color: #FE5F55">
+                    Cette oeuvre a besoin d'informations pour survivre.<br />
+                    Aidez-la en cliquant sur <i>Editer</i>
+                </div>
+                <?php endif; ?>
             </div>
             <img 
                 data-title="<?= ($piece['PIE_TITLE']) ? $piece['PIE_TITLE'] : 'Sans titre'; ?>" data-creation="<?= ($piece['PIE_CREATION_DATE']) ? $piece['PIE_CREATION_DATE'] : 'Non datée'; ?>" 

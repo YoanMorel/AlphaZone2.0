@@ -1,5 +1,6 @@
 <?php
 
+// [Test si la requête est une requête AJAX]
 if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'):
 
     array_map('htmlspecialchars', $_POST);
@@ -118,13 +119,12 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
 
         if(isset($_POST['action']) && $_POST['action'] == 'reply'):
             $inquiries->setRepliedInquire((int) $_POST['inqId']);
-            echo json_encode(['done']);
-            exit;
+            echo json_encode(['done A1']);
         endif;
 
         if(isset($_POST['action']) && $_POST['action'] == 'unread'):
             $inquiries->setOpenedInquire((int) $_POST['inqId']);
-            echo json_encode(['done']);
+            echo json_encode(['done A2']);
             exit;
         endif;
 
@@ -132,9 +132,27 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED
             $inquiries->setOpenedInquire((int) $_POST['inqId']);
         endif;
 
-        $stmt = $inquiries->getInquire((int) $_POST['inqId'])->fetchAll();
-        echo json_encode($stmt);
-        exit;
+        if(isset($_POST['action']) && $_POST['action'] == 'toTrash'):
+            $inquiries->moveInquireToTrash((int) $_POST['inqId']);
+            echo json_encode(['done A4']);
+            exit;
+        endif;
+
+        if(isset($_POST['action']) && $_POST['action'] == 'toReception'):
+            $inquiries->moveTrashToInquire((int) $_POST['inqId']);
+            echo json_encode(['done A5']);
+            exit;
+        endif;
+
+        if(isset($_POST['query']) && $_POST['query'] == 'reception'):
+            $stmt = $inquiries->getInquire((int) $_POST['inqId'])->fetchAll();
+            echo json_encode($stmt);
+            exit;
+        else:
+            $stmt = $inquiries->getTrashedInquire((int) $_POST['inqId'])->fetchAll();
+            echo json_encode($stmt);
+            exit;
+        endif;
     endif;
 
 else:

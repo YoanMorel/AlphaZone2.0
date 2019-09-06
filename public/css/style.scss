@@ -19,6 +19,10 @@ a {
   }
 }
 
+button:focus {
+  outline: none;
+}
+
 .container-fluid {
   display: flex;
   flex-direction: column;

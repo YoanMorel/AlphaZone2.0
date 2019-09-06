@@ -4,7 +4,7 @@
     <div style="margin: auto auto 0 auto">AJF Administration</div>
     <div class="authBox">
             <div class="fields">
-                <form id="authForm" action="admin/main.html" method="POST">
+                <form id="authForm" action="admin.html" method="POST">
                     <label for="login">Identifiant</label>
                     <input class="<?= isset($errors['login']) ? 'fieldError' : ''; ?>" id="login" type="text" name="login" />
                     <?= isset($errors['login']) ? '<div class="errorMsg">'.$errors['login'].'</div>' : ''; ?>

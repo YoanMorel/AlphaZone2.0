@@ -8,9 +8,15 @@ $(function() {
     }, 3000);
   }
 
-  // [RESPONSIVE NAVBAR]
-  $('.iconSidebar .icon').click(function(){
+  // [RESPONSIVE NAVBAR/SIDEBAR]
+  $('.titleNav .icon').click(function(){
     $('.sidebar').toggleClass('showing');
+  });
+
+  // [DROPDOWN]
+  $('.dropDownBtn').click(function(){
+    $('.dropDownContainer').not($(this).next('.dropDownContainer')).slideUp();
+    $(this).next().slideToggle();
   });
 
   // [SLIDE EFFECT]
@@ -127,8 +133,10 @@ $(function() {
     autoCompleteSources('');
   }
 
-  alertPopup.addClass('info').show();
-  $('div.alertPopup span.alertContent').append('<p><b>Information :</b></p>Pour transférer des fichiers images : sélectionnez vos images sur votre bureau et glissez les dans la zone pointillée du navigateur (ci-dessous)');
+  if(getNamePage() == 'upload') {
+    alertPopup.addClass('info').show();
+    $('div.alertPopup span.alertContent').append('<p><b>Information :</b></p>Pour transférer des fichiers images : sélectionnez vos images sur votre bureau et glissez les dans la zone pointillée du navigateur (ci-dessous)');
+  }
 
   // Lecture du fichier JSON pour remplir le tableaux de données de fichiers si il y a une sauvegarde. Dans le cas où elle existe, on affiche une alerte
   $.getJSON('controller/autoSaveBuffer.json', function(data) {
@@ -409,6 +417,13 @@ $(function() {
  > DEBUT SCRIPT DE MESSAGERIE
  * **************************************/
 
+  function getNamePage() {
+    var path = window.location.search;
+    var page = path.substring(path.lastIndexOf('=') + 1);
+
+    return page;
+  }
+
   $('div.inquireContainer').click(function() {
     $('div.messengerContainer').children('div').text('');
     var inqId = $(this).attr('id');
@@ -428,12 +443,12 @@ $(function() {
 
     checkMediaQueries(mediaQueries);
     mediaQueries.addListener(checkMediaQueries);
-    
+
     $.ajax({
       type:     'POST',
       dataType: 'json',
       url:      'controller/AjaxRouter.php',
-      data:     'ajax=messenger&inqId=' + inqId,
+      data:     'ajax=messenger&inqId=' + inqId +'&query=' + getNamePage(),
       complete: function(response) {
         var mail        = response.responseJSON[0]['CON_MAIL'];
         var lastName    = response.responseJSON[0]['CON_LAST_NAME'];
@@ -462,6 +477,11 @@ $(function() {
         $('div.inquirePostDate').html('<i class="far fa-fw fa-clock"></i> le ' + frenchDate.toLocaleDateString('fr-FR', options))
         $('div.inquireSubject').html('Objet : <span class="subject">' + subject + '</span>');
         $('div.inquireCtrl').html('<button name="' + inqId + '" id="reply" class="btnInquire"><i class="fas fa-fw fa-reply"></i>Répondre</button><button name="' + inqId + '" id="unread" class="btnInquire"><i class="fas fa-fw fa-envelope"></i>Marquer comme non lu</button>');
+        if(getNamePage() == 'reception') {
+          $('div.inquireCtrl').append('<button name="' + inqId + '" id="toTrash" class="btnInquire red"><i class="fas fa-fw fa-trash-alt"></i>Corbeille</button>');
+        } else {
+          $('div.inquireCtrl').append('<button name="' + inqId + '" id="toReception" class="btnInquire red"><i class="fas fa-fw fa-trash-restore"></i>Restaurer</button>');
+        }
         $('div.inquire').html(inquire);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -470,10 +490,12 @@ $(function() {
     });
   });
 
-  $('span.closeMessengerOverlay').click(function() {
+  function closeMessengerOverlay() {
     $(this).parent().removeClass('slideMessenger');
-    $('body').css('overflow', 'visible');
-  });
+    $('body').css('overflow-y', 'visible');
+  }
+
+  $('span.closeMessengerOverlay').click(closeMessengerOverlay);
 
   $(document).on('click', '#reply', function() {
     var inqId = $(this).attr('name');
@@ -512,7 +534,42 @@ $(function() {
         console.log('Status :' + textStatus + ' Error:' + errorThrown);
       }
     });
+  });
 
+  $(document).on('click', '#toTrash', function() {
+    var inqId = $(this).attr('name');
+
+    $.ajax({
+      type:     'POST',
+      dataType: 'json',
+      url:      'controller/AjaxRouter.php',
+      data:     'ajax=messenger&inqId=' + inqId + '&action=toTrash',
+      complete: function(response) {
+        $('span.closeMessengerOverlay').each(closeMessengerOverlay);
+        $('#' + inqId).remove();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log('Status :' + textStatus + ' Error:' + errorThrown);
+      }
+    });
+  });
+
+  $(document).on('click', '#toReception', function() {
+    var inqId = $(this).attr('name');
+
+    $.ajax({
+      type:     'POST',
+      dataType: 'json',
+      url:      'controller/AjaxRouter.php',
+      data:     'ajax=messenger&inqId=' + inqId + '&action=toReception',
+      complete: function(response) {
+        $('span.closeMessengerOverlay').each(closeMessengerOverlay);
+        $('#' + inqId).remove();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log('Status :' + textStatus + ' Error:' + errorThrown);
+      }
+    });
   });
 
 /****************************
@@ -619,10 +676,9 @@ $(function() {
       url: 'controller/AjaxRouter.php',
       data: params,
       complete: function(response) {
-
         snackBar(response.responseText);
-        if(imgNode.parents('div.galleryCol').hasClass('needsEdit')) {
-          imgNode.parents('div.galleryCol').removeClass('needsEdit');
+        if(imgNode.hasClass('needsEdit')) {
+          imgNode.removeClass('needsEdit');
         }
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {

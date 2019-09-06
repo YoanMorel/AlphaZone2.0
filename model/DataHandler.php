@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * DbConnection's child DataHandler class
+ * 
+ * Make database informations about all the pieces and transfers all object on the server
+ * 
+ * @version 2.0
+ * @author  Yoan Morel
+ */
 class DataHandler extends DbConnection {
 
+    /**
+	 * Variables storing pieces information before transfer
+	 */
     private $section;
     private $subSection;
     private $dataTitle;
@@ -9,14 +20,32 @@ class DataHandler extends DbConnection {
     private $dataLink;
     private $dataCreationDate;
 
-    public function setSection($dataSection) {
-        $this->section = $dataSection;
+    /**
+     * Set section attribute
+     * 
+     * @param string $sectionData section
+     */
+    public function setSection($sectionData) {
+        $this->section = $sectionData;
     }
 
-    public function setSubSection($dataSubSection) {
-        $this->subSection = $dataSubSection;
+    /**
+     * Set subsection attribute
+     * 
+     * @param string $subSectionData subsection
+     */
+    public function setSubSection($subSectionData) {
+        $this->subSection = $subSectionData;
     }
 
+    /**
+     * Set data attributes
+     * 
+     * @param string $title piece's title
+     * @param string $story piece's story
+     * @param string $link  piece's link
+     * @param string $creationDate piece's creation date
+     */
     public function setData($title, $story = null, $link, $creationDate = null) {
         $this->dataTitle        = $title;
         $this->dataStory        = $story;
@@ -24,6 +53,11 @@ class DataHandler extends DbConnection {
         $this->dataCreationdate = $creationDate;
     }
 
+    /**
+     * SQL service method to insert the new section in the SGBDR
+     * 
+     * @return object $result PDO statement
+     */
     public function insertSectionInDB() {
         $result = $this->queryCall(
             'INSERT INTO T_SECTIONS (SEC_SECTION, SEC_CREATION_DATE) VALUES (:newSection, NOW())',
@@ -35,6 +69,11 @@ class DataHandler extends DbConnection {
         return $result;
     }
 
+    /**
+     * SQL service method to insert the new subsection in the SGBDR
+     * 
+     * @return object $result PDO statement
+     */
     public function insertSubSectionInDB() {
         $result = $this->queryCall(
             'INSERT INTO T_SUBSECTIONS (SUB_SUBSECTION, SUB_CREATION_DATE, SEC_ID) VALUES (:newSubSection, NOW(), (
@@ -50,6 +89,11 @@ class DataHandler extends DbConnection {
         return $result;
     }
 
+    /**
+     * SQL service method to insert new data informations about the new piece in the SGBDR
+     * 
+     * @return object $result PDO statement
+     */
     public function insertDataInDB() {
         $result = $this->queryCall(
             'INSERT INTO T_PIECES (PIE_TITLE, PIE_IMG_LINK, PIE_STORY, PIE_UPLOAD_DATE, SUB_ID) 
@@ -70,6 +114,12 @@ class DataHandler extends DbConnection {
         return $result;
     }
 
+    /**
+     * SQL service method to update data from a particular piece
+     * 
+     * @param int $pieceId piece id
+     * @return object $result PDO statement
+     */
     public function updateDataFrom($pieceId) {
         $result = $this->queryCall(
             'UPDATE T_PIECES 
@@ -85,6 +135,12 @@ class DataHandler extends DbConnection {
         return $result;
     }
 
+    /**
+     * SQL service method to delete data from a particular piece in the SGBDR
+     * 
+     * @param int $pieceId piece id
+     * @return object $result PDO statement
+     */
     public function deleteDataFrom($pieceId) {
         $result = $this->queryCall(
             'DELETE FROM T_PIECES WHERE PIE_ID = :pieceId',

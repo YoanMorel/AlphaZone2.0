@@ -1,4 +1,4 @@
-<?php $this->title = 'uploader'; ?>
+<?php $this->title = 'Téléchargement'; ?>
 
   <div class="row no-gutters">
     <div class="col-12 alertUpload">

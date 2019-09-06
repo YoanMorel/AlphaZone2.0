@@ -45,7 +45,7 @@
         </div>
     </div>
     <?php if(isset($_SESSION['user'])): ?>
-        <a class="floatAdminBtn" href="admin/main.html">
+        <a class="floatAdminBtn" href="index.php?action=admin&module=main">
             <i class="fas fa-fw fa-user-cog"></i>
         </a>
         <?php endif; ?>

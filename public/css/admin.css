@@ -61,30 +61,94 @@
 
 /* [SIDEBAR ADMIN SECTION]
   ***********************************/
-.iconSidebar {
-  position: relative;
-  text-align: right;
+.titleNav {
+  width: 100%;
+  height: 40px;
+  line-height: 22px;
+  padding: 8px;
+  font-size: 22px;
+  background: #191716;
+  color: #FFD700;
   display: none;
+}
+
+.titleNav .messenger {
+  color: #7796CB;
+}
+
+.titleNav .upload {
+  color: #EEC0C6;
+}
+
+.titleNav .update {
+  color: #5fad56;
+}
+
+.titleNav .events {
+  color: #FFF07C;
+}
+
+.titleNav .settings {
+  color: #ff6978;
+}
+
+.titleNav .red {
+  color: #F93943;
+}
+
+.titleNav .icon {
+  float: right;
+  margin-right: 1rem;
   cursor: pointer;
 }
 
-.iconSidebar .icon {
-  margin-right: 1rem;
+.sideTitle {
+  width: 100%;
+  height: 40px;
+  line-height: 22px;
+  padding: 8px;
+  font-size: 22px;
+  background: #191716;
+  color: #FFD700;
+}
+
+.sideTitle .messenger {
+  color: #7796CB;
+}
+
+.sideTitle .upload {
+  color: #EEC0C6;
+}
+
+.sideTitle .update {
+  color: #5fad56;
+}
+
+.sideTitle .events {
+  color: #FFF07C;
+}
+
+.sideTitle .settings {
+  color: #ff6978;
+}
+
+.sideTitle .red {
+  color: #F93943;
 }
 
 .sidebar {
   height: 100vh;
+  max-height: 100vh;
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   left: 0;
   background-color: #191716;
-  overflow-x: hidden;
-  padding-top: 16px;
+  overflow: hidden;
 }
 
-.sidebar a {
+.sidebar a, .sidebar .dropDownBtn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -92,49 +156,121 @@
   display: block;
   text-align: left;
   width: 100%;
+  background: none;
+  border: none;
 }
 
-.sidebar a.seeSite {
+.sidebar a.seeSite, .sidebar .dropDownBtn.seeSite {
   position: absolute;
   bottom: 0;
 }
 
-.sidebar a:hover {
+.sidebar a.active, .sidebar .dropDownBtn.active {
+  background: #818181;
+  color: #191716;
+}
+
+.sidebar a:hover, .sidebar .dropDownBtn:hover {
   color: #FFD700;
 }
 
-.sidebar a:hover.contact {
+.sidebar a:hover.messenger, .sidebar .dropDownBtn:hover.messenger {
   color: #7796CB;
 }
 
-.sidebar a:hover.upload {
-  color: #eec0c6;
+.sidebar a:hover.upload, .sidebar .dropDownBtn:hover.upload {
+  color: #EEC0C6;
 }
 
-.sidebar a:hover.update {
-  color: #E4572e;
+.sidebar a:hover.update, .sidebar .dropDownBtn:hover.update {
+  color: #5fad56;
 }
 
-.sidebar a:hover.events {
-  color: #fff07c;
+.sidebar a:hover.events, .sidebar .dropDownBtn:hover.events {
+  color: #FFF07C;
 }
 
-.sidebar a:hover.red {
+.sidebar a:hover.settings, .sidebar .dropDownBtn:hover.settings {
+  color: #ff6978;
+}
+
+.sidebar a:hover.red, .sidebar .dropDownBtn:hover.red {
   color: #F93943;
 }
 
-@media screen and (max-width: 760px) {
-  .iconSidebar {
-    position: relative;
-    text-align: right;
+.sidebar .dropDownContainer {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+.sidebar .fa-caret-down {
+  float: right;
+  padding: 3px 8px 3px 0;
+}
+
+@media screen and (max-width: 1190px) {
+  .titleNav {
+    width: 100%;
+    height: 40px;
+    line-height: 22px;
+    padding: 8px;
+    font-size: 22px;
+    background: #191716;
+    color: #FFD700;
     display: block;
-    cursor: pointer;
-    background: #000;
   }
-  .iconSidebar .icon {
-    margin: 1rem;
+  .titleNav .messenger {
+    color: #7796CB;
+  }
+  .titleNav .upload {
+    color: #EEC0C6;
+  }
+  .titleNav .update {
+    color: #5fad56;
+  }
+  .titleNav .events {
+    color: #FFF07C;
+  }
+  .titleNav .settings {
+    color: #ff6978;
+  }
+  .titleNav .red {
+    color: #F93943;
+  }
+  .titleNav .icon {
+    float: right;
+    margin-right: 1rem;
     font-size: 20px;
     color: #FFF;
+  }
+  .sideTitle {
+    width: 100%;
+    height: 40px;
+    line-height: 22px;
+    padding: 8px;
+    font-size: 22px;
+    background: #191716;
+    color: #FFD700;
+    display: none;
+  }
+  .sideTitle .messenger {
+    color: #7796CB;
+  }
+  .sideTitle .upload {
+    color: #EEC0C6;
+  }
+  .sideTitle .update {
+    color: #5fad56;
+  }
+  .sideTitle .events {
+    color: #FFF07C;
+  }
+  .sideTitle .settings {
+    color: #ff6978;
+  }
+  .sideTitle .red {
+    color: #F93943;
   }
   .sidebar {
     height: 0;
@@ -164,65 +300,6 @@
   }
   .sidebar a.upload, .sidebar a.update, .sidebar a.events {
     display: none;
-  }
-  .sidebar a:hover {
-    color: #FFD700;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1180px) {
-  .sidebar {
-    height: auto;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: #191716;
-    overflow-x: hidden;
-    padding-top: 16px;
-  }
-  .sidebar a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #818181;
-    float: left;
-    text-align: left;
-    width: auto;
-  }
-  .sidebar a.seeSite {
-    position: relative;
-    float: left;
-  }
-  .sidebar a.upload, .sidebar a.update, .sidebar a.events {
-    display: none;
-  }
-  .sidebar a:hover {
-    color: #FFD700;
-  }
-}
-
-@media screen and (min-width: 1180px) and (max-width: 1200px) {
-  .sidebar {
-    height: auto;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: #191716;
-    overflow-x: hidden;
-    padding-top: 16px;
-  }
-  .sidebar a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #818181;
-    float: left;
-    text-align: left;
-    width: auto;
-  }
-  .sidebar a.seeSite {
-    position: relative;
-    float: left;
   }
   .sidebar a:hover {
     color: #FFD700;
@@ -573,8 +650,8 @@ textarea.uploadForm {
 /* [CONTACT ADMIN VIEW]
   ***************************/
 .inquireContainer {
-  border: 2px solid #CCC;
-  background-color: #EEE;
+  border: 2px solid #9590A8;
+  background-color: #e8b4bc;
   padding: 16px;
   margin: 16px;
   font-size: 12px;
@@ -582,7 +659,7 @@ textarea.uploadForm {
 }
 
 .inquireContainer:hover {
-  border: 2px solid #2196F3;
+  border: 2px solid #17255a;
 }
 
 .inquireContainer::after {
@@ -592,7 +669,16 @@ textarea.uploadForm {
 }
 
 .inquireContainer.opened {
-  background-color: #DDD;
+  background-color: #c3d898;
+  border: 2px solid #7ea16b;
+}
+
+.inquireContainer.opened:hover {
+  border: 2px solid #17255a;
+}
+
+.inquireContainer.opened .time {
+  color: #596f62;
 }
 
 .inquireContainer img {
@@ -608,20 +694,18 @@ textarea.uploadForm {
 
 .inquireContainer .time {
   float: right;
-  color: #AAA;
+  color: #6d466b;
   font-weight: bold;
   font-size: 12px;
 }
 
-.inquireContainer.opened .time {
-  color: #FFF;
-}
-
+/* [MESSENGER OVERLAY]
+   * ***************************/
 .messengerOverlay {
   right: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   -webkit-transition: .3s;
   transition: .3s;
   background-color: rgba(0, 0, 0, 0.9);
@@ -682,6 +766,14 @@ textarea.uploadForm {
 
 .messengerOverlay .messengerContainer .btnInquire:hover {
   background: #247ba0;
+}
+
+.messengerOverlay .messengerContainer .btnInquire.red {
+  background: #F93943;
+}
+
+.messengerOverlay .messengerContainer .btnInquire.red:hover {
+  background: #FE5F55;
 }
 
 .messengerOverlay .closeMessengerOverlay {
@@ -759,7 +851,7 @@ textarea.uploadForm {
     right: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     -webkit-transition: .3s;
     transition: .3s;
     background-color: rgba(0, 0, 0, 0.9);
@@ -808,6 +900,10 @@ textarea.uploadForm {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .galleryCol .overlay .list {

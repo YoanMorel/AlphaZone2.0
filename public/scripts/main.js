@@ -34,13 +34,14 @@ $(function() {
   });
 
   // Pour les ancres
-  $('[href*="#"]').on('click', function(event) {
+  $('a[href^="#"]').on('click', function(event) {
     event.preventDefault();
     var anchor = $(this).attr('href');
     $('html, body').animate({
       scrollTop: $(anchor).offset().top}, 500, 'linear');
   });
 
+  // Effet Blur sur le dernier Parallax de la page de présentation
   $('a.mainToGallery').hover(function() {
     $('div.parallaxExtraMainView > img').css("filter", "blur(4px)");
   }, function() {
@@ -76,14 +77,16 @@ $(function() {
         url:      'controller/AjaxRouter.php',
         data:     'ajax=validation&' + name + '=' + $(this).val(),
         complete: function(response) {
-          fieldFound = Object.keys(response.responseJSON);
-          $.each(fieldFound, function(key, value) {
-            if(value == name) {
-              $('input#' + name + ', textarea#' + name).addClass('fieldError').after('<div class="errorMsg">'+ response.responseJSON[value] +'</div>');
-            } else if ($('input#' + name + ', textarea#' + name).val() && !$('input#' + name + ', textarea#' + name).hasClass('fieldError')) {
-              $('input#' + name + ', textarea#' + name).addClass('fieldGood').siblings('form#contactInquiries div.errorMsg').empty();
-            }
-          });
+          if(response.responseJSON) {
+            fieldFound = Object.keys(response.responseJSON);
+            $.each(fieldFound, function(key, value) {
+              if(value == name) {
+                $('input#' + name + ', textarea#' + name).addClass('fieldError').after('<div class="errorMsg">'+ response.responseJSON[value] +'</div>');
+              } 
+            });
+          } else if ($('input#' + name + ', textarea#' + name).val() && !$('input#' + name + ',       textarea#' + name).hasClass('fieldError')) {
+            $('input#' + name + ', textarea#' + name).addClass('fieldGood').siblings('form#contactInquiries div.errorMsg').empty();
+          }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           console.log('Status :' + textStatus + ' Error:' + errorThrown);
@@ -94,7 +97,6 @@ $(function() {
         $(this).removeClass('fieldError fieldGood').siblings('form#contactInquiries div.errorMsg').empty();
     }
   });
-
 
   $('div.ondine').click(function() {
     $(this).siblings().children('p').addClass('animateSideText');

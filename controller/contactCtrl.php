@@ -19,11 +19,18 @@ class ContactCtrl {
     }
 
     public function messengerView() {
-        $view       = new View('messenger');
-        $contacts   = $this->inquiries->getContacts()->fetchAll();
-        $inquiries  = $this->inquiries->getInquiries()->fetchAll();
+        $view               = new View('messenger');
+        $contacts           = $this->inquiries->getContacts()->fetchAll();
+        $inquiries          = $this->inquiries->getInquiries()->fetchAll();
+        $trashedInquiries   = $this->inquiries->getTrashedInquiries()->fetchAll();
         
-        $view->generate(['contacts' => $contacts, 'inquiries' => $inquiries], true);
+        if(isset($_GET['service']) && $_GET['service'] == 'reception'):
+            $view->generate(['contacts' => $contacts, 'inquiries' => $inquiries], true);
+        elseif(isset($_GET['service']) && $_GET['service'] == 'trash'):
+            $view->generate(['contacts' => $contacts, 'inquiries' => $trashedInquiries], true);
+        else:
+            $view->generate(['contacts' => $contacts, 'inquiries' => $inquiries], true);
+        endif;
     }
 
     public function inquiries($lname, $organisme, $mail, $subject, $inquire) {

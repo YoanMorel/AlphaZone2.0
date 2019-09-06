@@ -2,64 +2,33 @@
 <html lang="fr" dir="ltr">
 
 <head>
-    <base href="http://private.com/testZone/alphaZone/">
-    <meta charset="utf-8" />
+  <base href="http://private.com/testZone/alphaZone/">
+  <meta charset="utf-8" />
 
-    <!-- Bootstrap setting -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Ubuntu&display=swap' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <link rel="stylesheet" href="public/css/style.css" />
-    <link rel="stylesheet" href="public/css/admin.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-    <title><?= $title; ?></title>
+  <!-- Bootstrap setting -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Ubuntu&display=swap' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="public/css/style.css" />
+  <link rel="stylesheet" href="public/css/admin.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <title><?= $title; ?></title>
 </head>
 
 <body onload="startTime()">
   <a href="javascript:" id="returnToTop"><i class="fas fa-chevron-up"></i></a>
   <div class="container-fluid p-0">
-      <div class="row no-gutters">
-          <?php if(isset($_SESSION['user'])): ?>
-          <div class="col-12 col-lg-12 col-xl-2">
-            <div class="iconSidebar">
-              <i class="fas fa-fw fa-bars icon"></i>
-            </div>
-            <div class="sidebar">
-                <a class="main" href="admin/main.html">
-                  <i class="fas fa-fw fa-home"></i> Accueil
-                </a>
-                <a class="upload" href="admin/upload.html">
-                  <i class="fas fa-fw fa-upload"></i> Envoyer
-                </a>
-                <a class="update" href="admin/update.html">
-                  <i class="fas fa-fw fa-image"></i> Galerie
-                </a>
-                <a class="contact" href="admin/contact.html">
-                  <i class="fas fa-fw fa-envelope"></i> Messagerie
-                </a>
-                <a class="events" href="admin/events.html">
-                  <i class="far fa-fw fa-calendar-alt"></i> Évènements
-                </a>
-                <a class="settings" href="admin/settings.html">
-                  <i class="fas fa-fw fa-cogs"></i> Paramètres
-                </a>
-                <a class="red shutdown" href="admin/exit.html">
-                  <i class="fas fa-fw fa-power-off"></i> Déconnexion
-                </a>
-                <a class="seeSite" href="home">
-                  <i class="far fa-fw fa-window-maximize"></i> Voir le site
-                </a>
-            </div>
-          </div>
-          <?php endif; ?>
-          <div class="col-12 col-lg-12 <?= isset($_SESSION['user']) ? 'col-xl-10' : 'col-xl-12'; ?>">
-            <div id="snackBar"></div>
-            <?= $content; ?>
-          </div>
+    <div class="row no-gutters">
+      <?php if (isset($_SESSION['user'])) :
+        require_once 'partials/sidebarPartial.php';
+      endif; ?>
+      <div class="col-12 col-lg-12 <?= isset($_SESSION['user']) ? 'col-xl-10' : 'col-xl-12'; ?>">
+        <div id="snackBar"></div>
+        <?= $content; ?>
       </div>
+    </div>
   </div>
 
   <!-- Optional JavaScript -->

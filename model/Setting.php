@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Setting Class
+ * 
  * Administrator for configuration settings Class for DbConnection Class
  * 
  * @version 0.1

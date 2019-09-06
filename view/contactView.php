@@ -2,11 +2,14 @@
 
 <div class="contactHeader"></div>
 <div class="contactTitle">
-    <div class="boxTitle">Contact</div>
+    <div style="margin: auto; text-align: center">
+        <div class="boxTitle">JEAN-FRANÇOIS ERNOTTE</div>
+        <div>Artiste Peintre<p class="m-2">Pour toutes questions, laissez-moi vos coordonnées</p></div>
+    </div>
 </div>
 <div id="contactForm" class="row no-gutters text-center">
     <div class="col-10 col-md-6 pt-4 pb-4 mx-auto">
-        <form id="contactInquiries" action="index.php?action=contact#contactForm" method="POST">
+        <form id="contactInquiries" action="contact.html" method="POST">
             <div class="pb-3">
                 <label for="lname">Nom *</label>
                 <input type="text" class="contactField <?= isset($errors['lname']) ? 'fieldError' : ''; ?>" placeholder="Votre nom ici" id="lname" name="lname" value="<?= isset($varsValue['lname']) ? $varsValue['lname'] : ''; ?>" />
@@ -29,7 +32,7 @@
             </div>
             <div class="pb-3">
                 <label for="inquire">Votre Message : *</label>
-                <textarea class="contactField <?= isset($errors['inquire']) ? 'fieldError' : ''; ?>" placeholder="Votre message ici" id="inquire" name="inquire" value="<?= isset($varsValue['inquire']) ? $varsValue['inquire'] : ''; ?>"></textarea>
+                <textarea class="contactField <?= isset($errors['inquire']) ? 'fieldError' : ''; ?>" placeholder="Votre message ici" id="inquire" name="inquire"><?= isset($varsValue['inquire']) ? $varsValue['inquire'] : ''; ?></textarea>
                 <?= isset($errors['inquire']) ? '<div class="errorMsg">'.$errors['inquire'].'</div>' : ''; ?>
             </div>
             <div>
