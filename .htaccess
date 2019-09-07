@@ -1,0 +1,24 @@
+#--------------------------------------------------
+# Répertoire : /AlphaZone/
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine On
+
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-l
+
+
+RewriteRule "^pieces/(.+)\.html$" "index.php?action=gallery&section=$1" [L]
+RewriteRule "^(.+)\.html$" "index.php?action=$1" [L]
+RewriteRule "^home$" index.php [L]
+
+
