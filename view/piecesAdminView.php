@@ -1,5 +1,4 @@
-<?php $this->title = 'Galerie';
-    // $pieces = []; ?>
+<?php $this->title = 'Galerie'; ?>
 
 <div class="row no-gutters galleryRow" <?= $pieces ? '' : 'style="height: 100vh;"'?>>
 
@@ -56,7 +55,7 @@
     <span class="closeEditor">&times;</span>
     <div class="container">
         <div class="row no-gutters mx-auto">
-            <div class="col-6 editorColImg">
+            <div class="col-4 col-lg-6 editorColImg">
                 <div class="containerImg">
                     <img class="img-fluid" src="" alt="image" />
                     <div class="textBlock">
@@ -65,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 editorColData">
+            <div class="col-8 col-lg-6 editorColData">
                 <div class="fieldContainer">
                     <label for="title">Titre</label>
                     <input id="title" type="text" />
@@ -94,14 +93,14 @@
         </div>
         <div class="container">
             <div class="row no-gutters">
-            <div class="col-5 justify-content-end d-flex align-items-center">
+            <div class="col-3 col-lg-5 ml-auto justify-content-end d-flex align-items-center checkText">
                 <label class="p-2" for="cbErase">Valider la suppression</label>
             </div>
-            <div class="col-1">
+            <div class="col-1 col-lg-1 mr-auto">
                 <input id="cbErase" type="checkbox" />
                 <span></span>
             </div>
-            <div class="col-6 text-center">
+            <div class="col-12 col-lg-6 text-center">
                 <button type="button" class="btn btn-danger btnErase" disabled>Suppression</button>
             </div>
             </div>

@@ -121,6 +121,82 @@ button:focus {
   margin-bottom: 15px;
 }
 
+@media screen and (max-width: 500px) {
+  .modalWindow {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .modalWindow.showModal {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modalWindow div.modalClose {
+    line-height: 50px;
+    font-size: 80%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    width: 70px;
+  }
+  .modalWindow div.modalClose a {
+    color: #aaa;
+    text-decoration: none;
+  }
+  .modalWindow div.modalClose a:hover {
+    color: black;
+  }
+  .modalWindow > div {
+    width: 95vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    padding: 2em;
+    background: #fff;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    font-size: 4vw;
+  }
+  .modalWindow > div.erase {
+    -webkit-box-shadow: 0px 0px 5px 5px #fc0303;
+            box-shadow: 0px 0px 5px 5px #fc0303;
+  }
+  .modalWindow > div .checkText {
+    font-size: 3vw;
+  }
+  .modalWindow > div header {
+    font-weight: bold;
+  }
+  .modalWindow > div h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+  }
+  .modalWindow > div h1.erase {
+    color: #fc0303;
+  }
+  .modalWindow > div small {
+    color: #aaa;
+  }
+  .modalWindow div:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
+}
+
 /* [MODAL IMG]
  * ************************/
 .modalImg {

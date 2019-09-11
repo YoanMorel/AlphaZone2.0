@@ -4,7 +4,7 @@
     <div class="topBar slideTopBar">
         <span style="padding-left: 1rem;">
             Bienvenue sur votre console d'administration 
-            <a href="index.php?action=admin&module=settings#user"><?= $_SESSION['user']->use_name; ?></a>
+            <a href="index.php?action=admin&module=settings#login"><?= $_SESSION['user']->use_name; ?></a>
         </span>
         <div class="clockTime"></div>
     </div>

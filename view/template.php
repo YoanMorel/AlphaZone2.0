@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <a href="javascript:" id="returnToTop"><i class="fas fa-chevron-up"></i></a>
+    <a href="javascript:void(0)" id="returnToTop"><i class="fas fa-chevron-up"></i></a>
     <div class="header <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? 'white' : 'main'; ?>">
         <div class="headerTitle">L'atelier de Jean-François</div>
         <div class="headerIcon"><i class="fas fa-fw fa-bars"></i></div>

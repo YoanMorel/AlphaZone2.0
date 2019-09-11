@@ -625,7 +625,8 @@ $(function() {
       $('button.btnErase').prop('disabled', true);   
     }
   });
-
+  
+  // Controle de suppression d'oeuvre
   $('button.btnErase').click(function() {
     $('div.modalWindow').removeClass('showModal');
     $.ajax({
@@ -658,6 +659,7 @@ $(function() {
     }
   });
 
+  // Au clique, mise à jour des informations de l'oeuvre
   $('button.btnEditor').on('click', function() {
     var btnEditor = $(this);
     var updateVars = {
@@ -680,6 +682,7 @@ $(function() {
         if(imgNode.hasClass('needsEdit')) {
           imgNode.removeClass('needsEdit');
         }
+        imgNode.data('story', updateVars.story);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         console.log('Status :' + textStatus + ' Error:' + errorThrown);

@@ -1,7 +1,7 @@
 <?php $this->title = 'Contact'; ?>
 
 <div class="contactHeader"></div>
-<div class="contactTitle">
+<div class="sectionTitle">
     <div style="margin: auto; text-align: center">
         <div class="boxTitle">JEAN-FRANÇOIS ERNOTTE</div>
         <div>Artiste Peintre<p class="m-2">Pour toutes questions, laissez-moi vos coordonnées</p></div>

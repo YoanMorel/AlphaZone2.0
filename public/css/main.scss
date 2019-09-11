@@ -11,6 +11,42 @@
     background-size: cover;
   }
 
+  /* [SECTION STYLE]
+  ************************/
+
+  .sectionTitle {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    border-bottom: 3px solid #D0D0D0;
+    position: relative;
+
+    & .boxTitle {
+      font-weight: bold;
+      font-size: 2rem;
+      text-align: center;
+      margin: auto;
+      width: 100%;
+
+      & a.leftArrow {
+        position: absolute;
+        left: 10%;
+      }
+  
+      & a.rightArrow {
+        position: absolute;
+        right: 10%;
+      }
+    }
+
+    & a.galleryReturn {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
   /* [MAIN VIEW]
   ************************/
 
@@ -468,20 +504,6 @@
   
   /* [CONTACT VIEW]
   *******************************/
-  
-  .contactTitle {
-    width: 100%;
-    height: 50vh;
-    display: flex;
-    border-bottom: 3px solid #D0D0D0;
-  }
-  
-  .boxTitle {
-    font-weight: bold;
-    font-size: 2rem;
-    text-align: center;
-    margin: auto;
-  }
   
   label {display: block;}
   

@@ -42,7 +42,7 @@ class ScanDir {
                 $this->log['scan']['dirScan'] = $this->dirScan;
             else:
                 $this->log['scan']['ok'] = 'Aucune irrégularité détéctée';
-                $this->log['scan']['ok'] .= "\n\rOpération terminée à ".date('G:i', mktime());
+                $this->log['scan']['ok'] .= "\n\rOpération terminée à ".date('G:i', time());
             endif;
         endif;
     }

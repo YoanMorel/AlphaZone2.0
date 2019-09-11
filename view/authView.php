@@ -1,6 +1,6 @@
 <?php $this->title = 'Authentification' ?>
 
-<div style="display: flex; flex-direction: column; flex-wrap: wrap; justify-content: space-around; height: 100vh;">
+<div class="authContain">
     <div style="margin: auto auto 0 auto">AJF Administration</div>
     <div class="authBox">
             <div class="fields">

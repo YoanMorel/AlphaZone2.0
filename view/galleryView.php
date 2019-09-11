@@ -1,9 +1,24 @@
 <?php $this->title = 'Galeries' ?>
 
-<div class="contactTitle">
-  <div style="margin: auto; text-align: center;">
-    <div class="boxTitle"><?= isset($sectionTitle) ? $sectionTitle : 'Galerie' ?></div>
-    <div>Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis.</div>
+<div class="sectionTitle">
+  <div style="width: 100vh; margin: auto; text-align: center;">
+    <div class="boxTitle">
+      <?php if(isset($nav) && $nav['prev'] != FALSE): ?>
+      <a href="pieces/<?= strtolower($nav['prev']) ?>.html" class="leftArrow">
+        <i class="fas fa-fw fa-caret-left"></i>
+      </a>
+      <?php endif; ?>
+      <?= isset($nav) ? $nav['current'] : 'Galerie' ?>
+      <?php if(isset($nav) && $nav['next'] != FALSE): ?>
+      <a href="pieces/<?= strtolower($nav['next']) ?>.html" class="rightArrow">
+        <i class="fas fa-fw fa-caret-right"></i>
+      </a>
+      <?php endif; ?>
+    </div>
+    <div style="width: 90%; margin: auto">Hinc ille commotus ut iniusta perferens et indigna praefecti custodiam protectoribus mandaverat fidis.</div>
+    <?php if(!isset($gallery)): ?>
+      <a href="gallery.html" class="galleryReturn">Retour à la Galerie</a>
+    <?php endif; ?>
   </div>
 </div>
 

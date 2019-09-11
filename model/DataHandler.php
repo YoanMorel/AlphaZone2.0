@@ -3,7 +3,7 @@
 /**
  * DbConnection's child DataHandler class
  * 
- * Make database informations about all the pieces and transfers all object on the server
+ * Make database informations about all the pieces
  * 
  * @version 2.0
  * @author  Yoan Morel
