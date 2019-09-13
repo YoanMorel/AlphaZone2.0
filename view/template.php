@@ -24,11 +24,11 @@
         <div class="headerTitle">L'atelier de Jean-François</div>
         <div class="headerIcon"><i class="fas fa-fw fa-bars"></i></div>
         <div class="headerLinks <?= (isset($_GET['action']) && $_GET['action'] != 'main') ? '' : 'main'; ?>">
-            <a href="home">Accueil</a>
-            <a href="gallery.html">Œuvres</a>
-            <a href="philosophy.html">Philosophie</a>
-            <a href="biography.html">Biographie</a>
-            <a href="contact.html">Contact</a>
+            <a href="home" class="<?= (empty($_GET)) ? 'active' : '' ?>">Accueil</a>
+            <a href="gallery.html" class="<?= (isset($_GET['action']) && $_GET['action'] == 'gallery') ? 'active' : '' ?>">Œuvres</a>
+            <a href="philosophy.html" class="<?= (isset($_GET['action']) && $_GET['action'] == 'philosophy') ? 'active' : '' ?>">Philosophie</a>
+            <a href="biography.html" class="<?= (isset($_GET['action']) && $_GET['action'] == 'biography') ? 'active' : '' ?>">Biographie</a>
+            <a href="contact.html" class="<?= (isset($_GET['action']) && $_GET['action'] == 'contact') ? 'active' : '' ?>">Contact</a>
             <a class="overlayDrop" href="javascript:void(0)"><i class="fas fa-th-large"></i></a>
         </div>
     </div>

@@ -13,7 +13,7 @@
     .authBox {
       margin: 0 auto 1rem auto;
       width: 320px;
-      height: 320px;
+      height: 396px;
       border: 2px solid #C52184;
       background: #DDD;
 
@@ -21,7 +21,17 @@
         position: relative;
         width: 100%;
 
-        & .spaceAround {margin: 2.6rem 3.1rem 0 3rem;}
+        & .containCaptcha {
+          display: flex;
+          width: 100%;
+          margin-top: 1.6rem; 
+
+          & div.g-recaptcha {
+            margin: auto;
+          }
+        }
+
+        & .spaceAround {margin: 1rem 3.1rem 0 3rem;}
 
         & form label {
           margin: 2rem auto 0 3.1rem;
@@ -47,6 +57,14 @@
             background-repeat: no-repeat;
   
             &[placeholder] {font-weight: bold;}
+          }
+
+          &.capsError {
+            background: #fce4e4;
+            background-image: url('../img/iicon.svg');
+            background-size: 25px;
+            background-position: right 2% center;
+            background-repeat: no-repeat;
           }
         }
 

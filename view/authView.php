@@ -11,6 +11,9 @@
                     <label for="password">Mot de passe</label>
                     <input class="<?= isset($errors['password']) ? 'fieldError' : ''; ?>" id="password" type="password" name="password" />
                     <?= isset($errors['password']) ? '<div class="errorMsg">'.$errors['password'].'</div>' : ''; ?>
+                    <div class="containCaptcha">
+                        <div class="g-recaptcha" data-sitekey="6LdJC7gUAAAAAAQ66CviTRb1JQndPj_xNk9v9qOX"></div>
+                    </div>
                 </form>
                 <div style="text-align: right;">
                     <button form="authForm" class="btn btn-info spaceAround" style="font-size: 12px; background: #bd2d87; border: none;">Se connecter</button>

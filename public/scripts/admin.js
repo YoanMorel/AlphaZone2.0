@@ -1,5 +1,20 @@
 $(function() {
 
+  // [AUTH CAPSLOCK TEST]
+  if(window.location.pathname == 'testZone/alphaZone/admin.html') {
+    document.querySelector("#password").addEventListener('keyup', checkCapsLock);
+    document.querySelector("#password").addEventListener('mousedown', checkCapsLock);
+  
+    function checkCapsLock(e) {
+      var capsLockOn = e.getModifierState('CapsLock');
+  
+      if(capsLockOn == true) 
+        this.classList.add('capsError');
+      else
+        this.classList.remove('capsError');
+    }
+  }
+
   // [SNACKBAR HANDLER]
   function snackBar(text) {
     $('#snackBar').addClass('show').text(text);
@@ -25,7 +40,7 @@ $(function() {
   });
 
   // [CLOCK]
-    startTime();
+  startTime();
 
   function startTime() {
     var today = new Date();

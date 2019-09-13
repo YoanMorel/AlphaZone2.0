@@ -19,7 +19,7 @@ $(function() {
     $('div.header').addClass('sticky');
   }
 
-  $('.headerIcon').click(function(){
+  $('.headerIcon').click(function() {
     $('.headerLinks').toggleClass('showing');
   });
 

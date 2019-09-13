@@ -20,7 +20,7 @@
 .authContain .authBox {
   margin: 0 auto 1rem auto;
   width: 320px;
-  height: 320px;
+  height: 396px;
   border: 2px solid #C52184;
   background: #DDD;
 }
@@ -30,8 +30,20 @@
   width: 100%;
 }
 
+.authContain .authBox .fields .containCaptcha {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin-top: 1.6rem;
+}
+
+.authContain .authBox .fields .containCaptcha div.g-recaptcha {
+  margin: auto;
+}
+
 .authContain .authBox .fields .spaceAround {
-  margin: 2.6rem 3.1rem 0 3rem;
+  margin: 1rem 3.1rem 0 3rem;
 }
 
 .authContain .authBox .fields form label {
@@ -60,6 +72,14 @@
 
 .authContain .authBox .fields form input.fieldError[placeholder] {
   font-weight: bold;
+}
+
+.authContain .authBox .fields form input.capsError {
+  background: #fce4e4;
+  background-image: url("../img/iicon.svg");
+  background-size: 25px;
+  background-position: right 2% center;
+  background-repeat: no-repeat;
 }
 
 .authContain .authBox .fields form div.errorMsg {

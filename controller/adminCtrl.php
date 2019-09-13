@@ -64,16 +64,32 @@ class AdminCtrl{
      * @param string $login admin login
      */
     public function authUser($login, $password) {
-        $validation = new FormValidator();
-        $validation->validationFilter();
-        if($validation->hasErrors() && (isset($validation->errors['login']) || isset($validation->errors['password']))):
-            $this->authView(['errors' => $validation->errors]);
-        else:
-            $user             = new User();
-            $userInfos        = json_encode(array_change_key_case($user->getUser($login)->fetchAll()[0]));
-            $_SESSION['user'] = json_decode($userInfos);
-
-            header('location: index.php?action=admin&module=main');
+	    // Private key
+	    $secret = "6LdJC7gUAAAAAOpiiSoX38gqdzGS8faPylFO0IAk";
+	    // Paramètre renvoyé par le recaptcha
+	    $response = $_POST['g-recaptcha-response'];
+	    // On récupère l'IP de l'utilisateur
+	    $remoteip = $_SERVER['REMOTE_ADDR'];
+	    $api_url = "https://www.google.com/recaptcha/api/siteverify?secret=" 
+	    . $secret
+	    . "&response=" . $response
+	    . "&remoteip=" . $remoteip ;
+	    $decode = json_decode(file_get_contents($api_url), true);
+	
+	    if ($decode['success'] == true):
+            $validation = new FormValidator();
+            $validation->validationFilter();
+            if($validation->hasErrors() && (isset($validation->errors['login']) || isset($validation->errors['password']))):
+                $this->authView(['errors' => $validation->errors]);
+            else:
+                $user             = new User();
+                $userInfos        = json_encode(array_change_key_case($user->getUser($login)->fetchAll()[0]));
+                $_SESSION['user'] = json_decode($userInfos);
+    
+                header('location: index.php?action=admin&module=main');
+            endif;
+	    else:
+		    header('location: admin.html');
         endif;
     }
 
